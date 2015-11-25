@@ -25,11 +25,11 @@ class Home
      * This method handles what happens when you move to http://yourproject/home/exampleone
      * The camelCase writing is just for better readability. The method name is case-insensitive.
      */
-    public function exampleOne()
+    public function login()
     {
         // load views
         require APP . 'views/_layout/header.php';
-        require APP . 'views/home/index.php';
+        require APP . 'views/home/signin.php';
         require APP . 'views/_layout/footer.php';
     }
     /**
@@ -37,11 +37,11 @@ class Home
      * This method handles what happens when you move to http://yourproject/home/exampletwo
      * The camelCase writing is just for better readability. The method name is case-insensitive.
      */
-    public function exampleTwo()
+    public function register()
     {
         // load views
         require APP . 'views/_layout/header.php';
-        require APP . 'views/home/index.php';
+        require APP . 'views/home/signup.php';
         require APP . 'views/_layout/footer.php';
     }
 }
