@@ -1,5 +1,5 @@
 <div class="content">
-  <form class="">
+  <form class="signin center">
     <ul>
       <li>
         <input type="text" name="username" placeholder="Nombre de usuario">
