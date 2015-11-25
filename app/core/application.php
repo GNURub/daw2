@@ -64,14 +64,14 @@ class Application
             $url = explode('/', $url);
             $this->url_controller = isset($url[0]) ? $url[0] : null;
             $this->url_action = isset($url[1]) ? $url[1] : null;
-            // Remove controller and action from the split URL
+            
             unset($url[0], $url[1]);
-            // Rebase array keys and store the URL params
+
             $this->url_params = array_values($url);
-            // for debugging. uncomment this if you have problems with the URL
-            //echo 'Controller: ' . $this->url_controller . '<br>';
-            //echo 'Action: ' . $this->url_action . '<br>';
-            //echo 'Parameters: ' . print_r($this->url_params, true) . '<br>';
+   
+//             echo 'Controller: ' . $this->url_controller . '<br>';
+//             echo 'Action: ' . $this->url_action . '<br>';
+//             echo 'Parameters: ' . print_r($this->url_params, true) . '<br>';
         }
     }
 }
