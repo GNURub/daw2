@@ -1,6 +1,6 @@
 <?php
-  require APP.'model/Discount.model.php';
-  class Discount {
+  require APP.'models/Discount.model.php';
+  class Discount extends Controller {
       private $_params;
 
       public function __construct($params = array())

@@ -1,15 +1,12 @@
 <?php
   require_once 'db.php';
-  class ImageModel implements iModel
+  class ImageModel extends Model implements iModel
   {
-    private $db;
-    private $instance;
     private $table = "imagenes";
     public  $id;
 
     function __construct(){
-      $this->instance = DB::getInstance();
-      $this->db = $this->instance->getConnection();
+      $this->connect();
     }
 
     function save($data){

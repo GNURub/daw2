@@ -1,15 +1,12 @@
 <?php
   require_once 'db.php';
-  class ColorModel implements iModel
+  class ColorModel extends Model implements iModel
   {
-    private $db;
-    private $instance;
     private $table = "colores";
     public  $id;
 
     function __construct(){
-      $this->instance = DB::getInstance();
-      $this->db = $this->instance->getConnection();
+      $this->connect();
     }
 
     function save($data){

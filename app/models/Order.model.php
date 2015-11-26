@@ -1,8 +1,8 @@
 <?php
   require_once 'db.php';
-  class OrderModel implements iModel
+  class OrderModel extends Model implements iModel
   {
-    
+
   }
 
  ?>

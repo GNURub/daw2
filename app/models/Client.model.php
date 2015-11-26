@@ -1,15 +1,12 @@
 <?php
   require_once 'db.php';
-  class ClientsModel implements iModel
+  class ClientsModel extends Model implements iModel
   {
-    private $db;
-    private $instance;
     private $table = "usuarios";
     public  $id;
 
     function __construct(){
-      $this->instance = DB::getInstance();
-      $this->db = $this->instance->getConnection();
+      $this->connect();
     }
 
     function save($data){
@@ -25,10 +22,14 @@
     }
 
     function  delete($id){
-
+      $query = "DELETE FROM {$this->table} WHERE username = '{$id}' OR email = '{$id}'";
+      if(!$this->db->query($query)){
+        throw new Exception($this->db->error);
+      }
+      return true;
     }
 
-    function update(){
+    function update($id){
 
     }
 

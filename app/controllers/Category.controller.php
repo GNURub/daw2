@@ -1,6 +1,6 @@
 <?php
   require APP.'model/Category.model.php';
-  class Category {
+  class Category extends Controller {
       private $_params;
 
       public function __construct($params = array())

@@ -103,6 +103,7 @@
             require VIEWS . 'error/500.php';
           }
         }else{
+          $error = "Los datos no son correctos.";
           require VIEWS . 'error/400.php';
         }
       }
@@ -118,9 +119,38 @@
           //update a todo item
       }
 
+      public function restoreAction()
+      {
+        extract($_POST);
+        if(isset($email)){
+          try {
+            $this->client-toArray($email);
+          } catch (Exception $e) {
+            $error = $e->getMessage();
+            require VIEWS. 'error/500.php';
+          }
+
+        }else{
+          require VIEWS. 'error/400.php';
+        }
+      }
+
       public function deleteAction()
       {
-          //delete a todo item
+        if(!self::getSession('username')){
+          header('location: /');
+        }else{
+          try {
+            if($this->client->delete(self::getSession('username'))){
+              self::destroySession('username');
+              header('location: /');
+            }
+          } catch (Exception $e) {
+            $error = $e->getMessage();
+            require VIEWS. 'error/500.php';
+          }
+
+        }
       }
   }
 

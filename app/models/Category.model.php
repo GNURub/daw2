@@ -1,6 +1,5 @@
 <?php
   require_once 'db.php';
-  require_once APP.'core/model.php';
   class CategoryModel extends Model implements iModel
   {
     private $table = "categorias";
