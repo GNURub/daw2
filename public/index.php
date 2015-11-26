@@ -10,5 +10,6 @@ require APP . 'config/config.php';
 require APP . 'helpers/response.php';
 require APP . 'helpers/utils.php';
 require APP . 'core/application.php';
+require APP . 'core/controller.php';
 require APP . 'core/model.php';
 $app = new Application();

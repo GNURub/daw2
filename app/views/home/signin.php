@@ -1,7 +1,7 @@
 <div class="content">
   <h2 class="center">Formulario de Login</h2>
   <div class="wrap">
-    <form class="signin center" action="/client/signin/">
+    <form class="signin center" action="/client/signin/" method="post">
       <ul>
         <li>
           <div class="group">
@@ -29,17 +29,3 @@
     </form>
   </div>
 </div>
-<script>
-  (function(doc){
-    doc.querySelector('form').addEventListener('submit', function(e){
-      e.preventDefault();
-      console.dir(e.target.action);
-      var inputs = Array.from(doc.querySelectorAll('form input'));
-      var url = '';
-      for (input of inputs) {
-        url += input.value + '/';
-      }
-      window.location.href = e.target.action + url;
-    }, false);
-  })(document);
-</script>

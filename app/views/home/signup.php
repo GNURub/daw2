@@ -62,17 +62,3 @@
     </ul>
   </form>
 </div>
-<script>
-  // (function(doc){
-  //   doc.querySelector('form').addEventListener('submit', function(e){
-  //     e.preventDefault();
-  //     console.dir(e.target.action);
-  //     var inputs = Array.from(doc.querySelectorAll('form input'));
-  //     var url = '';
-  //     for (input of inputs) {
-  //       url += input.value + '/';
-  //     }
-  //     window.location.href = e.target.action + url;
-  //   }, false);
-  // })(document);
-</script>

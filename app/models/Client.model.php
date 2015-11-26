@@ -32,9 +32,10 @@
 
     }
 
-    function toArray(){
+    function toArray($id){
+      $by = !empty($id) ? $id : $this->id;
       $query = "SELECT * FROM {$this->table}
-                    WHERE username = '{$this->id}'";
+                    WHERE username = '{$by}' OR email = '{$by}'";
       if(!$resultado = $this->db->query($query)){
         throw new Exception($this->db->error, 1);
       }

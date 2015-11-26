@@ -2,7 +2,7 @@
 	// namespace db;
 
 	interface iModel {
-	    public function toArray();
+	    public function toArray($id);
 			public function save($data);
 	}
 
