@@ -3,7 +3,7 @@
   class Category {
       private $_params;
 
-      public function __construct($params)
+      public function __construct($params = array())
       {
           $this->_params = $params;
       }

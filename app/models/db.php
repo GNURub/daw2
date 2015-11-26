@@ -1,7 +1,6 @@
 <?php
 	// namespace db;
 
-  require_once 'vendor/autoload.php';
 	interface iModel {
 	    public function toArray();
 			public function save($data);

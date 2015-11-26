@@ -24,7 +24,7 @@
 
     }
 
-    function  delete(){
+    function  delete($id){
 
     }
 
@@ -35,11 +35,10 @@
     function toArray(){
       $query = "SELECT * FROM {$this->table}
                     WHERE username = '{$this->id}'";
-      if ($resultado = $this->db->query($query)) {
+      if(!$resultado = $this->db->query($query)){
         throw new Exception($this->db->error, 1);
-        return $resultado->fetch_assoc();
       }
-
+      return $resultado->fetch_assoc();
     }
 
   }

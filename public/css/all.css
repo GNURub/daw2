@@ -2,26 +2,202 @@ header {
   width: 100%;
   height: 64px;
   background-color: #3f51b5; }
+  header.cabecera {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center; }
+  header .title {
+    color: white;
+    font-size: 2em; }
 
-header.cabecera {
+.content {
   display: flex;
-  justify-content: space-around;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: center; }
+  flex-direction: column; }
 
-header .title {
-  color: white;
-  font-size: 2em; }
+.wrap {
+  padding: 3em;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin: 0 auto;
+  height: 30em; }
+
+h2 {
+  color: #727272;
+  font-size: 3rem;
+  margin: 1em auto; }
+
+form {
+  margin: auto; }
+  form.signin.center {
+    width: auto; }
+
+.group {
+  position: relative;
+  margin-bottom: 45px; }
+
+input {
+  font-size: 18px;
+  padding: 10px 10px 10px 5px;
+  display: block;
+  width: 300px;
+  border: none;
+  border-bottom: 1px solid #757575; }
+  input:focus {
+    outline: none; }
+  input:focus ~ label, input:valid ~ label {
+    top: -20px;
+    font-size: 14px;
+    color: #5264AE; }
+  input:focus ~ .bar:before, input:focus ~ .bar:after {
+    width: 50%; }
+  input:focus ~ .highlight {
+    animation: inputHighlighter 0.3s ease; }
+
+label {
+  color: #999;
+  font-size: 18px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: 10px;
+  transition: 0.2s ease all; }
+
+.bar {
+  position: relative;
+  display: block;
+  width: 300px; }
+
+.bar:before, .bar:after {
+  content: '';
+  height: 2px;
+  width: 0;
+  bottom: 1px;
+  position: absolute;
+  background: #5264AE;
+  transition: 0.2s ease all; }
+
+.bar:before {
+  left: 50%; }
+
+.bar:after {
+  right: 50%; }
+
+.highlight {
+  position: absolute;
+  height: 60%;
+  width: 100px;
+  top: 25%;
+  left: 0;
+  pointer-events: none;
+  opacity: 0.5; }
+
+input:focus ~ label, input:valid ~ label {
+  top: -20px;
+  font-size: 14px;
+  color: #5264AE; }
+
+@keyframes inputHighlighter {
+  from {
+    background: #5264AE; }
+  to {
+    width: 0;
+    background: transparent; } }
+
+.btn {
+  position: relative;
+  display: block;
+  margin: 30px auto;
+  padding: 0;
+  overflow: hidden;
+  border-width: 0;
+  outline: none;
+  border-radius: 2px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  background-color: #FF4081;
+  color: #ecf0f1;
+  transition: background-color .3s; }
+  .btn:hover, .btn:focus {
+    background-color: #ff699c; }
+  .btn > * {
+    position: relative; }
+  .btn span {
+    display: block;
+    padding: 12px 24px; }
+  .btn:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    width: 0;
+    padding-top: 0;
+    border-radius: 100%;
+    background-color: rgba(236, 240, 241, 0.3);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); }
+  .btn:active:before {
+    width: 120%;
+    padding-top: 120%;
+    transition: width .2s ease-out, padding-top .2s ease-out; }
+  .btn.orange {
+    background-color: #e67e22; }
+  .btn.orange:hover, .btn.orange:focus {
+    background-color: #d35400; }
+  .btn.red {
+    background-color: #e74c3c; }
+  .btn.red:hover, .btn.red:focus {
+    background-color: #c0392b; }
+  .btn.lg {
+    width: 100%; }
+
+/* Styles, not important */
+*, *:before, *:after {
+  box-sizing: border-box; }
+
+html {
+  position: relative;
+  height: 100%; }
+
+h2 {
+  font-weight: normal; }
+
+* {
+  box-sizing: border-box; }
 
 body {
-  margin: 0; }
+  margin: 0;
+  width: 100%;
+  height: 100vh; }
+
+ul {
+  margin: 0;
+  padding: 0; }
+  ul li {
+    list-style: none; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat'; }
+
+.content {
+  display: flex;
+  width: 100%;
+  height: 45vh; }
 
 .roboto {
   font-family: 'Roboto', sans-serif; }
 
 .lobster {
   font-family: 'Lobster', cursive; }
+
+.montserrat {
+  font-family: 'Montserrat'; }
 
 .submenu {
   background-color: #3F51B5; }

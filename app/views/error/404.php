@@ -1,13 +1,13 @@
 <html>
   <head>
-    <title>Error 400</title>
+    <title>Error 404</title>
     <link href="<?=URL; ?>css/error.css" rel="stylesheet">
   </head>
   <body>
     <div id="critical-error" style="display: block;">
-        <h1>400 <small>Bad request</small></h1>
+        <h1>404 <small>Page Not Found</small></h1>
 
-        <p>This request isn't good. Sorry about that!</p>
+        <p>This is not the page you are looking for. Sorry about that!</p>
         <section class="additional-message">
             <h2>Additional info</h2>
             <p><?=isset($error) ? $error : 'The Box for this URL does not exist.';?></p>
