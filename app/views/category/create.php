@@ -1,22 +1,21 @@
 <?php require VIEWS . '_layout/header.php'; ?>
 <div class="content">
-  <h2 class="center">Recuperación de contraseña</h2>
-  <form class="signin center" method="post" action="/client/restore">
+  <h2 class="center">Formulario de Categoría</h2>
+  <form class="signin center" method="post">
     <ul>
       <li>
         <div class="group">
-          <input type="email" name="email" required>
+          <input type="text" name="nombre" required>
           <span class="highlight"></span>
           <span class="bar"></span>
-          <label>Email:</label>
+          <label>Titulo de la categoria:</label>
         </div>
       </li>
 
       <li>
-        <button class="btn lg" type="button"><span>Recordar</span></button>
+        <button class="btn lg" type="submit"><span>Crear Categoría</span></button>
       </li>
     </ul>
   </form>
 </div>
-
 <?php require VIEWS . '_layout/footer.php'; ?>

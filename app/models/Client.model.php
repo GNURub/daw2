@@ -1,6 +1,6 @@
 <?php
   require_once 'db.php';
-  class ClientsModel extends Model implements iModel
+  class ClientModel extends Model implements iModel
   {
     private $table = "usuarios";
     public  $id;

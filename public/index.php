@@ -13,3 +13,4 @@ require APP . 'core/application.php';
 require APP . 'core/controller.php';
 require APP . 'core/model.php';
 $app = new Application();
+exit();

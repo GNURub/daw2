@@ -1,3 +1,5 @@
+<?php require VIEWS . '_layout/header.php'; ?>
+
 <div class="content">
   <h2 class="center">Formulario de Login</h2>
   <div class="wrap">
@@ -13,7 +15,7 @@
         </li>
         <li>
           <div class="group">
-            <input type="password" name="password" required>
+            <input type="password" name="password" autocomplete="off" required>
             <span class="highlight"></span>
             <span class="bar"></span>
             <label>Contraseña:</label>
@@ -29,3 +31,5 @@
     </form>
   </div>
 </div>
+
+<?php require VIEWS . '_layout/footer.php'; ?>

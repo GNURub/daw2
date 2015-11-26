@@ -1,3 +1,4 @@
+<?php require VIEWS . '_layout/header.php'; ?>
 <div class="content">
   <h2 class="center">Formulario de Registro</h2>
   <form class="signin center" action="/client/create/" method="post">
@@ -13,7 +14,7 @@
 
       <li>
         <div class="group">
-          <input type="text" name="nombre" required>
+          <input type="text" name="nombre" class="caplitalize" required>
           <span class="highlight"></span>
           <span class="bar"></span>
           <label>Nombre:</label>
@@ -22,7 +23,7 @@
 
       <li>
         <div class="group">
-          <input type="text" name="apellidos" required>
+          <input type="text" name="apellidos" class="caplitalize" required>
           <span class="highlight"></span>
           <span class="bar"></span>
           <label>Apellidos:</label>
@@ -62,3 +63,5 @@
     </ul>
   </form>
 </div>
+
+<?php require VIEWS . '_layout/footer.php'; ?>

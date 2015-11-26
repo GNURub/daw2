@@ -35,12 +35,6 @@ class Application
             } else {
               $params = array_merge(array($this->url_action), $this->url_params);
               $this->url_controller->index($params);
-              // if (strlen($this->url_action) == 0) {
-              //   // no action defined: call the default index() method of a selected controller
-              //
-              // }else {
-              //   // header('location: ' . URL . 'error');
-              // }
             }
           }else{
               header('location: ' . URL . 'error');

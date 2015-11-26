@@ -29,11 +29,33 @@
 
     }
 
+    private function _query($id){
+      $query = "SELECT * FROM {$this->table}";
+      if(!empty($id)){
+        $query = "SELECT * FROM {$this->table}
+                    WHERE idcategoria = {$id}";
+      }
+      if(!$resultado = $this->db->query($query)){
+        throw new Exception($this->db->error, 1);
+      }
+      return $resultado;
+    }
+
     function toArray($id = false){
-      $query = "SELECT * FROM {$this->table}
-                    WHERE idcategoria = '{$this->id}'";
-      $result = $this->db->query($query);
-      return $result->fetch_object();
+      try {
+        return $this->_query($id)->fetch_assoc();
+      } catch (Exception $e) {
+        throw new Exception($e->getMessage());
+      }
+
+    }
+
+    function toObject($id){
+      try {
+        return $this->_query($id)->fetch_object();
+      } catch (Exception $e) {
+        throw new Exception($e->getMessage());
+      }
     }
   }
 

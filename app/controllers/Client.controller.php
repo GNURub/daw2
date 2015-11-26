@@ -8,7 +8,7 @@
 
       public function __construct($params = array())
       {
-          $this->client = new ClientsModel();
+          $this->client = new ClientModel();
           $this->_params = $params;
       }
 
@@ -18,9 +18,9 @@
         }else{
           if($params[0] == $_SESSION['username'] || empty($params[0])){
             $userData = $this->client->toArray($_SESSION['username']);
-            require VIEWS . '_layout/header.php';
+
             require VIEWS . 'client/index.php';
-            require VIEWS . '_layout/footer.php';
+
           }else{
             require VIEWS . 'error/401.php';
           }
@@ -30,7 +30,7 @@
       public function createAction()
       {
           // Creamos un nuevo cliente
-          // $client = new ClientsModel();
+          // $client = new ClientModel();
           // list($username, $name, $apellidos, $email, $pass, $cpass) = $this->_params;
           extract($_POST);
           $isValidUser = (
@@ -92,7 +92,7 @@
         if($isValidUser){
           try {
             $userData = $this->client->toArray($username);
-            if(hash_equals($userData['password'], crypt($password, $userData['password']))){
+            if(@hash_equals($userData['password'], crypt($password, $userData['password']))){
               self::setSession('username', $userData['username']);
               header('location: /client');
             }else{

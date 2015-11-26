@@ -42,7 +42,11 @@
       foreach ($data as $key => $value) {
 				$value = htmlspecialchars($value);
         if(!empty($values)){
-          $values .= ", '".$value."'";
+					if(is_numeric($value)){
+          	$values .= ", ".$value;
+					}else{
+						$values .= ", '".$value."'";
+					}
 					$keys .= ", ".$key;
         }else{
           $values .= "'".$value."'";

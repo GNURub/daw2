@@ -10,19 +10,42 @@
     }
 
     function save($data){
-
+      $parsed = DB::parseValues($data);
+      $keys = $parsed["keys"];
+      $values = $parsed["values"];
+      $query = "INSERT INTO {$this->table}($keys) VALUES ({$values})";
+      if(!$this->db->query($query)){
+        throw new Exception($this->db->error);
+      }
+      $this->id = $this->db->insert_id;
     }
-
-    function toArray($id = false){
+    private function _query($id){
       $query = "SELECT * FROM {$this->table}";
       if(!empty($id)){
         $query = "SELECT * FROM {$this->table}
-                    WHERE idproducto = '{$id}'";
+                    WHERE idproducto = {$id}";
       }
       if(!$resultado = $this->db->query($query)){
         throw new Exception($this->db->error, 1);
       }
-      return $resultado->fetch_assoc();
+      return $resultado;
+    }
+
+    function toArray($id = false){
+      try {
+        return $this->_query($id)->fetch_assoc();
+      } catch (Exception $e) {
+        throw new Exception($e->getMessage());
+      }
+
+    }
+
+    function toObject($id){
+      try {
+        return $this->_query($id)->fetch_object();
+      } catch (Exception $e) {
+        throw new Exception($e->getMessage());
+      }
     }
   }
 

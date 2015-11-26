@@ -44,6 +44,8 @@ input {
   width: 300px;
   border: none;
   border-bottom: 1px solid #757575; }
+  input.caplitalize {
+    text-transform: capitalize; }
   input:focus {
     outline: none; }
   input:focus ~ label, input:valid ~ label {
