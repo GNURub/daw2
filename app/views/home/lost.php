@@ -1,6 +1,6 @@
 <div class="content">
   <h2 class="center">Recuperación de contraseña</h2>
-  <form class="signin center">
+  <form class="signin center" method="post" action="/client/restore">
     <ul>
       <li>
         <div class="group">

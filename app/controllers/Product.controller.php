@@ -1,5 +1,6 @@
 <?php
   require APP.'models/Product.model.php';
+  require_once APP.'models/Client.model.php';
 
   class Product extends Controller {
       private $_params;
@@ -9,6 +10,7 @@
       public function __construct($params = array())
       {
           $this->product = new ProductModel();
+          $this->admin   = new ClientsModel();
           $this->_params = $params;
       }
 
@@ -16,9 +18,28 @@
 
       }
 
+      public function jsonAction(){
+        try {
+          $proucts = $this->product->toArray();
+          echo json_encode($proucts);
+        } catch (Exception $e) {
+          $error = array(
+            'error' => 200,
+            'errorMsg' => $e->getMessage()
+          );
+          echo json_encode($error);
+        }
+
+      }
+
       public function createAction()
       {
-          extract($_POST);
+          if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            extract($_POST);
+          }else{
+            
+          }
+
 
 
 

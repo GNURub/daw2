@@ -29,7 +29,7 @@
 
     }
 
-    function toArray(){
+    function toArray($id = false){
       $query = "SELECT * FROM {$this->table}
                     WHERE idimagen = '{$this->id}'";
       $result = $this->db->query($query);

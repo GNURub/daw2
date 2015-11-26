@@ -33,7 +33,7 @@
 
     }
 
-    function toArray($id){
+    function toArray($id = false){
       $by = !empty($id) ? $id : $this->id;
       $query = "SELECT * FROM {$this->table}
                     WHERE username = '{$by}' OR email = '{$by}'";

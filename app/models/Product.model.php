@@ -13,8 +13,16 @@
 
     }
 
-    function toArray($id){
-
+    function toArray($id = false){
+      $query = "SELECT * FROM {$this->table}";
+      if(!empty($id)){
+        $query = "SELECT * FROM {$this->table}
+                    WHERE idproducto = '{$id}'";
+      }
+      if(!$resultado = $this->db->query($query)){
+        throw new Exception($this->db->error, 1);
+      }
+      return $resultado->fetch_assoc();
     }
   }
 

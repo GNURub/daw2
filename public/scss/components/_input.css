@@ -70,6 +70,12 @@ input:focus ~ label, input:valid ~ label {
   color:#5264AE;
 }
 
+input:focus:invalid ~ label {
+  top:-20px;
+  font-size:14px;
+  color: #d13030;
+}
+
 @keyframes inputHighlighter {
   from  { background:#5264AE; }
   to    { width:0; background:transparent; }
