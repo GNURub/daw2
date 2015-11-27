@@ -26,7 +26,9 @@ ul{
 h1,h2,h3,h4,h5,h6{
   font-family: 'Montserrat';
 }
-
+.capitalize{
+  text-transform: capitalize;
+}
 .content{
   display: flex;
   width: 100%;
@@ -36,8 +38,8 @@ h1,h2,h3,h4,h5,h6{
 .roboto{
     font-family: 'Roboto', sans-serif;
 }
-.lobster{
-    font-family: 'Lobster', cursive;
+.pacifico{
+    font-family: 'Pacifico', cursive;
 }
 
 .montserrat{

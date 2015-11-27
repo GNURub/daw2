@@ -10,7 +10,7 @@
     }
 
     function save($data){
-      $parsed = DB::parseValues($data);
+      $parsed = DB::parseValues($data, true);
       $keys = $parsed["keys"];
       $values = $parsed["values"];
       $query = "INSERT INTO {$this->table}($keys) VALUES ({$values})";

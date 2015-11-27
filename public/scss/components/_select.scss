@@ -10,7 +10,7 @@ select {
   font-family: inherit;
   background-color: transparent;
   width: 100%;
-  padding: $select-padding 0;
+  padding: .9em;
   font-size: $select-font-size;
   color: #999;
   border: none;
@@ -22,7 +22,7 @@ select:focus {
 
 .mdl-selectfield label {display: none;}
 
-.mdl-selectfield select {appearance: none}
+.mdl-selectfield select {-webkit-appearance: none}
 .mdl-selectfield {
   font-family: 'Roboto','Helvetica','Arial',sans-serif;
   position: relative;

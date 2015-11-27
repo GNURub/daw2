@@ -8,11 +8,11 @@
       <li>
         <div class="mdl-selectfield">
           <label>Categoria: </label>
-          <select class="browser-default" name="categoria">
+          <select class="browser-default" name="categoria[]" multiple>
             <option value="" disabled selected>Elige una opción</option>
             <?php
               foreach ($categorias as $categoria) {
-                echo "<option value='{$categoria["idcategoria"]}'>{$categoria["idcategoria"]}</option>";
+                echo "<option value='{$categoria["idcategoria"]}' class='capitalize'>{$categoria["idcategoria"]}</option>";
               }
             ?>
           </select>

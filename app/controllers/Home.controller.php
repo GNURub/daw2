@@ -1,7 +1,5 @@
 <?php
-  require_once APP.'models/Product.model.php';
-  require_once APP.'models/Category.model.php';
-  require_once APP.'models/Client.model.php';
+
   class Home extends Controller
   {
       private $product;

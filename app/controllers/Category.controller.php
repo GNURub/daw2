@@ -1,6 +1,5 @@
 <?php
-  require APP.'models/Category.model.php';
-  require_once APP.'models/Client.model.php';
+
   class Category extends Controller {
       private $_params;
       private $category;
@@ -15,17 +14,24 @@
 
       public function index($params = array()){
           if(empty($params[0])){
+            Log::write("Error en categoria, no hay parametro para encontrar una.");
             require VIEWS . 'error/404.php';
             return;
           }else{
             try {
               $catego = $this->category->toArray($params[0]);
+
               if(empty($catego[0])){
+                Log::write("No existe la categoria que se esta buscando.");
                 require VIEWS . 'error/404.php';
               }else{
+                
+                Log::write("Se muestra la categoria.");
                 require VIEWS . 'category/show.php';
               }
             } catch (Exception $e) {
+              $error = $e->getMessage();
+              Log::write("Se ha producido una excepción, ". $error);
               require VIEWS . 'error/500.php';
             }
 
@@ -64,7 +70,7 @@
             }
           }
         }else{
-          require VIEWS . 'error/401.php';
+          require VIEWS . 'error/400.php';
         }
 
 
@@ -88,6 +94,10 @@
           );
           echo json_encode($error);
         }
+
+      }
+
+      public function xmlAction(){
 
       }
 

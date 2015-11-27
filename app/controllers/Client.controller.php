@@ -1,5 +1,4 @@
 <?php
-  require APP.'models/Client.model.php';
 
   class Client extends Controller {
       private $_params;
@@ -14,15 +13,36 @@
 
       public function index($params = array()){
         if(!self::getSession('username')){
+          Log::write("Se ha intentado a acceder a la zona de usuarios registrados /client");
           header('location: /');
         }else{
-          if($params[0] == $_SESSION['username'] || empty($params[0])){
+          if(empty($params[0])){
             $userData = $this->client->toArray($_SESSION['username']);
-
-            require VIEWS . 'client/index.php';
-
-          }else{
+            $canAccess = (
+              !empty($userData)
+            );
+            if($canAccess){
+              Log::write("El usuario accede a su perfil.");
+              require VIEWS . 'client/index.php';
+              return;
+            }
+            Log::write("El usuario no tiene acceso");
             require VIEWS . 'error/401.php';
+            return;
+          }else{
+            $userData = $this->client->toArray($params[0]);
+            $canAccess = (
+              ($userData && !!$userData['public']) ||
+              self::getSession('username') == $params[0]
+            );
+            if($canAccess){
+              Log::write("El usuario accede al perfil de {$params[0]} perfil.");
+              require VIEWS . 'client/index.php';
+              return;
+            }
+            Log::write("El usuario no tiene acceso");
+            require VIEWS . 'error/401.php';
+            return;
           }
         }
       }
@@ -30,8 +50,7 @@
       public function createAction()
       {
           // Creamos un nuevo cliente
-          // $client = new ClientModel();
-          // list($username, $name, $apellidos, $email, $pass, $cpass) = $this->_params;
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
           extract($_POST);
           $isValidUser = (
                           isset($username) &&
@@ -53,6 +72,7 @@
 
           try {
             if($isValidUser){
+              Log::write("Se esta intentando crear un usuario");
               $hash = crypt($password, uniqid());
               $this->client->save(array(
                   "username"  => $username,
@@ -63,19 +83,24 @@
                 )
               );
               $_SESSION['username'] = $username;
+              Log::write("El usuario $username se ha creado correctamente");
               header('Location: /client');
               // require VIEWS . '_layout/header.php';
               // require VIEWS . 'home/index.php';
               // require VIEWS . '_layout/footer.php';
             }else{
+              Log::write("Los datos pasados por POST no son correctos");
               require VIEWS . 'error/400.php';
             }
 
           } catch (Exception $e) {
             $error = $e->getMessage();
+            Log::write("Se ha producido una excepción al intentar crear el usuario");
             require VIEWS . 'error/500.php';
           }
-
+        }else{
+          require VIEWS . 'error/400.php';
+        }
 
       }
 
@@ -89,13 +114,16 @@
             isset($password) &&
             !empty($password)
         );
+        Log::write("El usuario $username se esta intentando logear");
         if($isValidUser){
           try {
             $userData = $this->client->toArray($username);
-            if(@hash_equals($userData['password'], crypt($password, $userData['password']))){
+
+            if(hash_equals($userData['password'], crypt($password, $userData['password']))){
               self::setSession('username', $userData['username']);
-              header('location: /client');
+              header('location: /');
             }else{
+              Log::write("La contraseña introducida no es correcta");
               require VIEWS . 'error/401.php';
             }
           } catch (Exception $e) {

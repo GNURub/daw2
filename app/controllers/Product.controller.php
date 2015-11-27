@@ -1,7 +1,5 @@
 <?php
-  require_once APP.'models/Product.model.php';
-  require_once APP.'models/Client.model.php';
-  require_once APP.'models/Category.model.php';
+
 
   class Product extends Controller {
       private $_params;
@@ -81,12 +79,15 @@
                     'descripcion' => $descripcion,
                   ))){
                     try {
-                      $this->product->saveWithCategory(array(
-                        'idproducto'  => $idProduct,
-                        'idcategoria' => $categoria
-                      ));
+                      foreach ($categoria as $cat) {
+                        $this->product->saveWithCategory(array(
+                          'idproducto'  => $idProduct,
+                          'idcategoria' => $cat
+                        ));
+                      }
                     } catch (Exception $e) {
-
+                      $error = $e->getMessage();
+                      require VIEWS . 'error/500.php';
                     }
 
                   }

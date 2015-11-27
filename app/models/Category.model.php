@@ -10,7 +10,7 @@
     }
 
     function save($data){
-      $parsed = DB::parseValues($data);
+      $parsed = DB::parseValues($data, true);
       $keys   = $parsed["keys"];
       $values = $parsed["values"];
       $query = "INSERT INTO {$this->table}($keys) VALUES ({$values})";
@@ -34,7 +34,7 @@
         $query = "SELECT * FROM {$this->table}";
       }else{
         $query = "SELECT * FROM {$this->table}
-                    WHERE idcategoria = {$id}";
+                    WHERE idcategoria = '{$id}'";
       }
       if(!$_puntero = $this->db->query($query)){
         throw new Exception($this->db->error, 1);

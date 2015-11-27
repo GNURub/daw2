@@ -1,5 +1,4 @@
 <?php
-  require APP.'models/Discount.model.php';
   class Discount extends Controller {
       private $_params;
 

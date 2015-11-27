@@ -35,7 +35,7 @@
 			}
 		}
 
-		static function parseValues($data){
+		static function parseValues($data, $lower = false){
       $values = "";
 			$keys   = "";
 
@@ -45,11 +45,17 @@
 					if(is_numeric($value)){
           	$values .= ", ".$value;
 					}else{
+						$value = !!$lower ? strtolower($value) : $value;
 						$values .= ", '".$value."'";
 					}
 					$keys .= ", ".$key;
         }else{
-          $values .= "'".$value."'";
+					if(is_numeric($value)){
+          	$values .= $value;
+					}else{
+						$value = !!$lower ? strtolower($value) : $value;
+						$values .= "'".$value."'";
+					}
 					$keys .= $key;
         }
       }
