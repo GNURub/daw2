@@ -31,17 +31,39 @@
           <ul class="menu">
             <li></li>
             <li>
-              <a href="">Registro</a>
+              <?php
+                if (!self::getSession('username')) {
+              ?>
+                  <a href="/home/signup">Registro</a>
+              <?php
+                }else{
+              ?>
+                  <a href="/client/">Perfil</a>
+              <?php
+                }
+              ?>
             </li>
             <li>
-              <a href="" class="button-icon"><i class="material-icons">more_vert</i></a>
+              <a href="javascript: void(0)" class="button-icon"><i class="material-icons">more_vert</i></a>
               <ul>
               </ul>
             </li>
             <li>
-              <a href="">Login</a>
+              <?php
+                if (!self::getSession('username')) {
+              ?>
+                  <a href="/home/signin">Login</a>
+              <?php
+                }else{
+              ?>
+                  <a href="/home/logout">Logout</a>
+              <?php
+                }
+              ?>
             </li>
           </ul>
         </nav>
-        <nav></nav>
+        <nav>
+          
+        </nav>
     </header>

@@ -15,6 +15,7 @@
       public function index()
       {
           // load VIEWSs
+          $currentUser = self::getSession('username');
           require VIEWS . 'home/index.php';
       }
 
