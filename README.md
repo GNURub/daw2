@@ -31,7 +31,6 @@ Requerimientos
 Para importar la base de datos, simplemente vamos a la terminal.
 
 ``` bash
-# Foo
 $ mysql -p -u[user] < final.sql
 ```
 
@@ -39,3 +38,8 @@ $ mysql -p -u[user] < final.sql
 
 
 ----------
+
+> **Note: credenciales app**
+
+> - Username: test
+> - Password: 1234567890

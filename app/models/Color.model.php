@@ -29,11 +29,22 @@
 
     }
 
-    function toArray($id = false){
-      $query = "SELECT * FROM {$this->table}
-                    WHERE idcolor = '{$this->id}'";
-      $result = $this->db->query($query);
-      return $result->fetch_object();
+    public function toArray($id){
+      if($id === false){
+        $query = "SELECT * FROM {$this->table}";
+      }else{
+        $query = "SELECT * FROM {$this->table}
+                    WHERE idcolor = {$id}";
+      }
+      if(!$_puntero = $this->db->query($query)){
+        throw new Exception($this->db->error, 1);
+      }
+      $result = array();
+      while ($row = $_puntero->fetch_assoc()) {
+        array_push($result, $row);
+      }
+      return $result;
+
     }
   }
 

@@ -1,48 +1,59 @@
 <?php
+  require_once APP.'models/Product.model.php';
+  require_once APP.'models/Category.model.php';
+  require_once APP.'models/Client.model.php';
+  class Home extends Controller
+  {
+      private $product;
+      private $category;
+      private $client;
+      public function __construct()
+      {
+        $this->product  = new ProductModel();
+        $this->client   = new ClientModel();
+        $this->category = new CategoryModel();
 
-class Home extends Controller
-{
+      }
+      public function index()
+      {
+          // load VIEWSs
+          require VIEWS . 'home/index.php';
+      }
 
-    public function index()
-    {
-        // load VIEWSs
-        require VIEWS . 'home/index.php';
-    }
+      public function signinAction()
+      {
+          if (self::getSession('username')) {
+            header('location: /');
+            return;
+          }
+          // load VIEWSs
+          require VIEWS . 'home/signin.php';
+      }
 
-    public function signinAction()
-    {
-        if (self::getSession('username')) {
-          header('location: /');
-          return;
-        }
-        // load VIEWSs
-        require VIEWS . 'home/signin.php';
-    }
+      public function signupAction()
+      {
+          if (self::getSession('username')) {
+            header('location: /');
+            return;
+          }
+          // load VIEWSs
+          require VIEWS . 'home/signup.php';
+      }
 
-    public function signupAction()
-    {
-        if (self::getSession('username')) {
-          header('location: /');
-          return;
-        }
-        // load VIEWSs
-        require VIEWS . 'home/signup.php';
-    }
+      public function logoutAction()
+      {
+          self::destroySession('username');
+          header('location: /home/signin');
+      }
 
-    public function logoutAction()
-    {
-        self::destroySession('username');
-        header('location: /home/signin');
-    }
+      public function lostAction()
+      {
+          // load VIEWSs
 
-    public function lostAction()
-    {
-        // load VIEWSs
+          require VIEWS . 'home/lost.php';
 
-        require VIEWS . 'home/lost.php';
-
-    }
+      }
 
 
-}
+  }
 ?>

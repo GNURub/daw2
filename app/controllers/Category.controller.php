@@ -20,7 +20,7 @@
           }else{
             try {
               $catego = $this->category->toArray($params[0]);
-              if(empty($catego)){
+              if(empty($catego[0])){
                 require VIEWS . 'error/404.php';
               }else{
                 require VIEWS . 'category/show.php';
@@ -46,7 +46,7 @@
             if($isValidCategory){
               try {
                 $this->category->save(array(
-                  'nombre' => $nombre
+                  'idcategoria' => $nombre
                 ));
               } catch (Exception $e) {
                 $error = $e->getMessage();
@@ -67,6 +67,27 @@
           require VIEWS . 'error/401.php';
         }
 
+
+      }
+
+      public function jsonAction(){
+        try {
+          $id = !empty($this->_params[0]) ? $this->_params[0] : false;
+          $categories = $this->category->toArray($id);
+          if (empty($categories)) {
+            $categories = array(
+              'error' => 400,
+              'errorMsg' => "Categoria no encontrada"
+            );
+          }
+          echo json_encode($categories);
+        } catch (Exception $e) {
+          $error = array(
+            'error' => 200,
+            'errorMsg' => $e->getMessage()
+          );
+          echo json_encode($error);
+        }
 
       }
 

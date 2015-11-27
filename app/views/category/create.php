@@ -5,7 +5,7 @@
     <ul>
       <li>
         <div class="group">
-          <input type="text" name="nombre" required>
+          <input type="text" class="capitalize" name="nombre" required>
           <span class="highlight"></span>
           <span class="bar"></span>
           <label>Titulo de la categoria:</label>

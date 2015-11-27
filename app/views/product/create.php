@@ -1,11 +1,28 @@
 <?php require VIEWS . '_layout/header.php'; ?>
+<!-- <?php print_r($categorias); ?> -->
 <div class="content">
   <h2 class="center">Formulario de Producto</h2>
   <form class="signin center" method="post">
     <ul>
+
+      <li>
+        <div class="mdl-selectfield">
+          <label>Categoria: </label>
+          <select class="browser-default" name="categoria">
+            <option value="" disabled selected>Elige una opción</option>
+            <?php
+              foreach ($categorias as $categoria) {
+                echo "<option value='{$categoria["idcategoria"]}'>{$categoria["idcategoria"]}</option>";
+              }
+            ?>
+          </select>
+        </div>
+      </li>
+
+
       <li>
         <div class="group">
-          <input type="text" name="titulo" required>
+          <input type="text" name="titulo" class="capitalize" required>
           <span class="highlight"></span>
           <span class="bar"></span>
           <label>Titulo del producto:</label>
@@ -14,7 +31,7 @@
 
       <li>
         <div class="group">
-          <input type="text" name="marca" required>
+          <input type="text" name="marca" class="capitalize" required>
           <span class="highlight"></span>
           <span class="bar"></span>
           <label>Marca:</label>

@@ -9,7 +9,7 @@ input         {
   width:300px;
   border:none;
   border-bottom:1px solid #757575;
-  &.caplitalize{
+  &.capitalize{
     text-transform: capitalize;
   }
   &:focus{

@@ -1,18 +1,20 @@
 <?php
-  require APP.'models/Product.model.php';
+  require_once APP.'models/Product.model.php';
   require_once APP.'models/Client.model.php';
+  require_once APP.'models/Category.model.php';
 
   class Product extends Controller {
       private $_params;
       private $product;
+      private $category;
       private $admin;
-
 
       public function __construct($params = array())
       {
-          $this->product = new ProductModel();
-          $this->admin   = new ClientModel();
-          $this->_params = $params;
+          $this->product    = new ProductModel();
+          $this->admin      = new ClientModel();
+          $this->category   = new CategoryModel();
+          $this->_params    = $params;
       }
 
       public function index($params = array()){
@@ -37,7 +39,7 @@
       public function jsonAction(){
         try {
           $id = !empty($this->_params[0]) ? $this->_params[0] : false;
-          $proucts = $this->product->toObject($id);
+          $proucts = $this->product->toArray($id);
           echo json_encode($proucts);
         } catch (Exception $e) {
           $error = array(
@@ -60,22 +62,34 @@
                 isset($marca) &&
                 isset($precio) &&
                 isset($gastoenvio) &&
+                isset($categoria) &&
                 isset($descripcion) &&
                 !empty($titulo) &&
                 !empty($marca) &&
+                !empty($categoria) &&
                 !empty($precio) &&
                 !empty($gastoenvio) &&
                 !empty($descripcion)
               );
               if($isValidProduct){
                 try {
-                  $this->product->save(array(
+                  if($idProduct = $this->product->save(array(
                     'titulo' => $titulo,
                     'marca' => $marca,
                     'precio' => $precio,
                     'gatosdeenvio' => $gastoenvio,
-                    'descripcion' => $descripcion
-                  ));
+                    'descripcion' => $descripcion,
+                  ))){
+                    try {
+                      $this->product->saveWithCategory(array(
+                        'idproducto'  => $idProduct,
+                        'idcategoria' => $categoria
+                      ));
+                    } catch (Exception $e) {
+
+                    }
+
+                  }
                 } catch (Exception $e) {
                   $error = $e->getMessage();
                   require VIEWS . 'error/500.php';
@@ -86,6 +100,7 @@
             }else{
               $client = $this->admin->toArray(self::getSession('username'));
               if($client['rol'] == 'admin' || $client['rol'] == 'administrador'){
+                $categorias = $this->category->toArray();
                 require VIEWS . 'product/create.php';
               }else{
                 require VIEWS . 'error/401.php';
