@@ -3,7 +3,10 @@
  * Log class
  */
 class Log extends Controller{
-    public static function write($text, $nombre_archivo = APP.'thecatlong.log.text'){
+    public static function write($text, $nombre_archivo = false){
+      if(!$nombre_archivo){
+        $nombre_archivo = APP.'thecatlong.log.text';
+      }
       if(is_writable($nombre_archivo)){
         $file = fopen($nombre_archivo, 'a+');
         if(!$file){
