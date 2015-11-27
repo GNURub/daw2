@@ -3,6 +3,7 @@ header{
     height: 136px;
     // position: fixed;
 
+
     div.logotipo{
 
     }
@@ -60,6 +61,57 @@ header{
       align-items: center;
       flex-wrap: nowrap;
       height: 100px;
+      div.dropdown_menu{
+        position:absolute;
+        background-color: rgb(246,246,246);
+        padding: 1em;
+        z-index: 30;
+        box-shadow: 0 0 20px rgba(0,0,0, .2);
+        border-radius: 3px;
+        left: -70px;
+        transition: all 1000ms ease;
+        min-width: 11.5rem;
+
+        ul{
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: flex-start;
+          font-size: 1em;
+          li{
+            display: flex;
+            width: 100%;
+            border-bottom: 1px solid rgba(0,0,0,.05);
+            margin-bottom: 5px;
+            &:hover > a{
+              font-weight: bold!important;
+            }
+            &.btn-li{
+              border: 0;
+              height: 2em;
+              button{
+                margin: 0;
+                font-weight: bold;
+                background-color: $accent_color;
+              }
+            }
+
+            a{
+              transition: all 500ms ease;
+              font-weight: normal;
+              text-align: left;
+              color: black;
+              &.carrito{
+                font-size: 12px;
+                i{
+                  font-size: 15px;
+                }
+              }
+            }
+
+          }
+        }
+      }
       div{
         flex: 1;
         &.buscador{

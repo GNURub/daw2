@@ -1,3 +1,5 @@
 <?php require VIEWS . '_layout/header.php'; ?>
-<h1>create</h1>
+<div class="content">
+
+</div>
 <?php require VIEWS . '_layout/footer.php'; ?>

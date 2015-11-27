@@ -121,6 +121,7 @@
 
             if(hash_equals($userData['password'], crypt($password, $userData['password']))){
               self::setSession('username', $userData['username']);
+              self::setSession('admin', $userData['rol']);
               header('location: /');
             }else{
               Log::write("La contraseña introducida no es correcta");
@@ -137,9 +138,13 @@
       }
 
 
-      public function readAction()
+      public function adminAction()
       {
-          //read all the todo items
+          if(!!self::getSession('user') && self::getSession('admin') == 'administrador'){
+            require VIEWS . 'client/admin.php';
+            return;
+          }
+          require VIEWS . 'error/401.php';
       }
 
       public function updateAction()
@@ -171,6 +176,7 @@
           try {
             if($this->client->delete(self::getSession('username'))){
               self::destroySession('username');
+              self::destroySession('admin');
               header('location: /');
             }
           } catch (Exception $e) {

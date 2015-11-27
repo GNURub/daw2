@@ -32,9 +32,21 @@
 
   <div class="social">
     <ul>
-      <li><a href=""><i></i>Insta</a></li>
-      <li><a href=""><i></i>Face</a></li>
-      <li><a href=""><i></i>Pinterest</a></li>
+      <li>
+        <a href="">
+          <img src="https://maxcdn.icons8.com/Color/PNG/24/Social_Networks/instagram-24.png" title="Instagram" width="24">
+        </a>
+      </li>
+      <li>
+        <a href="">
+          <img src="https://maxcdn.icons8.com/Color/PNG/24/Social_Networks/facebook-24.png" title="Facebook" width="24">
+        </a>
+      </li>
+      <li>
+        <a href="">
+          <img src="https://maxcdn.icons8.com/Color/PNG/24/Logos/pinterest-24.png" title="Pinterest" width="24">
+        </a>
+      </li>
     </ul>
   </div>
 </footer>
@@ -46,6 +58,6 @@
 
 <!-- our JavaScript -->
 <!-- <script src="<?php echo URL; ?>js/libs/material.js"></script> -->
-
+<script src="<?php echo URL; ?>js/app.js"></script>
 </body>
 </html>

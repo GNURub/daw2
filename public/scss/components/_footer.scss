@@ -3,7 +3,11 @@ footer{
   height: 200px;
   display: flex;
   flex-direction: column;
+  color: rgba(255,255,255, .7);
   background-color: $dark_primary;
+  h3{
+    color: $text_color;
+  }
   div{
     display: flex;
     flex-direction: row;
@@ -26,8 +30,20 @@ footer{
             display: flex;
             justify-content: flex-start;
             align-items: center;
+            margin-bottom: .2em;
+            i.material-icons{
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+              text-align: center;
+              background-color: $primary;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+            }
             & > * {
-              margin: 0 .3em;
+              margin: 0 .5em;
             }
 
           }

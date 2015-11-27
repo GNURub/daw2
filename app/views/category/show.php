@@ -1,5 +1,7 @@
 <?php require VIEWS . '_layout/header.php' ?>
 
-<?php print_r($productos); ?>
+<div class="content">
+
+</div>
 
 <?php require VIEWS . '_layout/footer.php' ?>

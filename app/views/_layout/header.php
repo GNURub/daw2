@@ -43,10 +43,50 @@
                 }
               ?>
             </li>
-            <li>
-              <a href="javascript: void(0)" class="button-icon"><i class="material-icons">more_vert</i></a>
-              <ul>
-              </ul>
+            <li style="position:relative;">
+              <a href="javascript: void(0)" class="button-icon btn_dropdown"><i class="material-icons">more_vert</i></a>
+              <?php
+                if (self::getSession('admin') == 'administrador' && self::getSession('username')) {
+              ?>
+                <div class="hidden dropdown_menu">
+                  <ul >
+                    <li>
+                      <a href="/product/create">
+                        Crear Producto.
+                      </a>
+                    </li>
+                    <li>
+                      <a href="/category/create">
+                        Crear Categoria.
+                      </a>
+                    </li>
+                    <li>
+                      <a href="">
+                        Adm.Acounts
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              <?php
+              }else{
+              ?>
+              <div class="hidden dropdown_menu">
+                <ul>
+                  <li>
+                    <a href="" class="carrito">
+                      <i class="material-icons">shopping_basket</i>
+                      <small>
+                        Tienes 6 productos.
+                      </small>
+                    </a>
+                  </li>
+                  <li class="btn-li">
+                    <button class="btn lg">Cerrar compra</button>
+                  </li>
+                </ul>
+              </div>
+              <?php } ?>
+
             </li>
             <li>
               <?php
