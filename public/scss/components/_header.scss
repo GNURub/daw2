@@ -1,16 +1,117 @@
 header{
     width: 100%;
-    height: 64px;
-    background-color: $dark_primary;
+    height: 136px;
+    // background-color: $dark_primary;
     &.cabecera{
       display: flex;
-      justify-content: space-around;
-      flex-direction: row;
+      flex-direction: column;
       flex-wrap: nowrap;
+    }
+
+    ul{
+      margin: 0;
+      padding: 0;
+    }
+    a{
+      text-decoration: none;
+      color: white;
+      &.button-icon{
+        min-height: 32px;
+        min-width: 32px;
+        border-radius: 50%;
+        display: table;
+        margin: 0 .2em;
+        i{
+          display: table-cell;
+          vertical-align: middle;
+          text-align: center;
+        }
+        &:hover{
+          background-color: rgba(158,158,158,.2);
+        }
+      }
+      .title{
+          color: white;
+          font-size: 2em;
+        @media screen and (max-width: 750px) {
+            & {
+                font-size: 90%;
+            }
+        }
+        @media screen and (max-width: 500px) {
+            & {
+                font-size: 60%;
+                display: none;
+            }
+        }
+      }
+    }
+    nav.utils{
+      display: flex;
+      flex-direction: row;
+      background-color: $dark_primary;
+      width: 100%;
+      justify-content: space-around;
+      padding: 0 .5rem;
       align-items: center;
+      flex-wrap: nowrap;
+      div{
+        flex: 1;
+        &.buscador{
+          flex: 2;
+          display: flex;
+          flex-direction: row;
+          position: relative;
+          i{
+            vertical-align: middle;
+            position: absolute;
+            font-size: 24px;
+            left: 24px;
+            top: 6px;
+            color: $primary_text;
+          }
+          input{
+            appearance: none;
+            padding: 8px 8px 8px 72px;
+            width: 100%;
+            height: 36px;
+            transition: all 200ms ease;
+            border: none;
+            border-radius: 3px;
+            font-weight: 300;
+            outline: none;
+            background-color: #5c6bc0;
+            color: white;
+            &:hover{
+              background-color: lighten(#5c6bc0, 10%);
+            }
+
+
+            &:focus{
+              color: black;
+              background-color: white;
+            }
+          }
+        }
+      }
+      ul{
+        flex: 1;
+        margin: 0 auto;
+        display: table;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        li{
+          display: table-cell;
+          vertical-align: middle;
+          align-self: center;
+          align-content: center;
+
+
+
+        }
+      }
+
     }
-    .title{
-        color: white;
-        font-size: 2em;
-    }
+
 }

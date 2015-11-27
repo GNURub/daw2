@@ -4,7 +4,6 @@ body {
   background: #33393d;
   height: 100%;
   box-sizing: border-box;
-  display: -moz-box;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-flex;
@@ -12,22 +11,18 @@ body {
   display: -ms-flex;
   display: flex;
   -webkit-box-orient: vertical;
-  -moz-box-orient: vertical;
   -webkit-box-direction: normal;
-  -moz-box-direction: normal;
   -webkit-flex-direction: column;
   -moz-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
   -webkit-box-pack: center;
-  -moz-box-pack: center;
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   -moz-justify-content: center;
   -ms-justify-content: center;
   justify-content: center;
   -webkit-box-align: stretch;
-  -moz-box-align: stretch;
   -ms-flex-align: stretch;
   -webkit-align-items: stretch;
   -moz-align-items: stretch;
@@ -102,7 +97,4 @@ body {
     text-decoration: none;
     color: #e8938a;
     -webkit-transition: .3s;
-    -moz-transition: .3s;
-    -ms-transition: .3s;
-    -o-transition: .3s;
     transition: .3s; }

@@ -18,5 +18,30 @@
 <body>
 <!--         <a href="<?php echo URL; ?>songs">songs</a> -->
     <header class="cabecera">
-        <span class="title pacifico">The Cat Long</span>
+        <nav class="utils">
+          <div>
+            <a href="" >
+              <span class="title pacifico">The Cat Long</span>
+            </a>
+          </div>
+          <div class="buscador">
+            <i class="material-icons">search</i>
+            <input type="search">
+          </div>
+          <ul class="menu">
+            <li></li>
+            <li>
+              <a href="">Registro</a>
+            </li>
+            <li>
+              <a href="" class="button-icon"><i class="material-icons">more_vert</i></a>
+              <ul>
+              </ul>
+            </li>
+            <li>
+              <a href="">Login</a>
+            </li>
+          </ul>
+        </nav>
+        <nav></nav>
     </header>
