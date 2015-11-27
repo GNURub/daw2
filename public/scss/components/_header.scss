@@ -1,7 +1,12 @@
 header{
     width: 100%;
     height: 136px;
-    // background-color: $dark_primary;
+    // position: fixed;
+
+    div.logotipo{
+
+    }
+
     &.cabecera{
       display: flex;
       flex-direction: column;
@@ -42,12 +47,7 @@ header{
                 font-size: 90%;
             }
         }
-        @media screen and (max-width: 500px) {
-            & {
-                font-size: 60%;
-                display: none;
-            }
-        }
+
       }
     }
     nav.utils{
@@ -59,6 +59,7 @@ header{
       padding: 0 .5rem;
       align-items: center;
       flex-wrap: nowrap;
+      height: 100px;
       div{
         flex: 1;
         &.buscador{
@@ -98,6 +99,8 @@ header{
           }
         }
       }
+
+
       ul{
         flex: 1;
         margin: 0 auto;
@@ -105,6 +108,7 @@ header{
         display: flex;
         justify-content: center;
         align-content: center;
+
         li{
           display: table-cell;
           vertical-align: middle;
@@ -114,11 +118,61 @@ header{
             font-weight: bold;
             letter-spacing: 2px;
           }
-
-
-
         }
       }
+
+    }
+
+    nav.submenu{
+      width: 100%;
+      background-color: $primary;
+      height: 36px;
+
+      ul{
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin: 0;
+        align-items: center;
+        li{
+
+          flex: auto;
+          height: inherit;
+          a{
+            transition: all 200ms ease;
+            transition: opacity 500ms ease;
+            color: white;
+            opacity: .75;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: inherit;
+            font-weight: bold;
+            &:hover, &.active{
+              opacity: 1;
+              border-bottom: 4px solid $secundary_accent;
+              box-shadow: inset 1px 1px 30px rgba(0,0,0, .05);
+
+            }
+          }
+        }
+      }
+    }
+
+    @media screen and (max-width: 500px) {
+        div.logotipo{
+            display: none;
+        }
+        ul.menu{
+          margin-left: 2em;
+          flex: 2!important;
+        }
+        div{
+          flex: auto;
+        }
 
     }
 

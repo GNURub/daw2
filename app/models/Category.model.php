@@ -4,9 +4,11 @@
   {
     private $table = "categorias";
     public  $id;
+    static $categories;
 
     function __construct(){
       $this->connect();
+      self::$categories = $this->toArray();
     }
 
     function save($data){

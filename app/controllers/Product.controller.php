@@ -6,6 +6,7 @@
       private $product;
       private $category;
       private $admin;
+      static $products;
 
       public function __construct($params = array())
       {
@@ -13,6 +14,7 @@
           $this->admin      = new ClientModel();
           $this->category   = new CategoryModel();
           $this->_params    = $params;
+          self::$products   = $this->product->toArray();
       }
 
       public function index($params = array()){

@@ -31,7 +31,17 @@
       $this->id = $this->db->insert_id;
     }
 
-    public function toArray($id){
+    function selecWithCategory($id){
+      $query = "SELECT *
+        FROM productos p
+        NATURAL JOIN productos_categorias a WHERE idcategoria = '{$id}'";
+      if(!$this->db->query($query)){
+        throw new Exception($this->db->error);
+      }
+      $this->id = $this->db->insert_id;
+    }
+
+    public function toArray($id = false){
       if($id === false){
         $query = "SELECT * FROM {$this->table}";
       }else{

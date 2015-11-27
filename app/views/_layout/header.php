@@ -19,8 +19,8 @@
 <!--         <a href="<?php echo URL; ?>songs">songs</a> -->
     <header class="cabecera">
         <nav class="utils">
-          <div>
-            <a href="" >
+          <div class="logotipo">
+            <a href="/" >
               <span class="title pacifico">The Cat Long</span>
             </a>
           </div>
@@ -63,7 +63,17 @@
             </li>
           </ul>
         </nav>
-        <nav>
-          
+        <nav class="submenu">
+          <ul>
+            <?php foreach (CategoryModel::$categories as $cat): ?>
+              <li>
+                <?php if (isset($selectedCategory) && $selectedCategory == $cat['idcategoria']){ ?>
+                  <a href="/category/<?=$cat['idcategoria']?>" class="capitalize active"><?=$cat['idcategoria']?></a>
+                <?php }else{ ?>
+                  <a href="/category/<?=$cat['idcategoria']?>" class="capitalize"><?=$cat['idcategoria']?></a>
+                <?php } ?>
+              </li>
+            <?php endforeach; ?>
+          </ul>
         </nav>
     </header>

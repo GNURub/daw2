@@ -42,10 +42,6 @@ header {
       @media screen and (max-width: 750px) {
         header a .title {
           font-size: 90%; } }
-      @media screen and (max-width: 500px) {
-        header a .title {
-          font-size: 60%;
-          display: none; } }
   header nav.utils {
     display: -webkit-box;
     display: -webkit-flex;
@@ -68,7 +64,8 @@ header {
             align-items: center;
     -webkit-flex-wrap: nowrap;
         -ms-flex-wrap: nowrap;
-            flex-wrap: nowrap; }
+            flex-wrap: nowrap;
+    height: 100px; }
     header nav.utils div {
       -webkit-box-flex: 1;
       -webkit-flex: 1;
@@ -146,6 +143,79 @@ header {
         header nav.utils ul li a {
           font-weight: bold;
           letter-spacing: 2px; }
+  header nav.submenu {
+    width: 100%;
+    background-color: #3F51B5;
+    height: 36px; }
+    header nav.submenu ul {
+      height: 100%;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: row;
+          -ms-flex-direction: row;
+              flex-direction: row;
+      -webkit-flex-wrap: wrap;
+          -ms-flex-wrap: wrap;
+              flex-wrap: wrap;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+          -ms-flex-pack: justify;
+              justify-content: space-between;
+      margin: 0;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+          -ms-flex-align: center;
+              align-items: center; }
+      header nav.submenu ul li {
+        -webkit-box-flex: 1;
+        -webkit-flex: auto;
+            -ms-flex: auto;
+                flex: auto;
+        height: inherit; }
+        header nav.submenu ul li a {
+          -webkit-transition: all 200ms ease;
+          transition: all 200ms ease;
+          -webkit-transition: opacity 500ms ease;
+          transition: opacity 500ms ease;
+          color: white;
+          opacity: .75;
+          display: -webkit-box;
+          display: -webkit-flex;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-pack: center;
+          -webkit-justify-content: center;
+              -ms-flex-pack: center;
+                  justify-content: center;
+          -webkit-box-align: center;
+          -webkit-align-items: center;
+              -ms-flex-align: center;
+                  align-items: center;
+          width: 100%;
+          height: inherit;
+          font-weight: bold; }
+          header nav.submenu ul li a:hover, header nav.submenu ul li a.active {
+            opacity: 1;
+            border-bottom: 4px solid #FF4081;
+            box-shadow: inset 1px 1px 30px rgba(0, 0, 0, 0.05); }
+  @media screen and (max-width: 500px) {
+    header div.logotipo {
+      display: none; }
+    header ul.menu {
+      margin-left: 2em;
+      -webkit-box-flex: 2 !important;
+      -webkit-flex: 2 !important;
+          -ms-flex: 2 !important;
+              flex: 2 !important; }
+    header div {
+      -webkit-box-flex: 1;
+      -webkit-flex: auto;
+          -ms-flex: auto;
+              flex: auto; } }
 
 .content {
   display: -webkit-box;
@@ -402,11 +472,15 @@ select:focus {
 * {
   box-sizing: border-box; }
 
+a {
+  outline: none; }
+
 body {
   margin: 0;
   width: 100%;
   height: 100vh;
-  font-family: 'Roboto'; }
+  font-family: 'Roboto';
+  color: #212121; }
 
 ul {
   margin: 0;

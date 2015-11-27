@@ -3,6 +3,7 @@
   class Category extends Controller {
       private $_params;
       private $category;
+      private $product;
       private $admin;
 
       public function __construct($params = array())
@@ -10,6 +11,7 @@
           $this->_params  = $params;
           $this->category = new CategoryModel();
           $this->admin    = new ClientModel();
+          $this->product  = new ProductModel();
       }
 
       public function index($params = array()){
@@ -25,9 +27,16 @@
                 Log::write("No existe la categoria que se esta buscando.");
                 require VIEWS . 'error/404.php';
               }else{
-                
-                Log::write("Se muestra la categoria.");
-                require VIEWS . 'category/show.php';
+                try {
+                  $selectedCategory = $catego[0]['idcategoria'];
+                  $productos = $this->product->selecWithCategory($catego[0]['idcategoria']);
+                  // no va
+                  Log::write("Se muestra la categoria.");
+                  require VIEWS . 'category/show.php';
+                } catch (Exception $e) {
+                  echo $e->getMessage();
+                }
+
               }
             } catch (Exception $e) {
               $error = $e->getMessage();
