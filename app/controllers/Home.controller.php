@@ -53,6 +53,22 @@
 
       }
 
+      public function filosofyAction()
+      {
+          // load VIEWSs
+
+          require VIEWS . 'home/lost.php';
+
+      }
+
+      public function multimediaAction()
+      {
+          // load VIEWSs
+
+          require VIEWS . 'home/lost.php';
+
+      }
+
 
   }
 ?>

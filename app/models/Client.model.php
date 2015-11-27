@@ -4,9 +4,11 @@
   {
     private $table = "usuarios";
     public  $id;
+    public $category;
 
     function __construct(){
       $this->connect();
+      $this->category = new CategoryModel();
     }
 
     function save($data){
