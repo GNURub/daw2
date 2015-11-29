@@ -1,3 +1,9 @@
+<?php
+  $isAdmin = (
+    self::getSession('admin') &&
+    self::getSession('username')
+  );
+ ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,16 +13,11 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- JS -->
-    <!-- please note: The JavaScript files are loaded in the footer to speed up page construction -->
-
-    <!-- CSS -->
-    <link href='https://fonts.googleapis.com/css?family=Pacifico|Roboto:400,700,300,500,400italic|Montserrat:400,700|Material+Icons' rel='stylesheet' type='text/css'>
 <!--     <link href="<?php echo URL; ?>css/material.css" rel="stylesheet"> -->
     <link href="<?=URL; ?>css/all.css" rel="stylesheet">
+    <link rel="import" href="<?=URL; ?>components/item.html">
 </head>
 <body>
-<!--         <a href="<?php echo URL; ?>songs">songs</a> -->
     <header class="cabecera">
         <nav class="utils">
           <div class="logotipo">
@@ -46,7 +47,7 @@
             <li style="position:relative;">
               <a href="javascript: void(0)" class="button-icon btn_dropdown"><i class="material-icons">more_vert</i></a>
               <?php
-                if (self::getSession('admin') == 'administrador' && self::getSession('username')) {
+                if ($isAdmin) {
               ?>
                 <div class="hidden dropdown_menu">
                   <ul >
@@ -58,6 +59,11 @@
                     <li>
                       <a href="/category/create">
                         Crear Categoria.
+                      </a>
+                    </li>
+                    <li>
+                      <a href="/subcategory/create">
+                        Crear Subcategoria.
                       </a>
                     </li>
                     <li>
@@ -76,7 +82,7 @@
                     <a href="" class="carrito">
                       <i class="material-icons">shopping_basket</i>
                       <small>
-                        Tienes 6 productos.
+                        Tienes 60 productos.
                       </small>
                     </a>
                   </li>

@@ -79,39 +79,3 @@
     width: 100%;
   }
 }
-
-
-
-
-
-
-/* Styles, not important */
-*, *:before, *:after {
-  box-sizing: border-box;
-}
-
-html {
-  position: relative;
-  height: 100%;
-}
-
-// body {
-//   position: absolute;
-//   top: 50%;
-//   left: 50%;
-//
-//   -webkit-transform: translate(-50%, -50%);
-//   -moz-transform: translate(-50%, -50%);
-//   -ms-transform: translate(-50%, -50%);
-//   -o-transform: translate(-50%, -50%);
-//   transform: translate(-50%, -50%);
-//
-//   background-color: #ecf0f1;
-//   color: #34495e;
-//   font-family: Trebuchet, Arial, sans-serif;
-//   text-align: center;
-// }
-
-h2 {
-  font-weight: normal;
-}

@@ -5,7 +5,12 @@
     <p>In a real application this could be the homepage.</p>
 </div>
  -->
-<div class="content">
 
+<div class="content">
+  <?php
+    foreach ($productos as $producto) {
+      echo "<x-item label='{$producto['titulo']}' descripcion='{$producto['descripcion']}'></x-item>";
+    }
+  ?>
 </div>
  <?php require VIEWS . '_layout/footer.php'; ?>

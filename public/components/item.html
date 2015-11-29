@@ -1,0 +1,212 @@
+<!-- Defines element markup -->
+<template>
+  <style>
+    @import '../css/all.css';
+    .container_item{
+      width: 300px;
+      height: 306px;
+      display: flex;
+      flex-direction: column;
+      border-radius: 3px;
+      background-color: #fff;
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+    }
+    .header_item, .footer_item{
+      width: 100%;
+      /*height: 50%;*/
+      position: relative;
+    }
+    .header_item{
+      flex:1.5;
+    }
+
+    .footer_item{
+      flex:1;
+    }
+    .header_item > img{
+      width: 100%;
+      /*flex: auto;*/
+      height: 100%;
+    }
+    .header_item > .title_item{
+      position: absolute;
+      padding: 0 10px;
+      bottom: -16px;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.54);
+      font-weight: bold;
+      color: white;
+      line-height: 2em;
+    }
+    .header_item > button{
+      position: absolute;
+      right: 10px;
+      bottom: -50px;
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+      -webkit-user-select: none;
+      touch-action: pan-y;
+      z-index: 10;
+    }
+    .header_item > .new_item{
+      position: absolute;
+      right: 4px;
+      top: 5px;
+      padding: 4px 9px;
+      color: white;
+      background-color: #4CAF50;
+      font-weight: bold;
+      font-size: 10px;
+      border-radius: 4px;
+
+    }
+    .footer_item > .description{
+      padding: 10px;
+    }
+  </style>
+    <div class="container_item">
+      <div class="header_item">
+        <span class="new_item" hidden>New!</span>
+        <img src="http://lorempixel.com/300/300" alt="" />
+        <span class="title_item">
+
+        </span>
+        <button class="btn material-icons">add</button>
+      </div>
+      <div class="footer_item">
+        <p class="description">
+
+        </p>
+      </div>
+    </div>
+</template>
+
+<script>
+(function(window, document, undefined) {
+    'use strict';
+    var thatDoc = document;
+
+
+    var thisDoc =  (thatDoc._currentScript || thatDoc.currentScript).ownerDocument;
+
+
+    var template = thisDoc.querySelector('template').content;
+
+
+    var Item = Object.create(HTMLElement.prototype);
+
+    Item.url = 'http://lorempixel.com/300/200/';
+    Item.height = 306;
+    Item.label = '';
+    Item.descripcion = '';
+    Item.new = false;
+
+
+    Item.createdCallback = function() {
+
+        var shadowRoot = this.createShadowRoot();
+
+
+        var clone = thatDoc.importNode(template, true);
+        shadowRoot.appendChild(clone);
+
+
+        this.img                  = shadowRoot.querySelector('img');
+        this.container            = shadowRoot.querySelector('.container_item');
+        this.titleContainer       = shadowRoot.querySelector('.title_item');
+        this.newContainer         = shadowRoot.querySelector('.header_item > .new_item');
+        this.descriptionContainer = shadowRoot.querySelector('.footer_item > .description');
+        this.headerContainer      = shadowRoot.querySelector('.header_item');
+
+        var b = shadowRoot.querySelector('.header_item > button');
+        b.addEventListener('click', function(e){
+          console.log(e);
+        }, false);
+
+        this.newContainer.hidden = !this.hasAttribute('new');
+
+        if (this.hasAttribute('url')) {
+            var url = this.getAttribute('url');
+            this.setUrl(url);
+        }
+        else {
+            this.setUrl(this.url);
+        }
+
+        if (this.hasAttribute('height')) {
+            var height = this.getAttribute('height');
+            this.setHeight(height);
+        }
+        else {
+            this.setHeight(this.height);
+        }
+
+        if (this.hasAttribute('label')) {
+            var label = this.getAttribute('label');
+            this.setTitle(label);
+        }
+        else {
+            this.setTitle(this.label);
+        }
+
+        if (this.hasAttribute('descripcion')) {
+            var des = this.getAttribute('descripcion');
+            this.setDescription(des);
+        }
+        else {
+            this.setDescription(this.descripcion);
+        }
+    };
+
+
+    Item.attributeChangedCallback = function(attr, oldVal, newVal) {
+        if (attr === 'url') {
+            this.setUrl(newVal);
+        }
+        switch (attr) {
+          case 'url':
+            this.setUrl(newVal);
+            break;
+          case 'height':
+            this.setHeight(newVal);
+            break;
+          case 'title':
+            this.setTitle(newVal);
+            break;
+          case 'new':
+            this.newContainer.hidden = !this.hasAttribute('new');
+            break;
+
+        }
+    };
+
+    Item.setUrl = function(val) {
+        this.url = val;
+
+        this.img.src = this.url;
+    };
+
+
+
+    Item.setHeight = function(val) {
+        this.height = val;
+        this.container.style.height = this.height + 'px';
+        this.img.style.height = this.headerContainer.style.height;
+    };
+
+    Item.setTitle = function(val) {
+        this.label = val;
+        this.titleContainer.innerHTML = this.label;
+    };
+
+    Item.setDescription = function(val) {
+        this.descripcion = val;
+        this.descriptionContainer.innerHTML = this.descripcion;
+    };
+
+    window.Item = thatDoc.registerElement('x-item', {
+        prototype: Item
+    });
+})(window, document);
+</script>

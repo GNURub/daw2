@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Pacifico|Roboto:400,700,300,500,400italic|Montserrat:400,700|Material+Icons);
 header {
   width: 100%;
   height: 136px; }
@@ -95,7 +96,8 @@ header {
         -webkit-align-items: flex-start;
             -ms-flex-align: start;
                 align-items: flex-start;
-        font-size: 1em; }
+        font-size: 1em;
+        width: 100%; }
         header nav.utils div.dropdown_menu ul li {
           display: -webkit-box;
           display: -webkit-flex;
@@ -120,9 +122,25 @@ header {
             text-align: left;
             color: black; }
             header nav.utils div.dropdown_menu ul li a.carrito {
-              font-size: 12px; }
+              font-size: 12px;
+              display: -webkit-inline-box;
+              display: -webkit-inline-flex;
+              display: -ms-inline-flexbox;
+              display: inline-flex;
+              -webkit-justify-content: space-around;
+                  -ms-flex-pack: distribute;
+                      justify-content: space-around;
+              -webkit-box-orient: vertical;
+              -webkit-box-direction: normal;
+              -webkit-flex-direction: column;
+                  -ms-flex-direction: column;
+                      flex-direction: column;
+              -webkit-box-align: center;
+              -webkit-align-items: center;
+                  -ms-flex-align: center;
+                      align-items: center; }
               header nav.utils div.dropdown_menu ul li a.carrito i {
-                font-size: 15px; }
+                font-size: 25px; }
     header nav.utils div {
       -webkit-box-flex: 1;
       -webkit-flex: 1;
@@ -447,17 +465,6 @@ input:focus:invalid ~ label {
   .btn.lg {
     width: 100%; }
 
-/* Styles, not important */
-*, *:before, *:after {
-  box-sizing: border-box; }
-
-html {
-  position: relative;
-  height: 100%; }
-
-h2 {
-  font-weight: normal; }
-
 .card {
   background: #fff;
   border-radius: 2px;
@@ -660,7 +667,7 @@ footer {
         footer div.social ul li {
           margin: 0 1em; }
 
-* {
+*, *:before, *:after {
   box-sizing: border-box; }
 
 a {
@@ -695,6 +702,7 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: capitalize; }
 
 div.content {
+  margin-top: 1em;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -704,7 +712,21 @@ div.content {
       -ms-flex-preferred-size: 100%;
           flex-basis: 100%;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-  z-index: 1; }
+  z-index: 1;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
+
+div.content x-item {
+  margin: 1em 0; }
 
 .roboto {
   font-family: 'Roboto', sans-serif; }
