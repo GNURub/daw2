@@ -8,6 +8,17 @@ class Controller
     self::getSession($key);
   }
 
+  public static function pushInSession($key, $value){
+      $array = self::getSession($key);
+    if ($array && is_array($array)) {
+      array_push($array, $value);
+      self::setSession($key, $array);
+
+    }else{
+      $_SESSION[$key] = array($value);
+    }
+  }
+
   public static function getSession($key){
     if($key == 'admin'){
       $isAdmin = isset($_SESSION[$key]) && (
@@ -22,6 +33,24 @@ class Controller
   public static function destroySession($key){
     if(self::getSession($key)){
       unset($_SESSION[$key]);
+      return true;
+    }
+    return false;
+  }
+
+
+  public static function setCookie($key, $value, $time = 1233332){
+    setcookie($key, $val, time() + $time);
+    self::getCookie($key);
+  }
+
+  public static function getCookie($key){
+    return isset($_COOKIE[$key]) ? $_COOKIE[$key] : false;
+  }
+
+  public static function destroyCookie($key){
+    if(self::getCookie($key)){
+      setcookie($key, '', time()-3600);
       return true;
     }
     return false;

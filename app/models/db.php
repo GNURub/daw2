@@ -40,7 +40,7 @@
 			$keys   = "";
 
       foreach ($data as $key => $value) {
-				$value = htmlspecialchars($value);
+				$value = escapeText($value);
         if(!empty($values)){
 					if(is_numeric($value)){
           	$values .= ", ".$value;

@@ -71,6 +71,15 @@
                 !empty($gastoenvio) &&
                 !empty($descripcion)
               );
+              if($_FILES["imagen"]){
+                try {
+                  $path = uploadImage($_FILES["imagen"]);
+                } catch (Exception $e) {
+                  $error = $e->getMessage();
+                  require VIEWS . 'error/500.php';
+                }
+              }else {$path = false;}
+
               if($isValidProduct){
                 try {
                   if($idProduct = $this->product->save(array(
@@ -87,6 +96,14 @@
                           'idcategoria' => $cat
                         ));
                       }
+                      // subimos la imagen si existe
+                      if($path){
+                        $this->product->saveWithImage(array(
+                          'idproducto'  => $idProduct,
+                          'path' => $path
+                        ));
+                      }
+                      header('location: /');
                     } catch (Exception $e) {
                       $error = $e->getMessage();
                       require VIEWS . 'error/500.php';
@@ -115,9 +132,15 @@
       }
 
 
-      public function readAction()
+      public function addAction()
       {
-          //read all the todo items
+        if(empty($this->_params[0])){
+          require VIEWS . 'error/404.php';
+        }else{
+          echo $this->_params[0];
+          self::pushInSession('productos', $this->_params[0]);
+        }
+        header('location: /');
       }
 
       public function updateAction()

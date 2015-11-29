@@ -27,13 +27,7 @@ if (ENVIRONMENT == 'development' || ENVIRONMENT == 'dev') {
 }
 /**
  * Configuration for: URL
- * Here we auto-detect your applications URL and the potential sub-folder. Works perfectly on most servers and in local
- * development environments (like WAMP, MAMP, etc.). Don't touch this unless you know what you do.
- *
- * URL_PUBLIC_FOLDER:
- * The folder that is visible to public, users will only have access to that folder so nobody can have a look into
- * "/application" or other folder inside your application or call any other .php file than index.php inside "/public".
- *
+
  * URL_PROTOCOL:
  * The protocol. Don't change unless you know exactly what you do.
  *

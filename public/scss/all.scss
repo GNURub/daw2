@@ -10,6 +10,7 @@
 
 *, *:before, *:after{
   box-sizing: border-box;
+  outline: none;
 }
 a{
   outline: none;
@@ -38,17 +39,24 @@ h1,h2,h3,h4,h5,h6{
 .capitalize{
   text-transform: capitalize;
 }
-div.content{
-  margin-top: 1em;
+div.content {
   display: flex;
   width: 100%;
   flex-basis: 100%;
-
   box-shadow: 0 10px 40px rgba(0,0,0, .2);
   z-index: 1;
-  flex-direction: row;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  & > div.items-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    align-content: flex-end;
+    padding: 1em;
+
+  }
+
+
 }
 div.content x-item{
   margin: 1em 0;

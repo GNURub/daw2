@@ -63,6 +63,7 @@
                 $this->category->save(array(
                   'idcategoria' => $nombre
                 ));
+                header('location: /');
               } catch (Exception $e) {
                 $error = $e->getMessage();
                 require VIEWS . 'error/500.php';

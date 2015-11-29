@@ -37,8 +37,9 @@
       font-weight: bold;
       color: white;
       line-height: 2em;
+      left: 0;
     }
-    .header_item > button{
+    .header_item  button{
       position: absolute;
       right: 10px;
       bottom: -50px;
@@ -48,6 +49,7 @@
       -webkit-user-select: none;
       touch-action: pan-y;
       z-index: 10;
+      outline: none;
     }
     .header_item > .new_item{
       position: absolute;
@@ -101,6 +103,7 @@
     Item.label = '';
     Item.descripcion = '';
     Item.new = false;
+    Item.num = null;
 
 
     Item.createdCallback = function() {
@@ -119,10 +122,13 @@
         this.descriptionContainer = shadowRoot.querySelector('.footer_item > .description');
         this.headerContainer      = shadowRoot.querySelector('.header_item');
 
+
         var b = shadowRoot.querySelector('.header_item > button');
         b.addEventListener('click', function(e){
-          console.log(e);
-        }, false);
+          e.preventDefault();
+          window.location.href = '/product/add/' + this.getAttribute('num');
+
+        }.bind(this), false);
 
         this.newContainer.hidden = !this.hasAttribute('new');
 

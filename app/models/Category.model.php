@@ -35,6 +35,7 @@
       if($id === false){
         $query = "SELECT * FROM {$this->table}";
       }else{
+        $id = escapeText($id);
         $query = "SELECT * FROM {$this->table}
                     WHERE idcategoria = '{$id}'";
       }

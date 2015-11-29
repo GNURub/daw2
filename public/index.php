@@ -2,6 +2,7 @@
 
 define('ROOT', dirname(__DIR__) . DIRECTORY_SEPARATOR);
 define('APP', ROOT . 'app' . DIRECTORY_SEPARATOR);
+define('IMGS', ROOT . 'public/images' . DIRECTORY_SEPARATOR);
 define('VIEWS', APP . 'views' . DIRECTORY_SEPARATOR);
 
 

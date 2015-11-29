@@ -12,8 +12,7 @@
     <meta name="description" content="">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!--     <link href="<?php echo URL; ?>css/material.css" rel="stylesheet"> -->
+    <script src="<?=URL; ?>js/wc.js"></script>
     <link href="<?=URL; ?>css/all.css" rel="stylesheet">
     <link rel="import" href="<?=URL; ?>components/item.html">
 </head>
@@ -82,7 +81,7 @@
                     <a href="" class="carrito">
                       <i class="material-icons">shopping_basket</i>
                       <small>
-                        Tienes 60 productos.
+                        Tienes <?=self::getSession('productos') ? count(self::getSession('productos')) : 0;?> productos.
                       </small>
                     </a>
                   </li>

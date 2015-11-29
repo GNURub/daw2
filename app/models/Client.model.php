@@ -24,6 +24,7 @@
     }
 
     function  delete($id){
+      $id = escapeText($id);
       $query = "DELETE FROM {$this->table} WHERE username = '{$id}' OR email = '{$id}'";
       if(!$this->db->query($query)){
         throw new Exception($this->db->error);
@@ -37,6 +38,7 @@
 
     function toArray($id = false){
       $by = !empty($id) ? $id : $this->id;
+      $by = escapeText($by);
       $query = "SELECT * FROM {$this->table}
                     WHERE username = '{$by}' OR email = '{$by}'";
       if(!$resultado = $this->db->query($query)){

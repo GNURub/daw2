@@ -2,7 +2,7 @@
 <!-- <?php print_r($categorias); ?> -->
 <div class="content">
   <h2 class="center">Formulario de Producto</h2>
-  <form class="signin center" method="post">
+  <form class="signin center" method="post" enctype="multipart/form-data">
     <ul>
 
       <li>
@@ -62,6 +62,15 @@
           <span class="highlight"></span>
           <span class="bar"></span>
           <label>Descripcion:</label>
+        </div>
+      </li>
+
+      <li>
+        <div class="group">
+          <input type="file" style="opacity:0" name="imagen" required>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label>Imagen:</label>
         </div>
       </li>
 
