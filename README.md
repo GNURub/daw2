@@ -5,7 +5,13 @@ The Cat Long!
 Proceso de **instalacion** del proyecto Web.
 
 ----------
+Para descargar el proyecto:
 
+``` bash
+$ git clone git@github.com:GNURub/daw2.git
+```
+
+o [descargar zip][1]
 
 Requerimientos
 -------------
@@ -43,3 +49,5 @@ $ mysql -p -u[user] < final.sql
 
 > - Username: test
 > - Password: 1234567890
+
+  [1]: https://github.com/GNURub/daw2/archive/master.zip
