@@ -46,7 +46,7 @@
       $id = escapeText($id);
       $query = "SELECT *
         FROM productos p
-        NATURAL JOIN productos_categorias a WHERE idcategoria = '{$id}'";
+        NATURAL JOIN productos_categorias a NATURAL JOIN imagenes i WHERE idcategoria = '{$id}'";
       if(!$_puntero = $this->db->query($query)){
         throw new Exception($this->db->error);
       }

@@ -5,7 +5,7 @@
 
     <?php
       foreach ($productos as $producto) {
-        echo "<x-item num='{$producto['idproducto']}' label='{$producto['titulo']}' descripcion='{$producto['descripcion']}'></x-item>";
+        echo "<x-item num='{$producto['idproducto']}' label='{$producto['titulo']}' descripcion='{$producto['descripcion']}' url='/images/{$producto['path']}'></x-item>";
       }
     ?>
   </div>
