@@ -22,8 +22,8 @@ header {
     text-decoration: none;
     color: white; }
     header a.button-icon {
-      min-height: 32px;
-      min-width: 32px;
+      height: 32px;
+      width: 32px;
       border-radius: 50%;
       display: table;
       margin: 0 .2em;
@@ -245,13 +245,15 @@ header {
       -webkit-box-align: center;
       -webkit-align-items: center;
           -ms-flex-align: center;
-              align-items: center; }
+              align-items: center;
+      position: relative; }
       header nav.submenu ul li {
         height: 36px;
         -webkit-box-flex: 1;
         -webkit-flex: auto;
             -ms-flex: auto;
-                flex: auto; }
+                flex: auto;
+        overflow: hidden; }
         header nav.submenu ul li a {
           -webkit-transition: all 200ms ease;
           transition: all 200ms ease;
@@ -712,7 +714,8 @@ div.content {
       -ms-flex-preferred-size: 100%;
           flex-basis: 100%;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-  z-index: 1; }
+  z-index: 1;
+  padding-top: 1em; }
   div.content > div.items-container {
     display: -webkit-box;
     display: -webkit-flex;

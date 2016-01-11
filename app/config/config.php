@@ -19,10 +19,10 @@ if (ENVIRONMENT == 'development' || ENVIRONMENT == 'dev') {
     define('DB_PASS', 'root');
     define('DB_CHARSET', 'utf8');
 }else{
-  define('DB_HOST', 'localhost');
-  define('DB_NAME', 'thecatlong');
-  define('DB_USER', 'adminkZekemg');
-  define('DB_PASS', 'adminkZekemg');
+  define('DB_HOST', 'mysql.hostinger.es');
+  define('DB_NAME', 'u919364308_daw');
+  define('DB_USER', 'u919364308_daw');
+  define('DB_PASS', '1234567890');
   define('DB_CHARSET', 'utf8');
 }
 /**

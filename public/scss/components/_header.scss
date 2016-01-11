@@ -22,8 +22,9 @@ header{
       text-decoration: none;
       color: white;
       &.button-icon{
-        min-height: 32px;
-        min-width: 32px;
+
+        height: 32px;
+        width: 32px;
         border-radius: 50%;
         display: table;
         margin: 0 .2em;
@@ -194,9 +195,11 @@ header{
         justify-content: space-between;
         margin: 0;
         align-items: center;
+        position: relative;
         li{
           height: 36px;
           flex: auto;
+          overflow: hidden;
           a{
             transition: all 200ms ease;
             transition: opacity 500ms ease;

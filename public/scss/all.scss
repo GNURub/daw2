@@ -45,6 +45,7 @@ div.content {
   flex-basis: 100%;
   box-shadow: 0 10px 40px rgba(0,0,0, .2);
   z-index: 1;
+  padding-top: 1em;
 
   & > div.items-container{
     display: flex;
