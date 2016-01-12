@@ -5,8 +5,7 @@
       private $client;
 
 
-      public function __construct($params = array())
-      {
+      public function __construct($params = array()){
           $this->client = new ClientModel();
           $this->_params = $params;
       }

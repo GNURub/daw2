@@ -6,7 +6,7 @@
 /**
  * Configuration for: Error reporting
  */
-define('ENVIRONMENT', 'development');
+define('ENVIRONMENT', 'producction');
 if (ENVIRONMENT == 'development' || ENVIRONMENT == 'dev') {
     error_reporting(E_ALL);
     ini_set("display_errors", 1);
@@ -19,10 +19,10 @@ if (ENVIRONMENT == 'development' || ENVIRONMENT == 'dev') {
     define('DB_PASS', 'root');
     define('DB_CHARSET', 'utf8');
 }else{
-  define('DB_HOST', 'mysql.hostinger.es');
-  define('DB_NAME', 'u919364308_daw');
-  define('DB_USER', 'u919364308_daw');
-  define('DB_PASS', '1234567890');
+  define('DB_HOST', 'mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/');
+  define('DB_NAME', 'thecatlong');
+  define('DB_USER', 'admin5AjSk6P');
+  define('DB_PASS', 'CpCQV1xlJcRt');
   define('DB_CHARSET', 'utf8');
 }
 /**

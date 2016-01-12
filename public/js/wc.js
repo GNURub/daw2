@@ -1,8 +1,10 @@
-var isCompatibleWC = ('registerElement' in document
-      && 'createShadowRoot' in HTMLElement.prototype
-      && 'import' in document.createElement('link')
-      && 'content' in document.createElement('template'));
+(function(doc) {
+  var isCompatibleWC = ('registerElement' in doc
+  && 'createShadowRoot' in HTMLElement.prototype
+  && 'import' in doc.createElement('link')
+  && 'content' in doc.createElement('template'));
 
-if(!isCompatibleWC){
-  document.write("<script src='https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.18/webcomponents.min.js'></script>");
-}
+  if(!isCompatibleWC){
+    doc.write("<script src='https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.18/webcomponents.min.js'></script>");
+  }
+})(document);
