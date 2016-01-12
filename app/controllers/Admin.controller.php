@@ -42,7 +42,7 @@
             foreach ($clientes as $value) {
               send_email($value);
             }
-            return;
+            return header('location: /');
           }
           return require VIEWS . 'admin/notifyByEmail.php';
         }
