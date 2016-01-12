@@ -19,7 +19,7 @@ if (ENVIRONMENT == 'development' || ENVIRONMENT == 'dev') {
     define('DB_PASS', 'root');
     define('DB_CHARSET', 'utf8');
 }else{
-  define('DB_HOST', "mysql://".getenv("OPENSHIFT_MYSQL_DB_HOST").":".getenv("OPENSHIFT_MYSQL_DB_PORT"));
+  define('DB_HOST', getenv("OPENSHIFT_MYSQL_DB_HOST"));
   define('DB_NAME', 'thecatlong');
   define('DB_USER', 'admin5AjSk6P');
   define('DB_PASS', 'CpCQV1xlJcRt');
