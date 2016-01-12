@@ -29,7 +29,7 @@
 
 			// Error handling
 			if($this->_connection->connect_errno) {
-				echo "error";
+				echo "error {$this->_connection->connect_errno}";
 				trigger_error("Failed to conencto to MySQL: " . $this->_connection->connect_errno,
 					 E_USER_ERROR);
 			}
