@@ -66,6 +66,10 @@
     .footer_item > .description{
       padding: 10px;
     }
+    .promo textarea{
+      width: 100%;
+      height: 4em;
+    }
   </style>
     <div class="container_item">
       <div class="header_item">
@@ -80,6 +84,9 @@
         <p class="description">
 
         </p>
+        <div class="promo">
+          <textarea></textarea>
+        </div>
       </div>
     </div>
 </template>
@@ -121,6 +128,7 @@
         this.newContainer         = shadowRoot.querySelector('.header_item > .new_item');
         this.descriptionContainer = shadowRoot.querySelector('.footer_item > .description');
         this.headerContainer      = shadowRoot.querySelector('.header_item');
+        this.headerContainer      = shadowRoot.querySelector('.promo');
 
 
         var b = shadowRoot.querySelector('.header_item > button');
