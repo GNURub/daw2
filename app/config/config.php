@@ -18,12 +18,14 @@ if (ENVIRONMENT == 'development' || ENVIRONMENT == 'dev') {
     define('DB_USER', 'root');
     define('DB_PASS', 'root');
     define('DB_CHARSET', 'utf8');
+    define('URL_PROTOCOL', 'http://');
 }else{
   define('DB_HOST', getenv("OPENSHIFT_MYSQL_DB_HOST"));
   define('DB_NAME', 'thecatlong');
   define('DB_USER', 'admin5AjSk6P');
   define('DB_PASS', 'CpCQV1xlJcRt');
   define('DB_CHARSET', 'utf8');
+  define('URL_PROTOCOL', 'https://');
 }
 /**
  * Configuration for: URL
@@ -42,7 +44,7 @@ if (ENVIRONMENT == 'development' || ENVIRONMENT == 'dev') {
  * then replace this line with full URL (and sub-folder) and a trailing slash.
  */
 define('URL_PUBLIC_FOLDER', 'public');
-define('URL_PROTOCOL', 'https://');
+
 define('URL_DOMAIN', $_SERVER['HTTP_HOST']);
 define('URL_SUB_FOLDER', str_replace(URL_PUBLIC_FOLDER, '', dirname($_SERVER['SCRIPT_NAME'])));
 define('URL', URL_PROTOCOL . URL_DOMAIN . URL_SUB_FOLDER);
