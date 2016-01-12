@@ -7,7 +7,7 @@
  * Configuration for: Error reporting
  */
 define('ENVIRONMENT', 'producction');
-if (ENVIRONMENT == 'development' || ENVIRONMENT == 'dev') {
+if (ENVIRONMENT == 'development' || ENVIRONMENT == 'dev' || !getenv("OPENSHIFT_MYSQL_DB_HOST")) {
     error_reporting(E_ALL);
     ini_set("display_errors", 1);
     /**
