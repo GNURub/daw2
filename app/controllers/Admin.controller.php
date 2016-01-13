@@ -33,17 +33,12 @@
       {
         if($this->isAdmin){
           if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            if(empty($itemid)){
+              return header('location: /');
+            }
             extract($_POST);
             $clientes = $this->clients->toArray();
-            // function send_email($user){
-            //   mail($user['email'], $title, $etalles);
-            //   sleep(2);
-            // }
-            // foreach ($clientes as $value) {
-            //   if(EMAIL != $value['email']){
-            //     send_email($value);
-            //   }
-            // }
+            $item = $this->product->toArray($itemid);
 
 
             $mail = new PHPMailer;
@@ -55,7 +50,7 @@
             $mail->Username   = EMAIL;
             $mail->Password   = PASSWORD;
             $mail->SMTPSecure = SMTP_SECURE;
-            $mail->Port       = SMTP_PORT;           
+            $mail->Port       = SMTP_PORT;
 
             $mail->setFrom(EMAIL, 'Mailer');
             foreach ($clientes as $value) {
@@ -63,11 +58,12 @@
                 $mail->addAddress($value['email']);
               }
             }
-
-            // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-            // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-            $mail->isHTML(true);                                  // Set email format to HTML
-            //
+            foreach ($item as $i) {
+              $mail->addAttachment($i['path']);
+            }
+            // $mail->addAttachment('/var/tmp/file.tar.gz');
+            // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');
+            $mail->isHTML(true);
             $mail->Subject = $title;
             $mail->Body    = $detalles;
             $mail->AltBody = $detalles;
@@ -80,6 +76,7 @@
 
 
           }
+          $itemId = isset($this->_params[0]) ? $this->_params[0] : null;
           return require VIEWS . 'admin/notifyByEmail.php';
         }
         return require VIEWS . 'error/401.php';

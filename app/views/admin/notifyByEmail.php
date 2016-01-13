@@ -20,7 +20,9 @@
           <label>Detalles:</label>
         </div>
       </li>
-
+      <li>
+        <input type="hidden" name="itemid" value="<?=$itemId?>">
+      </li>
       <li>
         <button class="btn lg" type="submit"><span>Notificar</span></button>
       </li>
