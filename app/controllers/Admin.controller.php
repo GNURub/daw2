@@ -49,13 +49,13 @@
             $mail = new PHPMailer;
             $mail->SMTPDebug = 3;
 
-            $mail->isSMTP();                                      // Set mailer to use SMTP
-            $mail->Host       = SMTP_HOST;                       // Specify main and backup SMTP servers
-            $mail->SMTPAuth   = true;                               // Enable SMTP authentication
-            $mail->Username   = EMAIL;                              // SMTP username
-            $mail->Password   = PASSWORD;                           // SMTP password
-            $mail->SMTPSecure = SMTP_SECURE;                            // Enable TLS encryption, `ssl` also accepted
-            $mail->Port       = SMTP_PORT;                                    // TCP port to connect to
+            $mail->isSMTP();
+            $mail->Host       = SMTP_HOST;
+            $mail->SMTPAuth   = true;
+            $mail->Username   = EMAIL;
+            $mail->Password   = PASSWORD;
+            $mail->SMTPSecure = SMTP_SECURE;
+            $mail->Port       = SMTP_PORT;           
 
             $mail->setFrom(EMAIL, 'Mailer');
             foreach ($clientes as $value) {
@@ -72,13 +72,10 @@
             $mail->Body    = $detalles;
             $mail->AltBody = $detalles;
 
-            if(!$mail->send()) {
-                echo 'Message could not be sent.';
-                echo 'Mailer Error: ' . $mail->ErrorInfo;
-            } else {
-                return header('location: /');
+            if($mail->send()) {
+                header('location: /');
+                return;
             }
-
 
 
 
