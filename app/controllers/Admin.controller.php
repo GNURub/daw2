@@ -46,8 +46,8 @@
             // }
 
 
-            $mail->SMTPDebug = 3;
             $mail = new PHPMailer;
+            $mail->SMTPDebug = 3;
 
             $mail->isSMTP();                                      // Set mailer to use SMTP
             $mail->Host       = SMTP_HOST;                       // Specify main and backup SMTP servers
