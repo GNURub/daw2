@@ -5,6 +5,15 @@ define('APP', ROOT . 'app' . DIRECTORY_SEPARATOR);
 define('IMGS', ROOT . 'public/images' . DIRECTORY_SEPARATOR);
 define('VIEWS', APP . 'views' . DIRECTORY_SEPARATOR);
 
+if (file_exists(ROOT . 'vendor/autoload.php')) {
+    require ROOT . 'vendor/autoload.php';
+}
+
+$string = file_get_contents(ROOT . 'app' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'credentials.json');
+$credentials = json_decode($string, true);
+define('EMAIL', $credentials['username']);
+define('PASSWORD', $credentials['password']);
+
 
 //core
 require_once APP.'core/model.php';
