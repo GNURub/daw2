@@ -46,7 +46,7 @@
             // }
 
 
-            $mail->SMTPDebug = 3;                                 // Enable verbose debug output
+            $mail->SMTPDebug = 3;
             $mail = new PHPMailer;
 
             $mail->isSMTP();                                      // Set mailer to use SMTP
