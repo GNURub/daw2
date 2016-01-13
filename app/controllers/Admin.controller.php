@@ -37,7 +37,7 @@
             $clientes = $this->clients->toArray();
             function send_email($user){
               mail($user['email'], $title, $etalles);
-              sleep(20);
+              sleep(2);
             }
             foreach ($clientes as $value) {
               send_email($value);

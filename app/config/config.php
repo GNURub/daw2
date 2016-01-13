@@ -20,6 +20,8 @@ if (ENVIRONMENT == 'development' || ENVIRONMENT == 'dev' || !getenv("OPENSHIFT_M
     define('DB_CHARSET', 'utf8');
     define('URL_PROTOCOL', 'http://');
 }else{
+  error_reporting(E_ALL);
+  ini_set('display_errors', 1);
   define('DB_HOST', getenv("OPENSHIFT_MYSQL_DB_HOST"));
   define('DB_NAME', 'thecatlong');
   define('DB_USER', 'admin5AjSk6P');
