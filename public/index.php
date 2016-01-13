@@ -9,7 +9,7 @@ if (file_exists(ROOT . 'vendor/autoload.php')) {
     require ROOT . 'vendor/autoload.php';
 }
 
-// SMTP CONFIG
+// SMTP CONFIGG
 $string = file_get_contents(ROOT . 'app' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'credentials.json');
 $credentials = json_decode($string, true);
 define('EMAIL', $credentials['smtp']['email']);
