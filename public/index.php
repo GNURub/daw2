@@ -9,10 +9,15 @@ if (file_exists(ROOT . 'vendor/autoload.php')) {
     require ROOT . 'vendor/autoload.php';
 }
 
+// SMTP CONFIG
 $string = file_get_contents(ROOT . 'app' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'credentials.json');
 $credentials = json_decode($string, true);
-define('EMAIL', $credentials['username']);
-define('PASSWORD', $credentials['password']);
+define('EMAIL', $credentials['smtp']['email']);
+define('PASSWORD', $credentials['smtp']['password']);
+define('SMTP_HOST', $credentials['smtp']['host']);
+define('SMTP_PORT', $credentials['smtp']['port']);
+define('SMTP_SECURE', $credentials['smtp']['secure']);
+
 
 
 //core

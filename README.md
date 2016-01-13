@@ -51,5 +51,38 @@ $ mysql -p -u[user] < final.sql
 > - Username: test
 > - Password: 1234567890
 
+## Configuración SMTP
+Crear el archivo credentials.json
+```sequence
+/app/config/credentials.json
+
+```
+```json
+{
+  "smtp": {
+    "email"    : "****@***.**",
+    "password" : "**************",
+    "host"     : "",
+    "port"     : "",
+    "secure"   : ""
+  },
+  "facebook": {}
+}
+
+```
+Ejemplo
+```json
+{
+  "smtp": {
+    "email"    : "rubencidlara@gmail.com",
+    "password" : "**************",
+    "host"     : "smtp.gmail.com",
+    "port"     : 587,
+    "secure"   : "tls"
+  }
+}
+
+```
+
   [1]: https://github.com/GNURub/daw2/archive/master.zip
   [2]: http://thecatlong-gnurub.rhcloud.com/
