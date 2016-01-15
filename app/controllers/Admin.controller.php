@@ -73,7 +73,7 @@
                                 </html>";
             }
             foreach ($item as $i) {
-              $mail->addAttachment($i['path']);
+              $mail->addAttachment(IMGS. $i['path']);
             }
             $mail->AltBody = $detalles;
 
