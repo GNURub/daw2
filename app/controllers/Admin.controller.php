@@ -35,7 +35,7 @@
         if($this->isAdmin){
           if($_SERVER['REQUEST_METHOD'] == 'POST'){
             extract($_POST);
-            if(empty($itemid)){
+            if(empty($itemid) || empty($this->product->toArray($itemid))){
               return header('location: /');
             }
             $clientes = $this->clients->toArray();
@@ -43,7 +43,7 @@
 
 
             $mail = new PHPMailer;
-            $mail->SMTPDebug = 3;
+            // $mail->SMTPDebug = 3;
 
             $mail->isSMTP();
             $mail->Host       = SMTP_HOST;
@@ -52,21 +52,29 @@
             $mail->Password   = PASSWORD;
             $mail->SMTPSecure = SMTP_SECURE;
             $mail->Port       = SMTP_PORT;
-
             $mail->setFrom(EMAIL, 'The cat long');
+            $mail->isHTML(true);
+            $mail->Subject = $title;
+
             foreach ($clientes as $value) {
               if(EMAIL != $value['email']){
                 $mail->addAddress($value['email']);
               }
+              $mail->Body    = "<html>
+                                  <head>
+                                    <title>$title</title>
+                                  </head>
+                                  <body>
+                                    <h2>$title</h2>
+                                    <p>
+                                      $detalles
+                                    </p>
+                                  </body>
+                                </html>";
             }
             foreach ($item as $i) {
               $mail->addAttachment($i['path']);
             }
-            // $mail->addAttachment('/var/tmp/file.tar.gz');
-            // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');
-            $mail->isHTML(true);
-            $mail->Subject = $title;
-            $mail->Body    = $detalles;
             $mail->AltBody = $detalles;
 
             if($mail->send()) {
@@ -77,7 +85,7 @@
 
 
           }
-          if(!isset($this->_params[0]) || empty($this->_params[0])){
+          if(empty($this->_params[0]) || empty($this->product->toArray($this->_params[0]))){
             header('location: /');
             return;
           }
