@@ -36,6 +36,7 @@ require_once APP.'models/Subcategory.model.php';
 //config
 require_once APP.'config/config.php';
 require_once APP.'helpers/response.php';
+require_once APP.'helpers/pdf.php';
 require_once APP.'helpers/utils.php';
 Log::write("Atendiendo peticion.");
 $app = new Application();
