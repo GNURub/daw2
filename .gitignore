@@ -1,4 +1,4 @@
 node_modules/
-public/images/*
+public/images/*.png
 *.*~
 app/config/credentials.json

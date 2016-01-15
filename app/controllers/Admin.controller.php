@@ -8,6 +8,7 @@
       private $clients;
       static $products;
       private $isAdmin;
+      static $lastItem;
 
       public function __construct($params = array())
       {
@@ -33,10 +34,10 @@
       {
         if($this->isAdmin){
           if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            extract($_POST);
             if(empty($itemid)){
               return header('location: /');
             }
-            extract($_POST);
             $clientes = $this->clients->toArray();
             $item = $this->product->toArray($itemid);
 
@@ -52,7 +53,7 @@
             $mail->SMTPSecure = SMTP_SECURE;
             $mail->Port       = SMTP_PORT;
 
-            $mail->setFrom(EMAIL, 'Mailer');
+            $mail->setFrom(EMAIL, 'The cat long');
             foreach ($clientes as $value) {
               if(EMAIL != $value['email']){
                 $mail->addAddress($value['email']);
@@ -76,7 +77,13 @@
 
 
           }
-          $itemId = isset($this->_params[0]) ? $this->_params[0] : null;
+          if(!isset($this->_params[0]) || empty($this->_params[0])){
+            header('location: /');
+            return;
+          }
+          $itemId = $this->_params[0];
+          self::$lastItem = $itemId;
+
           return require VIEWS . 'admin/notifyByEmail.php';
         }
         return require VIEWS . 'error/401.php';

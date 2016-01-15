@@ -8,6 +8,8 @@
 <html lang="es">
 <head>
     <meta charset="utf-8">
+    <link rel="shortcut icon" href="<?=URL; ?>images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="<?=URL; ?>images/favicon.ico" type="image/x-icon">
     <title>TheCatLong...</title>
     <meta name="description" content="">
 
