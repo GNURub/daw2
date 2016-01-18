@@ -87,7 +87,8 @@
 
 
           }
-          if(empty($this->_params[0]) || empty($this->product->toArray($this->_params[0]))){
+          $pa = $this->product->toArray($this->_params[0]);
+          if(empty($this->_params[0]) || empty($pa)){
             header('location: /');
             return;
           }
