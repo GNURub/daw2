@@ -35,7 +35,9 @@
         if($this->isAdmin){
           if($_SERVER['REQUEST_METHOD'] == 'POST'){
             extract($_POST);
-            if(!isset($itemid) || empty($itemid) || empty($this->product->toArray($itemid))){
+            $itemid = (!isset($itemid) || empty($itemid)) ? null : $itemid;
+            $pro = $this->product->toArray($itemid);
+            if(empty($itemid) || empty($pro)){
               header('location: /');
             }
             $clientes = $this->clients->toArray();
