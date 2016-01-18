@@ -645,7 +645,7 @@ function addTVAs( $params, $tab_tva, $invoice )
 // call this method first
 function temporaire( $texte )
 {
-    $this->SetFont('Arial','B',50);
+    $this->SetFont('Arial','B',150);
     $this->SetTextColor(203,203,203);
     $this->Rotate(45,55,190);
     $this->Text(55,190,$texte);
