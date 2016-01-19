@@ -36,7 +36,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="<?=URL; ?>js/wc.js"></script>
     <link href="<?=URL; ?>css/all.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="<?=URL; ?>css/fontawesome/css/font-awesome.css"> -->
     <link rel="import" href="<?=URL; ?>components/item.html">
+    <link rel="import" href="<?=URL; ?>components/fb.html">
 </head>
 <body>
     <header class="cabecera">
@@ -132,7 +134,10 @@
         </nav>
         <nav class="submenu">
           <ul>
-            <?php foreach (CategoryModel::$categories as $cat): ?>
+            <?php
+              // categorias personalizadas o las de la bbdd
+              $categories = (!isset($categories) || empty($categories)) ? CategoryModel::$categories : $categories;
+              foreach ($categories as $cat): ?>
               <li>
                 <?php if (isset($selectedCategory) && $selectedCategory == $cat['idcategoria']){ ?>
                   <a href="/category/<?=$cat['idcategoria']?>" class="capitalize active"><?=$cat['idcategoria']?></a>

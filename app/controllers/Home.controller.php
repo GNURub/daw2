@@ -66,7 +66,7 @@
       public function multimediaAction()
       {
           // load VIEWSs
-
+          $categories = array(array('idcategoria'=> 'Imagenes'), array('idcategoria'=>'Videos'));
           require VIEWS . 'home/lost.php';
 
       }

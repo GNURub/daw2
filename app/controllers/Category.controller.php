@@ -20,6 +20,13 @@
             require VIEWS . 'error/404.php';
             return;
           }else{
+            if($params[0] == 'Imagenes' || $params[0] == 'Videos'){
+              $selectedCategory = $params[0];
+              $categories = array(array('idcategoria'=> 'Imagenes'), array('idcategoria'=>'Videos'));
+              require VIEWS . "category/imagenes.php";
+              return;
+            }
+
             try {
               $catego = $this->category->toArray($params[0]);
 

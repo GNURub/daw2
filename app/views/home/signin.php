@@ -27,6 +27,10 @@
         <li>
           <button class="btn lg" type="submit"><span>Login</span></button>
         </li>
+        <li>o</li>
+        <li>
+          <fb-button></fb-button>
+        </li>
       </ul>
     </form>
   </div>

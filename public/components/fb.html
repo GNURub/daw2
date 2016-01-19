@@ -1,0 +1,49 @@
+<template>
+  <style>
+    @import '../css/all.css';
+    @import '../css/style.css';
+    #fb{
+      background-color: #2d5f9a;
+      padding: .5em 1em;
+    }
+
+  </style>
+  <button id="fb" class="btn">
+    <span class="icon-facebook-official"></span>
+  </button>
+</template>
+<script>
+  (function(window, document, undefined){
+    'use strict';
+    var thatDoc = document;
+
+
+    var thisDoc =  (thatDoc._currentScript || thatDoc.currentScript).ownerDocument;
+
+
+    var template = thisDoc.querySelector('template').content;
+
+
+    var fbButton = Object.create(HTMLElement.prototype);
+
+    fbButton.url = null;
+
+    fbButton.createdCallback = function() {
+      var shadowRoot = this.createShadowRoot();
+
+      var clone = thatDoc.importNode(template, true);
+      shadowRoot.appendChild(clone);
+
+      if (this.hasAttribute('url')) {
+          var url = this.getAttribute('url');
+          // this.setUrl(url);
+      }
+    };
+    fbButton.attributeChangedCallback = function() {};
+
+    window.fbButton = thatDoc.registerElement('fb-button', {
+        prototype: fbButton
+    });
+
+  })(window, document);
+</script>
