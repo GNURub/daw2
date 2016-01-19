@@ -105,10 +105,9 @@
       {
         $pdf = new PDF_Invoice( 'P', 'mm', 'A4' );
         $pdf->AddPage();
-        $pdf->addSociete( "MaSociete",
-                          "MonAdresse\n" .
-                          "75000 PARIS\n".
-                          "R.C.S. PARIS B 000 000 007\n" .
+        $pdf->addSociete( "TheCatLong",
+                          "Av. España N°76, Illes Balears.\n" .
+                          "07800 Eivissa, Illes Balea\n".
                           "Capital: 18000 " . EURO );
         $pdf->fact_dev( "Devis ", "TEMPO" );
         $pdf->temporaire( "Factura" );
@@ -116,42 +115,42 @@
         $pdf->addClient("CL01");
         $pdf->addPageNumber("1");
         $pdf->addClientAdresse("Ste\nM. XXXX\n3ème étage\n33, rue d'ailleurs\n75000 PARIS");
-        $pdf->addReglement(utf8_decode("Chèque à réception de facture"));
+        $pdf->addReglement("Chèque à réception de facture");
         $pdf->addEcheance("03/12/2003");
         $pdf->addNumTVA("FR888777666");
         $pdf->addReference("Devis ... du ....");
-        $cols=array( "REFERENCE"    => 23,
+        $cols=array( "REFERENCIA"    => 23,
                      "DESIGNATION"  => 78,
-                     "QUANTITE"     => 22,
-                     "P.U. HT"      => 26,
+                     "CANTIDAD"     => 22,
+                     "PRECIO UNI."      => 26,
                      "MONTANT H.T." => 30,
                      "TVA"          => 11 );
         $pdf->addCols( $cols);
-        $cols=array( "REFERENCE"    => "L",
+        $cols=array( "REFERENCIA"    => "L",
                      "DESIGNATION"  => "L",
-                     "QUANTITE"     => "C",
-                     "P.U. HT"      => "R",
+                     "CANTIDAD"     => "C",
+                     "PRECIO UNI."      => "R",
                      "MONTANT H.T." => "R",
                      "TVA"          => "C" );
         $pdf->addLineFormat( $cols);
         $pdf->addLineFormat($cols);
-
+        // productos
         $y    = 109;
-        $line = array( "REFERENCE"    => "REF1",
+        $line = array( "REFERENCIA"    => "REF1",
                        "DESIGNATION"  => "Carte Mère MSI 6378\n" .
                                          "Processeur AMD 1Ghz\n" .
                                          "128Mo SDRAM, 30 Go Disque, CD-ROM, Floppy, Carte vidéo",
-                       "QUANTITE"     => "1",
-                       "P.U. HT"      => "600.00",
+                       "CANTIDAD"     => "1",
+                       "PRECIO UNI."      => "600.00",
                        "MONTANT H.T." => "600.00",
                        "TVA"          => "1" );
         $size = $pdf->addLine( $y, $line );
         $y   += $size + 2;
 
-        $line = array( "REFERENCE"    => "REF2",
+        $line = array( "REFERENCIA"    => "REF2",
                        "DESIGNATION"  => "Câble RS232",
-                       "QUANTITE"     => "1",
-                       "P.U. HT"      => "10.00",
+                       "CANTIDAD"     => "1",
+                       "PRECIO UNI."      => "10.00",
                        "MONTANT H.T." => "60.00",
                        "TVA"          => "1" );
         $size = $pdf->addLine( $y, $line );

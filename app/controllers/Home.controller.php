@@ -43,6 +43,7 @@
       public function logoutAction()
       {
           self::destroySession('username');
+          self::destroySession('admin');
           header('location: /home/signin');
       }
 

@@ -1,5 +1,5 @@
 <?php
-define('EURO', chr(128) );
+define('EURO', utf8_encode(chr(128)) );
 define('EURO_VAL', 6.55957 );
 
 class PDF_Invoice extends FPDF
@@ -164,7 +164,7 @@ function addDevis( $numdev )
 function addFacture( $numfact )
 {
     $string = sprintf("FA%04d",$numfact);
-    $this->fact_dev( "Facture", $string );
+    $this->fact_dev( "Factura", $string );
 }
 
 function addDate( $date )
@@ -178,7 +178,7 @@ function addDate( $date )
     $this->Line( $r1, $mid, $r2, $mid);
     $this->SetXY( $r1 + ($r2-$r1)/2 - 5, $y1+3 );
     $this->SetFont( "Arial", "B", 10);
-    $this->Cell(10,5, "DATE", 0, 0, "C");
+    $this->Cell(10,5, "FECHA", 0, 0, "C");
     $this->SetXY( $r1 + ($r2-$r1)/2 - 5, $y1+9 );
     $this->SetFont( "Arial", "", 10);
     $this->Cell(10,5,$date, 0,0, "C");
@@ -195,7 +195,7 @@ function addClient( $ref )
     $this->Line( $r1, $mid, $r2, $mid);
     $this->SetXY( $r1 + ($r2-$r1)/2 - 5, $y1+3 );
     $this->SetFont( "Arial", "B", 10);
-    $this->Cell(10,5, "CLIENT", 0, 0, "C");
+    $this->Cell(10,5, "CLIENTE", 0, 0, "C");
     $this->SetXY( $r1 + ($r2-$r1)/2 - 5, $y1 + 9 );
     $this->SetFont( "Arial", "", 10);
     $this->Cell(10,5,$ref, 0,0, "C");
@@ -212,7 +212,7 @@ function addPageNumber( $page )
     $this->Line( $r1, $mid, $r2, $mid);
     $this->SetXY( $r1 + ($r2-$r1)/2 - 5, $y1+3 );
     $this->SetFont( "Arial", "B", 10);
-    $this->Cell(10,5, "PAGE", 0, 0, "C");
+    $this->Cell(10,5, "PÁGINA", 0, 0, "C");
     $this->SetXY( $r1 + ($r2-$r1)/2 - 5, $y1 + 9 );
     $this->SetFont( "Arial", "", 10);
     $this->Cell(10,5,$page, 0,0, "C");
@@ -240,7 +240,7 @@ function addReglement( $mode )
     $this->Line( $r1, $mid, $r2, $mid);
     $this->SetXY( $r1 + ($r2-$r1)/2 -5 , $y1+1 );
     $this->SetFont( "Arial", "B", 10);
-    $this->Cell(10,4, "MODE DE REGLEMENT", 0, 0, "C");
+    $this->Cell(10,4, "MODO DE PAGO", 0, 0, "C");
     $this->SetXY( $r1 + ($r2-$r1)/2 -5 , $y1 + 5 );
     $this->SetFont( "Arial", "", 10);
     $this->Cell(10,5,$mode, 0,0, "C");
@@ -249,8 +249,8 @@ function addReglement( $mode )
 // Expiry date
 function addEcheance( $date )
 {
-    $r1  = 80;
-    $r2  = $r1 + 40;
+    $r1  = 77;
+    $r2  = $r1 + 50;
     $y1  = 80;
     $y2  = $y1+10;
     $mid = $y1 + (($y2-$y1) / 2);
@@ -258,7 +258,7 @@ function addEcheance( $date )
     $this->Line( $r1, $mid, $r2, $mid);
     $this->SetXY( $r1 + ($r2 - $r1)/2 - 5 , $y1+1 );
     $this->SetFont( "Arial", "B", 10);
-    $this->Cell(10,4, "DATE D'ECHEANCE", 0, 0, "C");
+    $this->Cell(10,4, "FECHA DE VENCIMIENTO", 0, 0, "C");
     $this->SetXY( $r1 + ($r2-$r1)/2 - 5 , $y1 + 5 );
     $this->SetFont( "Arial", "", 10);
     $this->Cell(10,5,$date, 0,0, "C");
@@ -276,7 +276,7 @@ function addNumTVA($tva)
     $this->RoundedRect($r1, $y1, ($r2 - $r1), ($y2-$y1), 2.5, 'D');
     $this->Line( $r1, $mid, $r2, $mid);
     $this->SetXY( $r1 + 16 , $y1+1 );
-    $this->Cell(40, 4, "TVA Intracommunautaire", '', '', "C");
+    $this->Cell(40, 4, "N.I.F.", '', '', "C");
     $this->SetFont( "Arial", "", 10);
     $this->SetXY( $r1 + 16 , $y1+5 );
     $this->Cell(40, 5, $tva, '', '', "C");
@@ -347,7 +347,7 @@ function lineVert( $tab )
 // add a line to the invoice/estimate
 /*    $ligne = array( "REFERENCE"    => $prod["ref"],
                       "DESIGNATION"  => $libelle,
-                      "QUANTITE"     => sprintf( "%.2F", $prod["qte"]) ,
+                      "CANTIDAD"     => sprintf( "%.2F", $prod["qte"]) ,
                       "P.U. HT"      => sprintf( "%.2F", $prod["px_unit"]),
                       "MONTANT H.T." => sprintf ( "%.2F", $prod["qte"] * $prod["px_unit"]) ,
                       "TVA"          => $prod["tva"] );

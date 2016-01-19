@@ -621,6 +621,7 @@ function Cell($w, $h=0, $txt='', $border=0, $ln=0, $align='', $fill=false, $link
 	}
 	if($txt!=='')
 	{
+		$txt = utf8_decode($txt);
 		if(!isset($this->CurrentFont))
 			$this->Error('No font has been set');
 		if($align=='R')

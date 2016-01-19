@@ -70,6 +70,13 @@
       width: 100%;
       height: 4em;
     }
+    a.btn.lg{
+      text-decoration: none;
+      text-align: center;
+      padding: .5em 1em;
+      font-weight: bold;
+      background-color: rgb(25, 143, 26);
+    }
   </style>
     <div class="container_item">
       <div class="header_item">
@@ -83,6 +90,9 @@
       <div class="footer_item">
         <p class="description">
 
+        </p>
+        <p class="admin">
+          <a href="" id="linker" class="btn lg">Promoción</a>
         </p>
 
       </div>
@@ -127,6 +137,7 @@
         this.descriptionContainer = shadowRoot.querySelector('.footer_item > .description');
         this.headerContainer      = shadowRoot.querySelector('.header_item');
         // this.promoContainer      = shadowRoot.querySelector('.promo');
+        this.linker = shadowRoot.querySelector('#linker');
 
 
         var b = shadowRoot.querySelector('.header_item > button');
@@ -162,6 +173,16 @@
             this.setTitle(this.label);
         }
 
+        if (this.hasAttribute('num')) {
+          this.linker.href =  "/admin/notify/" + this.getAttribute('num');
+        }
+
+        if (this.hasAttribute('admin')) {
+          shadowRoot.querySelector('.admin').removeAttribute('hidden');
+        }else{
+          shadowRoot.querySelector('.admin').setAttribute('hidden', true);
+        }
+
         if (this.hasAttribute('descripcion')) {
             var des = this.getAttribute('descripcion');
             this.setDescription(des);
@@ -188,6 +209,9 @@
             break;
           case 'new':
             this.newContainer.hidden = !this.hasAttribute('new');
+            break;
+          case 'num':
+            this.linker.href = "/admin/notify/" + this.getAttribute('num');
             break;
 
         }
