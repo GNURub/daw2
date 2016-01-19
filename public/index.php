@@ -18,9 +18,13 @@ define('SMTP_HOST', $credentials['smtp']['host']);
 define('SMTP_PORT', $credentials['smtp']['port']);
 define('SMTP_SECURE', $credentials['smtp']['secure']);
 
+// Facebook Login
+define('FACEBOOK_ID', $credentials['facebook']['appId']);
+define('FACEBOOK_SECRET', $credentials['facebook']['appSecret']);
 
 
-//core
+
+// core
 require_once APP.'core/model.php';
 require_once APP.'core/controller.php';
 require_once APP.'core/application.php';
@@ -33,11 +37,15 @@ require_once APP.'models/Color.model.php';
 require_once APP.'models/Discount.model.php';
 require_once APP.'models/Subcategory.model.php';
 
-//config
+// config
 require_once APP.'config/config.php';
+
+// services
 require_once APP.'helpers/response.php';
 require_once APP.'helpers/pdf.php';
+require_once APP.'helpers/fb.php';
 require_once APP.'helpers/utils.php';
+
 Log::write("Atendiendo peticion.");
 $app = new Application();
 exit();

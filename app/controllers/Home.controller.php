@@ -71,6 +71,13 @@
 
       }
 
+      public function fbAction()
+      {
+          $fb = new FacebookLogin();
+          echo $fb->getUrl("http://localhost");
+
+      }
+
 
   }
 ?>
