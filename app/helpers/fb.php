@@ -2,7 +2,8 @@
 
 class FacebookLogin
 {
-  private $fb, $helper, $permissions;
+  private $fb, $permissions;
+  private static $helper;
   function __construct($permissions = array('email'))
   {
     $this->permissions = $permissions;
@@ -11,17 +12,17 @@ class FacebookLogin
       'app_secret' => FACEBOOK_SECRET,
       'default_graph_version' => 'v2.5',
     ]);
-    $this->helper = $this->fb->getRedirectLoginHelper();
+    self::$helper = $this->fb->getRedirectLoginHelper();
   }
 
   function getUrl($fbUrl = 'https://thecatlong-gnurub.rhcloud.com/home/fb'){
-    $loginUrl = $this->helper->getLoginUrl($fbUrl, $this->permissions);
+    $loginUrl = self::$helper->getLoginUrl($fbUrl, $this->permissions);
     return htmlspecialchars($loginUrl);
   }
 
   function getToken(){
     // try {
-    //   $accessToken = $this->helper->getAccessToken();
+    //   $accessToken = self::$helper->getAccessToken();
     // } catch(Facebook\Exceptions\FacebookResponseException $e) {
     //   // When Graph returns an error
     //   echo 'Graph returned an error: ' . $e->getMessage();
@@ -33,12 +34,12 @@ class FacebookLogin
     // }
 
     // if (! isset($accessToken)) {
-    //   if ($this->helper->getError()) {
+    //   if (self::$helper->getError()) {
     //     header('HTTP/1.0 401 Unauthorized');
-    //     echo "Error: " . $this->helper->getError() . "\n";
-    //     echo "Error Code: " . $this->helper->getErrorCode() . "\n";
-    //     echo "Error Reason: " . $this->helper->getErrorReason() . "\n";
-    //     echo "Error Description: " . $this->helper->getErrorDescription() . "\n";
+    //     echo "Error: " . self::$helper->getError() . "\n";
+    //     echo "Error Code: " . self::$helper->getErrorCode() . "\n";
+    //     echo "Error Reason: " . self::$helper->getErrorReason() . "\n";
+    //     echo "Error Description: " . self::$helper->getErrorDescription() . "\n";
     //   } else {
     //     header('HTTP/1.0 400 Bad Request');
     //     echo 'Bad request';
@@ -69,7 +70,7 @@ class FacebookLogin
   //     try {
   //       $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
   //     } catch (Facebook\Exceptions\FacebookSDKException $e) {
-  //       echo "<p>Error getting long-lived access token: " . $this->helper->getMessage() . "</p>\n\n";
+  //       echo "<p>Error getting long-lived access token: " . self::$helper->getMessage() . "</p>\n\n";
   //       exit;
   //     }
   //
