@@ -5,11 +5,13 @@
       private $product;
       private $category;
       private $client;
+      protected static $fb;
       public function __construct()
       {
         $this->product  = new ProductModel();
         $this->client   = new ClientModel();
         $this->category = new CategoryModel();
+        self::$fb = new FacebookLogin();
 
       }
       public function index()
@@ -27,6 +29,7 @@
             return;
           }
           // load VIEWSs
+          $fbUrl = self::$fb->getUrl("http://localhost");
           require VIEWS . 'home/signin.php';
       }
 
@@ -73,8 +76,8 @@
 
       public function fbAction()
       {
-          $fb = new FacebookLogin();
-          echo $fb->getUrl("http://localhost");
+          // $fb = new FacebookLogin();
+          echo self::$fb->getUrl("http://localhost");
 
       }
 

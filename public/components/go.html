@@ -2,8 +2,8 @@
   <style>
     @import '../css/all.css';
     @import '../css/style.css';
-    #fb{
-      background-color: #2d5f9a;
+    #go{
+      background-color: #db4437;
       padding: .1em .2em;
     }
     .icon-facebook-official{
@@ -12,8 +12,8 @@
     }
 
   </style>
-  <button id="fb" class="btn lg">
-    <span class="icon-facebook-official"> Facebook</span>
+  <button id="go" class="btn lg">
+    <span class="icon-facebook-official"> Google +</span>
   </button>
 </template>
 <script>
@@ -28,41 +28,25 @@
     var template = thisDoc.querySelector('template').content;
 
 
-    var fbButton = Object.create(HTMLElement.prototype);
+    var goButton = Object.create(HTMLElement.prototype);
 
-    fbButton.url = null;
+    goButton.url = null;
 
-    fbButton.createdCallback = function() {
+    goButton.createdCallback = function() {
       var shadowRoot = this.createShadowRoot();
 
       var clone = thatDoc.importNode(template, true);
       shadowRoot.appendChild(clone);
 
-
-      this.addEventListener('click', function (){
-        window.location.href = this.url;
-      }.bind(this), false);
-
       if (this.hasAttribute('url')) {
           var url = this.getAttribute('url');
-          this.setUrl(url);
+          // this.setUrl(url);
       }
     };
-    fbButton.attributeChangedCallback = function(attr, oldVal, newVal) {
-      switch (attr) {
-        case 'url':
-          this.setUrl(newVal);
-          break;
-      }
-    };
+    goButton.attributeChangedCallback = function() {};
 
-    fbButton.setUrl = function(val) {
-        this.url = val;
-    };
-
-
-    window.fbButton = thatDoc.registerElement('fb-button', {
-        prototype: fbButton
+    window.fbButton = thatDoc.registerElement('go-button', {
+        prototype: goButton
     });
 
   })(window, document);

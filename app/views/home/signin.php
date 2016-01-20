@@ -27,9 +27,8 @@
         <li>
           <button class="btn lg" type="submit"><span>Login</span></button>
         </li>
-        <li>o</li>
         <li>
-          <fb-button></fb-button>
+          <fb-button url="<?=$fbUrl;?>"></fb-button>
         </li>
       </ul>
     </form>

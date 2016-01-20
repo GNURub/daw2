@@ -29,6 +29,7 @@ require_once APP.'core/model.php';
 require_once APP.'core/controller.php';
 require_once APP.'core/application.php';
 require_once APP.'core/log.php';
+
 // cargamos los modelos
 require_once APP.'models/Category.model.php';
 require_once APP.'models/Product.model.php';
