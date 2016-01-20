@@ -30,6 +30,7 @@
           }
           // load VIEWSs
           $fbUrl = self::$fb->getToken();
+
           require VIEWS . 'home/signin.php';
       }
 
