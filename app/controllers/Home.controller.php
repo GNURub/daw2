@@ -29,7 +29,7 @@
             return;
           }
           // load VIEWSs
-          $fbUrl = self::$fb->getUrl("http://localhost");
+          $fbUrl = self::$fb->getUrl();
           require VIEWS . 'home/signin.php';
       }
 
