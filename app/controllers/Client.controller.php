@@ -3,11 +3,14 @@
   class Client extends Controller {
       private $_params;
       private $client;
+      private $product;
 
 
       public function __construct($params = array()){
-          $this->client = new ClientModel();
+          $this->client  = new ClientModel();
+          $this->product = new ProductModel();
           $this->_params = $params;
+
       }
 
       public function index($params = array()){
@@ -167,22 +170,34 @@
         }
       }
 
+      public function factureAction(){
+        if(!self::getSession('username')){
+          return header('location: /');
+        }
+
+        $productos = array();
+        foreach (self::getSession('productos') as $id) {
+          $pro = $this->product->toArray($id);
+          array_push($productos, $pro);
+        }
+        
+        return generate_facture($productos);
+      }
+
       public function deleteAction()
       {
         if(!self::getSession('username')){
-          header('location: /');
-        }else{
-          try {
-            if($this->client->delete(self::getSession('username'))){
-              self::destroySession('username');
-              self::destroySession('admin');
-              header('location: /');
-            }
-          } catch (Exception $e) {
-            $error = $e->getMessage();
-            require VIEWS. 'error/500.php';
+          return header('location: /');
+        }
+        try {
+          if($this->client->delete(self::getSession('username'))){
+            self::destroySession('username');
+            self::destroySession('admin');
+            header('location: /');
           }
-
+        } catch (Exception $e) {
+          $error = $e->getMessage();
+          require VIEWS. 'error/500.php';
         }
       }
   }

@@ -30,6 +30,15 @@
         <li>
           <fb-button url="<?=$fbUrl;?>"></fb-button>
         </li>
+        <li>
+          <go-button></go-button>
+        </li>
+        <li>
+          <tw-button></tw-button>
+        </li>
+        <li>
+          <gh-button></gh-button>
+        </li>
       </ul>
     </form>
   </div>
