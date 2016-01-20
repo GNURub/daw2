@@ -76,7 +76,7 @@
 
       public function fbAction($a)
       {
-          var_dump($a);
+          // var_dump($a);
           // $fb = new FacebookLogin();
           echo self::$fb->getToken();
 
