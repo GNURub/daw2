@@ -69,6 +69,10 @@ class FacebookLogin
 
     echo 'Logged in as ' . $userNode->getName();
     var_dump($userNode);
+    var_dump(
+    $userNode->getField('email'), $userNode['email']
+);
+
 
     // // // Get the access token metadata from /debug_token
     // // $tokenMetadata = $oAuth2Client->debugToken($accessToken);
