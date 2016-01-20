@@ -93,10 +93,9 @@
       "I.V.A."          => "C" );
       $pdf->addLineFormat( $cols);
       $pdf->addLineFormat($cols);
+
       // productos
-      $y    = 109;
-
-
+      $y  = 109;
       foreach ($productos as $id => $pro) {
         foreach ($pro as $key => $value) {
           $line = array( "REFERENCIA"    => "REF". $value['idproducto'],
