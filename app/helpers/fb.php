@@ -32,19 +32,19 @@ class FacebookLogin
       exit;
     }
 
-    if (! isset($accessToken)) {
-      if ($this->helper->getError()) {
-        header('HTTP/1.0 401 Unauthorized');
-        echo "Error: " . $this->helper->getError() . "\n";
-        echo "Error Code: " . $this->helper->getErrorCode() . "\n";
-        echo "Error Reason: " . $this->helper->getErrorReason() . "\n";
-        echo "Error Description: " . $this->helper->getErrorDescription() . "\n";
-      } else {
-        header('HTTP/1.0 400 Bad Request');
-        echo 'Bad request';
-      }
-      exit;
-    }
+    // if (! isset($accessToken)) {
+    //   if ($this->helper->getError()) {
+    //     header('HTTP/1.0 401 Unauthorized');
+    //     echo "Error: " . $this->helper->getError() . "\n";
+    //     echo "Error Code: " . $this->helper->getErrorCode() . "\n";
+    //     echo "Error Reason: " . $this->helper->getErrorReason() . "\n";
+    //     echo "Error Description: " . $this->helper->getErrorDescription() . "\n";
+    //   } else {
+    //     header('HTTP/1.0 400 Bad Request');
+    //     echo 'Bad request';
+    //   }
+    //   exit;
+    // }
 
     // Logged in
     echo '<h3>Access Token</h3>';
