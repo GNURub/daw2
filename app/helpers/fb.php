@@ -47,7 +47,7 @@ class FacebookLogin
     }
 
     // Logged in
-    echo '<h3>Access Token</h3>';
+    // echo '<h3>Access Token</h3>';
     // var_dump($accessToken->getValue());
     $this->fb->setDefaultAccessToken($accessToken->getValue());
 
@@ -68,6 +68,7 @@ class FacebookLogin
     }
 
     echo 'Logged in as ' . $userNode->getName();
+    var_dump($userNode);
 
     // // // Get the access token metadata from /debug_token
     // // $tokenMetadata = $oAuth2Client->debugToken($accessToken);
