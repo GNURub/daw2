@@ -31,7 +31,7 @@ class Application
             }
             // comprobamos si la accion existe
             if (method_exists($this->url_controller, $action)) {
-              $this->url_controller->{$action}();
+              $this->url_controller->{$action}($this->url_params);
             } else {
               $params = array_merge(array($this->url_action), $this->url_params);
               $this->url_controller->index($params);
