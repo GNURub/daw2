@@ -79,7 +79,7 @@ class FacebookLogin
   //   }
   //
   //   $_SESSION['fb_access_token'] = (string) $accessToken;
-  // }
+  }
 }
 
  ?>
