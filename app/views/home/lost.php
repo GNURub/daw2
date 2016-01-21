@@ -1,5 +1,5 @@
 <?php require VIEWS . '_layout/header.php'; ?>
-<div class="content">
+<div class="content form">
   <h2 class="center">Recuperación de contraseña</h2>
   <form class="signin center" method="post" action="/client/restore">
     <ul>

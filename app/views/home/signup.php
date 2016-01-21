@@ -1,5 +1,5 @@
 <?php require VIEWS . '_layout/header.php'; ?>
-<div class="content">
+<div class="content form">
   <h2 class="center">Formulario de Registro</h2>
   <form class="signin center" action="/client/create/" method="post">
     <ul>

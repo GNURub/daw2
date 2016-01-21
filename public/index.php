@@ -22,6 +22,9 @@ define('SMTP_SECURE', $credentials['smtp']['secure']);
 define('FACEBOOK_ID', $credentials['facebook']['appId']);
 define('FACEBOOK_SECRET', $credentials['facebook']['appSecret']);
 
+define('GOOGLE_ID', $credentials['google']['appId']);
+define('GOOGLE_SECRET', $credentials['google']['appSecret']);
+
 
 
 // core
@@ -45,6 +48,7 @@ require_once APP.'config/config.php';
 require_once APP.'helpers/response.php';
 require_once APP.'helpers/pdf.php';
 require_once APP.'helpers/fb.php';
+require_once APP.'helpers/go.php';
 require_once APP.'helpers/utils.php';
 
 Log::write("Atendiendo peticion.");

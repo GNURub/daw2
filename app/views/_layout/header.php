@@ -34,14 +34,15 @@
     <meta name="description" content="">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="<?=URL; ?>js/wc.js"></script>
+    <script src="<?=URL; ?>js/wc.js" async></script>
 
     <link href="<?=URL; ?>css/all.css" rel="stylesheet">
 
     <!-- <link rel="stylesheet" href="<?=URL; ?>css/fontawesome/css/font-awesome.css"> -->
     <link rel="import" href="<?=URL; ?>components/item.html">
-    <link rel="import" href="<?=URL; ?>components/fb.html">
+    <!-- <link rel="import" href="<?=URL; ?>components/fb.html"> -->
     <link rel="import" href="<?=URL; ?>components/go.html">
+    <link rel="import" href="<?=URL; ?>components/social-buttons.html">
 </head>
 <body>
     <header class="cabecera">

@@ -1,5 +1,5 @@
 <?php require VIEWS . '_layout/header.php'; ?>
-<div class="content">
+<div class="content form">
   <h2 class="center">Formulario de Categoría</h2>
   <form class="signin center" method="post">
     <ul>

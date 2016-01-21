@@ -1,0 +1,72 @@
+<template>
+  <style>
+    @import '../css/all.css';
+  </style>
+  <div id="container"></div>
+</template>
+<script charset="utf-8">
+  (function(window, document, undefined){
+    'use strict';
+    var thatDoc = document;
+    var thisDoc =  (thatDoc._currentScript || thatDoc.currentScript).ownerDocument;
+
+
+    var template = thisDoc.querySelector('template').content;
+    var socialButtons = Object.create(HTMLElement.prototype);
+
+    socialButtons.importHref = function (file, cb){
+      var link = thisDoc.createElement('link');
+      link.rel = 'import';
+      link.href = file;
+      link.setAttribute('async', '');
+      // link.onload = function(e) {...};
+      // link.onerror = function(e) {...};
+      this.appendChild(link);
+      if(typeof cb === 'function'){
+        cb();
+      }
+    };
+    socialButtons.createdCallback = function() {
+      var shadowRoot = this.createShadowRoot();
+
+      var clone = thatDoc.importNode(template, true);
+      shadowRoot.appendChild(clone);
+
+      if(this.hasAttribute('fb-url')){
+        this.importHref('/components/fb.html');
+        var fb = thisDoc.createElement('fb-button');
+        fb.setAttribute('url', this.getAttribute('fb-url'));
+        shadowRoot.querySelector('div').appendChild(fb);
+      }
+
+      if(this.hasAttribute('go-url')){
+        this.importHref('/components/go.html');
+        var go = thisDoc.createElement('go-button');
+        go.setAttribute('url', this.getAttribute('go-url'));
+        shadowRoot.querySelector('div').appendChild(go);
+      }
+
+      if(this.hasAttribute('gh-url')){
+        this.importHref('/components/gh.html');
+        var gh = thisDoc.createElement('gh-button');
+        gh.setAttribute('url', this.getAttribute('gh-url'));
+        shadowRoot.querySelector('div').appendChild(gh);
+      }
+
+      if(this.hasAttribute('tw-url')){
+        this.importHref('/components/tw.html');
+        var tw = thisDoc.createElement('tw-button');
+        tw.setAttribute('url', this.getAttribute('tw-url'));
+        shadowRoot.querySelector('div').appendChild(tw);
+      }
+
+
+
+    };
+    socialButtons.attributeChangedCallback = function(attr, oldVal, newVal) {};
+    window.socialButtons = thatDoc.registerElement('social-buttons', {
+        prototype: socialButtons
+    });
+
+  })(window, document);
+</script>

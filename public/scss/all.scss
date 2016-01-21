@@ -44,9 +44,9 @@ h1,h2,h3,h4,h5,h6{
   text-transform: capitalize;
 }
 div.content {
-  display: flex;
+  // display: flex;
   width: 100%;
-  flex-basis: 100%;
+  // flex-basis: 100vh;
   box-shadow: 0 10px 40px rgba(0,0,0, .2);
   z-index: 1;
   padding-top: 1em;
@@ -68,18 +68,67 @@ div.content x-item{
   margin: 1em 0;
 }
 
+.wrapper{
+  width: 860px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.why-its-rad{
+  padding-top: 40px;
+  padding-bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
+  .columns{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+
+    .column{
+      // display: flex;
+      float: none;
+      margin: .5em 0;
+      &.left, &.right{
+        width: 50%;
+      }
+      h2{
+        font-weight: 300;
+        font-size: 30px;
+        margin-top: 0;
+      }
+      &.image{
+        img{
+          display: block;
+          float: right;
+        }
+      }
+      &:first-child{
+        padding-left: 0;
+        padding-right: 20px;
+      }
+      &:last-child{
+        padding-right: 0;
+        padding-left: 20px;
+      }
+    }
+  }
+}
+
 .roboto{
     font-family: 'Roboto', sans-serif;
 }
 .pacifico{
     font-family: 'Pacifico', cursive;
 }
-
 .montserrat{
   font-family: 'Montserrat';
 }
 .submenu{
-    background-color: #3F51B5;
+    background-color: $primary;
 }
 
 .hidden{

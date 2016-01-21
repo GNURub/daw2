@@ -51,14 +51,10 @@ label{
 
 input[type=checkbox]:checked ~ label .box {
   opacity:0;
-  -webkit-transform   :scale(0) rotate(-180deg);
-  -moz-transform 		:scale(0) rotate(-180deg);
   transform 				:scale(0) rotate(-180deg);
 }
 input[type=checkbox]:checked ~ label .check {
   opacity:1;
-  -webkit-transform   :scale(1) rotate(45deg);
-  -moz-transform      :scale(1) rotate(45deg);
   transform           :scale(1) rotate(45deg);
 }
 

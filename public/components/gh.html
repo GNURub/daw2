@@ -1,18 +1,19 @@
 <template>
   <style>
     @import '../css/all.css';
-    #go{
-      background-color: #db4437;
+    #gh{
+      background-color: #444;
       padding: .1em .2em;
+      color: white;
     }
-    .icon-google-plus{
+    .icon-github{
       font-size: 19px;
       font-weight: bold;
     }
 
   </style>
-  <button id="go" class="btn lg">
-    <span class="icon-google-plus"> Google +</span>
+  <button id="gh" class="btn lg">
+    <span class="icon-github"> GitHub</span>
   </button>
 </template>
 <script>
@@ -27,11 +28,11 @@
     var template = thisDoc.querySelector('template').content;
 
 
-    var goButton = Object.create(HTMLElement.prototype);
+    var ghButton = Object.create(HTMLElement.prototype);
 
-    goButton.url = null;
+    ghButton.url = null;
 
-    goButton.createdCallback = function() {
+    ghButton.createdCallback = function() {
       var shadowRoot = this.createShadowRoot();
 
       var clone = thatDoc.importNode(template, true);
@@ -46,7 +47,7 @@
           this.setUrl(url);
       }
     };
-    goButton.attributeChangedCallback = function(attr, oldVal, newVal) {
+    ghButton.attributeChangedCallback = function(attr, oldVal, newVal) {
       switch (attr) {
         case 'url':
           this.setUrl(newVal);
@@ -54,12 +55,12 @@
       }
     };
 
-    goButton.setUrl = function(val) {
+    ghButton.setUrl = function(val) {
         this.url = val;
     };
 
-    window.fbButton = thatDoc.registerElement('go-button', {
-        prototype: goButton
+    window.ghButton = thatDoc.registerElement('gh-button', {
+        prototype: ghButton
     });
 
   })(window, document);

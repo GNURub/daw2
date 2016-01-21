@@ -51,10 +51,6 @@
 
     background-color: rgba(236, 240, 241, .3);
 
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
   }
   &:active:before {
@@ -78,6 +74,15 @@
   &.red:hover, &.red:focus {
     background-color: #c0392b;
   }
+
+  &.green {
+    background-color: $accent_color;
+  }
+
+  &.red:hover, &.red:focus {
+    background-color: darken($accent_color, 15%);
+  }
+
   &.lg{
     width: 100%;
   }

@@ -1,6 +1,6 @@
 <?php require VIEWS . '_layout/header.php'; ?>
 <!-- <?php print_r($categorias); ?> -->
-<div class="content">
+<div class="content form">
   <h2 class="center">Formulario de Producto</h2>
   <form class="signin center" method="post" enctype="multipart/form-data">
     <ul>

@@ -5,13 +5,14 @@
       private $product;
       private $category;
       private $client;
-      protected static $fb;
+      protected static $fb, $go;
       public function __construct()
       {
         $this->product  = new ProductModel();
         $this->client   = new ClientModel();
         $this->category = new CategoryModel();
         self::$fb = new FacebookLogin();
+        self::$go = new GoogleLogin();
 
       }
       public function index()
@@ -28,8 +29,10 @@
             header('location: /');
             return;
           }
+
           // load VIEWSs
           $fbUrl = self::$fb->getUrl();
+          $goUrl = self::$go->getUrl();
           require VIEWS . 'home/signin.php';
       }
 

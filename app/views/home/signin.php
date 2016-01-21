@@ -1,6 +1,6 @@
 <?php require VIEWS . '_layout/header.php'; ?>
 
-<div class="content">
+<div class="content form">
   <h2 class="center">Formulario de Login</h2>
   <div class="wrap">
     <form class="signin center" action="/client/signin/" method="post">
@@ -28,16 +28,7 @@
           <button class="btn lg" type="submit"><span>Login</span></button>
         </li>
         <li>
-          <fb-button url="<?=$fbUrl;?>"></fb-button>
-        </li>
-        <li>
-          <go-button></go-button>
-        </li>
-        <li>
-          <tw-button></tw-button>
-        </li>
-        <li>
-          <gh-button></gh-button>
+          <social-buttons fb-url="<?=$fbUrl;?>" go-url="<?=$goUrl;?>"></social-buttons>
         </li>
       </ul>
     </form>

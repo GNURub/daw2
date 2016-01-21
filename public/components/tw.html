@@ -1,18 +1,18 @@
 <template>
   <style>
     @import '../css/all.css';
-    #go{
-      background-color: #db4437;
+    #tw{
+      background-color: #55acee;
       padding: .1em .2em;
     }
-    .icon-google-plus{
+    .icon-twitter{
       font-size: 19px;
       font-weight: bold;
     }
 
   </style>
-  <button id="go" class="btn lg">
-    <span class="icon-google-plus"> Google +</span>
+  <button id="tw" class="btn lg">
+    <span class="icon-twitter"> Twitter</span>
   </button>
 </template>
 <script>
@@ -27,11 +27,11 @@
     var template = thisDoc.querySelector('template').content;
 
 
-    var goButton = Object.create(HTMLElement.prototype);
+    var twButton = Object.create(HTMLElement.prototype);
 
-    goButton.url = null;
+    twButton.url = null;
 
-    goButton.createdCallback = function() {
+    twButton.createdCallback = function() {
       var shadowRoot = this.createShadowRoot();
 
       var clone = thatDoc.importNode(template, true);
@@ -46,7 +46,7 @@
           this.setUrl(url);
       }
     };
-    goButton.attributeChangedCallback = function(attr, oldVal, newVal) {
+    twButton.attributeChangedCallback = function(attr, oldVal, newVal) {
       switch (attr) {
         case 'url':
           this.setUrl(newVal);
@@ -54,12 +54,12 @@
       }
     };
 
-    goButton.setUrl = function(val) {
+    twButton.setUrl = function(val) {
         this.url = val;
     };
 
-    window.fbButton = thatDoc.registerElement('go-button', {
-        prototype: goButton
+    window.twButton = thatDoc.registerElement('tw-button', {
+        prototype: twButton
     });
 
   })(window, document);
