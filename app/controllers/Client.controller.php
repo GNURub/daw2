@@ -206,9 +206,24 @@
 
       public function fbAction($a)
       {
-          // var_dump($a);
-          // $fb = new FacebookLogin();
-          echo self::$fb->getToken();
+
+          $res = self::$fb->getToken();
+          if(!empty($res['user'])){
+            $userDB = $client->toArray($res['user']->getField('email'));
+            print_r($userDB);
+          }else if($res['error']){
+            switch ($res['error']) {
+              case 400:
+                return require VIEWS . 'error/400.php';
+                break;
+              case 401:
+                return require VIEWS . 'error/401.php';
+                break;
+              default:
+                return require VIEWS . 'error/404.php';
+                break;
+            }
+          }
 
       }
   }

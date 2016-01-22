@@ -27,24 +27,26 @@ class FacebookLogin
       $accessToken = $this->helper->getAccessToken();
     } catch(Facebook\Exceptions\FacebookResponseException $e) {
       // When Graph returns an error
-      echo 'Graph returned an error: ' . $e->getMessage();
-      exit;
+      // echo 'Graph returned an error: ' . $e->getMessage();
+      return array("error"=> $e->getMessage(), "user"=>null);
     } catch(Facebook\Exceptions\FacebookSDKException $e) {
       // When validation fails or other local issues
-      echo 'Facebook SDK returned an error: ' . $e->getMessage();
-      exit;
+      // echo 'Facebook SDK returned an error: ' . $e->getMessage();
+      return array("error"=> $e->getMessage(), "user"=>null);
     }
 
     if (! isset($accessToken)) {
       if ($this->helper->getError()) {
         header('HTTP/1.0 401 Unauthorized');
-        echo "Error: " . $this->helper->getError() . "\n";
-        echo "Error Code: " . $this->helper->getErrorCode() . "\n";
-        echo "Error Reason: " . $this->helper->getErrorReason() . "\n";
-        echo "Error Description: " . $this->helper->getErrorDescription() . "\n";
+        // echo "Error: " . $this->helper->getError() . "\n";
+        // echo "Error Code: " . $this->helper->getErrorCode() . "\n";
+        // echo "Error Reason: " . $this->helper->getErrorReason() . "\n";
+        // echo "Error Description: " . $this->helper->getErrorDescription() . "\n";
+        return array("error"=> 401, "user"=>null);
       } else {
-        header('HTTP/1.0 400 Bad Request');
-        echo 'Bad request';
+        // header('HTTP/1.0 400 Bad Request');
+        // echo 'Bad request';
+        return array("error"=> 400, "user"=>null);
       }
       exit;
     }
@@ -62,19 +64,19 @@ class FacebookLogin
       $userNode = $response->getGraphUser();
     } catch(Facebook\Exceptions\FacebookResponseException $e) {
       // When Graph returns an error
-      echo 'Graph returned an error: ' . $e->getMessage();
-      exit;
+      // echo 'Graph returned an error: ' . $e->getMessage();
+      return array("error"=> $e->getMessage(), "user"=>null);
     } catch(Facebook\Exceptions\FacebookSDKException $e) {
       // When validation fails or other local issues
-      echo 'Facebook SDK returned an error: ' . $e->getMessage();
-      exit;
+      // echo 'Facebook SDK returned an error: ' . $e->getMessage();
+      return array("error"=> $e->getMessage(), "user"=>null);
     }
 
-    echo 'Logged in as ' . $userNode->getName();
-    var_dump($userNode);
-    var_dump(
-    $userNode->getField('email'), $userNode['email']
-);
+    // return $userNode->getField('email');
+    return array("error"=> null, "user"=>$userNode);
+
+
+
 
 
     // // // Get the access token metadata from /debug_token
