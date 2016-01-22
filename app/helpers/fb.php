@@ -19,7 +19,7 @@ class FacebookLogin
         'scope' => 'email',
         'redirect_uri' => 'https://thecatlong-gnurub.rhcloud.com/home/fb',
     );
-    $loginUrl = $this->helper->getLoginUrl($this->permissions);
+    $loginUrl = $this->helper->getLoginUrl($params);
     return htmlspecialchars($loginUrl);
   }
 
