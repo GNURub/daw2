@@ -11,7 +11,7 @@ class FacebookLogin
       'app_secret' => FACEBOOK_SECRET,
       'default_graph_version' => 'v2.5',
     ]);
-    $this->helper = $this->fb->getRedirectLoginHelper($fbUrl);
+    $this->helper = $this->fb->getRedirectLoginHelper();
   }
 
   function getUrl(){
