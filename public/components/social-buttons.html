@@ -23,7 +23,7 @@
       // link.onerror = function(e) {...};
       this.appendChild(link);
       if(typeof cb === 'function'){
-        cb();
+        link.onload = cb.bind(this);
       }
     };
     socialButtons.createdCallback = function() {
@@ -34,31 +34,35 @@
 
 
       if(this.hasAttribute('fb-url')){
-        this.importHref('/components/fb.html');
-        var fb = thisDoc.createElement('fb-button');
-        fb.setAttribute('url', this.getAttribute('fb-url'));
-        shadowRoot.querySelector('div').appendChild(fb);
+        this.importHref('/components/fb.html', function(){
+          var fb = thisDoc.createElement('fb-button');
+          fb.setAttribute('url', this.getAttribute('fb-url'));
+          shadowRoot.querySelector('div').appendChild(fb);
+        });
       }
 
       if(this.hasAttribute('go-url')){
-        this.importHref('/components/go.html');
-        var go = thisDoc.createElement('go-button');
-        go.setAttribute('url', this.getAttribute('go-url'));
-        shadowRoot.querySelector('div').appendChild(go);
+        this.importHref('/components/go.html', function(){
+          var go = thisDoc.createElement('go-button');
+          go.setAttribute('url', this.getAttribute('go-url'));
+          shadowRoot.querySelector('div').appendChild(go);
+        });
       }
 
       if(this.hasAttribute('gh-url')){
-        this.importHref('/components/gh.html');
-        var gh = thisDoc.createElement('gh-button');
-        gh.setAttribute('url', this.getAttribute('gh-url'));
-        shadowRoot.querySelector('div').appendChild(gh);
+        this.importHref('/components/gh.html', function(){
+          var gh = thisDoc.createElement('gh-button');
+          gh.setAttribute('url', this.getAttribute('gh-url'));
+          shadowRoot.querySelector('div').appendChild(gh);
+        });
       }
 
       if(this.hasAttribute('tw-url')){
-        this.importHref('/components/tw.html');
-        var tw = thisDoc.createElement('tw-button');
-        tw.setAttribute('url', this.getAttribute('tw-url'));
-        shadowRoot.querySelector('div').appendChild(tw);
+        this.importHref('/components/tw.html', function(){
+          var tw = thisDoc.createElement('tw-button');
+          tw.setAttribute('url', this.getAttribute('tw-url'));
+          shadowRoot.querySelector('div').appendChild(tw);
+        });
       }
 
 
