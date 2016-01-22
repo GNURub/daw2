@@ -228,7 +228,7 @@
 
             }else{
               // Logeado OK
-
+              exit("Siiii");
             }
           }else if($res['error']){
             switch ($res['error']) {
