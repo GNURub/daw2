@@ -211,6 +211,8 @@
           if(!empty($res['user'])){
             $userDB = $this->client->toArray($res['user']->getField('email'));
             print_r($userDB);
+            var_dump($res, $userDB);
+            exit;
           }else if($res['error']){
             switch ($res['error']) {
               case 400:
