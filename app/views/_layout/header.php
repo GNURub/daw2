@@ -26,7 +26,7 @@
     <link rel="manifest" href="<?=URL; ?>images/icons/manifest.json">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="<?=URL; ?>images/icons/ms-icon-144x144.png">
-    <meta name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="#303F9F">
 
 
 

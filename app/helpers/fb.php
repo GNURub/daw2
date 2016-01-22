@@ -3,7 +3,7 @@
 class FacebookLogin
 {
   private $fb, $helper, $permissions;
-  function __construct($permissions = array('email'))
+  function __construct($fbUrl = 'https://thecatlong-gnurub.rhcloud.com/home/fb', $permissions = array('email'))
   {
     $this->permissions = $permissions;
     $this->fb = new Facebook\Facebook([
@@ -11,11 +11,11 @@ class FacebookLogin
       'app_secret' => FACEBOOK_SECRET,
       'default_graph_version' => 'v2.5',
     ]);
-    $this->helper = $this->fb->getRedirectLoginHelper();
+    $this->helper = $this->fb->getRedirectLoginHelper($fbUrl);
   }
 
-  function getUrl($fbUrl = 'https://thecatlong-gnurub.rhcloud.com/home/fb'){
-    $loginUrl = $this->helper->getLoginUrl($fbUrl, $this->permissions);
+  function getUrl(){
+    $loginUrl = $this->helper->getLoginUrl($this->permissions);
     return htmlspecialchars($loginUrl);
   }
 
