@@ -212,7 +212,7 @@
             $userDB = $this->client->toArray($res['user']->getField('email'));
             if(empty($userDB)){
               // el usuario de fb se debe registrar
-              list($nombre, $firstSubname, $secondSubname) = split(' ', $res['user']->getField('name'));
+              list($nombre, $firstSubname, $secondSubname) = explode(' ', $res['user']->getField('name'));
               echo $nombre;
               // $this->client->save(array(
               //   "email" => $res['user']->getField('email'),
