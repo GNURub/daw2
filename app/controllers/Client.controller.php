@@ -209,7 +209,7 @@
 
           $res = self::$fb->getToken();
           if(!empty($res['user'])){
-            $userDB = $client->toArray($res['user']->getField('email'));
+            $userDB = $this->client->toArray($res['user']->getField('email'));
             print_r($userDB);
           }else if($res['error']){
             switch ($res['error']) {
