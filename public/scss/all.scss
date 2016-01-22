@@ -23,7 +23,7 @@ a{
 body{
     margin: 0;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     font-family: 'Roboto';
     color: $primary_text;
     display: flex;

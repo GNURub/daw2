@@ -32,6 +32,7 @@
       var clone = thatDoc.importNode(template, true);
       shadowRoot.appendChild(clone);
 
+
       if(this.hasAttribute('fb-url')){
         this.importHref('/components/fb.html');
         var fb = thisDoc.createElement('fb-button');
@@ -63,7 +64,13 @@
 
 
     };
-    socialButtons.attributeChangedCallback = function(attr, oldVal, newVal) {};
+    socialButtons.attributeChangedCallback = function(attr, oldVal, newVal) {
+      var cont = thatDoc.querySelector('social-buttons');
+      if(attr === 'tw-url' && !this.hasAttribute('tw-url')){
+        var tw = thatDoc.querySelector('tw-button');
+        cont.removeChild(tw);
+      }
+    };
     window.socialButtons = thatDoc.registerElement('social-buttons', {
         prototype: socialButtons
     });

@@ -210,9 +210,18 @@
           $res = self::$fb->getToken();
           if(!empty($res['user'])){
             $userDB = $this->client->toArray($res['user']->getField('email'));
-            print_r($userDB);
-            var_dump($res, $userDB);
-            exit;
+            if(empty($userDB)){
+              // el usuario de fb se debe registrar
+              list($nombre, $firstSubname, $secondSubname) = split(' ', $res['user']->getField('name'));
+              echo $nombre;
+              // $this->client->save(array(
+              //   "email" => $res['user']->getField('email'),
+              //   "username" => $res['user']->getField('id')
+              // ));
+            }else{
+              // Logeado OK
+
+            }
           }else if($res['error']){
             switch ($res['error']) {
               case 400:
