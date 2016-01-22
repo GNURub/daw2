@@ -58,7 +58,7 @@ class FacebookLogin
     $oAuth2Client = $this->fb->getOAuth2Client();
 
     try {
-      $response = $this->fb->get('/me');
+      $response = $this->fb->get('/me?locale=en_US&fields=name,email');
       $userNode = $response->getGraphUser();
     } catch(Facebook\Exceptions\FacebookResponseException $e) {
       // When Graph returns an error
