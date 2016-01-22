@@ -14,7 +14,7 @@ class FacebookLogin
     $this->helper = $this->fb->getRedirectLoginHelper();
   }
 
-  function getUrl($fbUrl = 'https://thecatlong-gnurub.rhcloud.com/home/fb'){
+  function getUrl($fbUrl = 'https://thecatlong-gnurub.rhcloud.com/client/fb'){
     $params = array(
         'scope' => 'email',
     );

@@ -4,12 +4,15 @@
       private $_params;
       private $client;
       private $product;
+      protected static $fb, $go;
 
 
       public function __construct($params = array()){
           $this->client  = new ClientModel();
           $this->product = new ProductModel();
           $this->_params = $params;
+          self::$fb = new FacebookLogin();
+          self::$go = new GoogleLogin();
 
       }
 
@@ -180,7 +183,7 @@
           $pro = $this->product->toArray($id);
           array_push($productos, $pro);
         }
-        
+
         return generate_facture($productos);
       }
 
@@ -199,6 +202,14 @@
           $error = $e->getMessage();
           require VIEWS. 'error/500.php';
         }
+      }
+
+      public function fbAction($a)
+      {
+          // var_dump($a);
+          // $fb = new FacebookLogin();
+          echo self::$fb->getToken();
+
       }
   }
 
