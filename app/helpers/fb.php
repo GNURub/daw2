@@ -16,7 +16,7 @@ class FacebookLogin
 
   function getUrl($fbUrl = 'https://thecatlong-gnurub.rhcloud.com/client/fb'){
     $params = array(
-        'scope' => 'email',
+        'scope' => 'email,user_location, user_birthday',
     );
     $loginUrl = $this->helper->getLoginUrl($fbUrl, $params);
     return htmlspecialchars($loginUrl);
