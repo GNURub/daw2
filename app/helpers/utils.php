@@ -9,6 +9,10 @@
     return preg_match('/^[\w\s\S]{8,}$/', $pass);
   }
 
+  function isImageValid($file){
+    return !!preg_match('/image\/*/', mime_content_type($file));
+  }
+
   function escapeText($text){
     return htmlentities(htmlspecialchars($text));
   }

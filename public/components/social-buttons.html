@@ -7,12 +7,14 @@
 <script charset="utf-8">
   (function(window, document, undefined){
     'use strict';
+
     var thatDoc = document;
     var thisDoc =  (thatDoc._currentScript || thatDoc.currentScript).ownerDocument;
 
 
     var template = thisDoc.querySelector('template').content;
     var socialButtons = Object.create(HTMLElement.prototype);
+
 
     socialButtons.importHref = function (file, cb){
       var link = thisDoc.createElement('link');
@@ -37,6 +39,8 @@
         this.importHref('/components/fb.html', function(){
           var fb = thisDoc.createElement('fb-button');
           fb.setAttribute('url', this.getAttribute('fb-url'));
+          // animate(fb);
+
           shadowRoot.querySelector('div').appendChild(fb);
         });
       }

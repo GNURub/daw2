@@ -20,8 +20,16 @@
             require VIEWS . 'error/404.php';
             return;
           }else{
-            if($params[0] == 'Imagenes' || $params[0] == 'Videos'){
-              $selectedCategory = $params[0];
+            $selectedCategory = $params[0];
+            if($params[0] == 'Imagenes'){
+
+              $gallery_imgs = scandir(PUBLICO . 'images_gallery'. DIRECTORY_SEPARATOR, 1);
+              // echo isImageValid(PUBLICO. 'images_gallery'. DIRECTORY_SEPARATOR . $gallery_img[0]);
+
+              $categories = array(array('idcategoria'=> 'Imagenes'), array('idcategoria'=>'Videos'));
+              require VIEWS . "category/imagenes.php";
+              return;
+            }else if($params[0] == 'Videos'){
               $categories = array(array('idcategoria'=> 'Imagenes'), array('idcategoria'=>'Videos'));
               require VIEWS . "category/imagenes.php";
               return;

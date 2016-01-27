@@ -61,7 +61,10 @@
         <button class="btn lg" type="submit"><span>Registrarse</span></button>
       </li>
     </ul>
+    <social-buttons fb-url></social-buttons>
+
   </form>
+
 </div>
 
 <?php require VIEWS . '_layout/footer.php'; ?>

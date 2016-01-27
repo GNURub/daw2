@@ -1,6 +1,7 @@
 <?php
 header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() + (60 * 60)));
 define('ROOT', dirname(__DIR__) . DIRECTORY_SEPARATOR);
+define('PUBLICO', ROOT.'public'. DIRECTORY_SEPARATOR);
 define('APP', ROOT . 'app' . DIRECTORY_SEPARATOR);
 define('IMGS', ROOT . 'public/images' . DIRECTORY_SEPARATOR);
 define('VIEWS', APP . 'views' . DIRECTORY_SEPARATOR);
