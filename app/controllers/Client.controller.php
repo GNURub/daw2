@@ -206,44 +206,45 @@
 
       public function fbAction($a)
       {
+        $res = self::$fb->getToken();
+        if(!empty($res['user'])){
+          $userDB = $this->client->toArray($res['user']->getField('email'));
+          if(empty($userDB)){
+            // el usuario de fb se debe registrar
+            $na = explode(' ', $res['user']->getField('name'));
+            array_shift($na);
+            try {
 
-          $res = self::$fb->getToken();
-          if(!empty($res['user'])){
-            $userDB = $this->client->toArray($res['user']->getField('email'));
-            if(empty($userDB)){
-              // el usuario de fb se debe registrar
-              $na = explode(' ', $res['user']->getField('name'));
-              array_shift($na);
-              try {
-
-                $this->client->save(array(
-                  "email" => $res['user']->getField('email'),
-                  "username" => $res['user']->getField('id'),
-                  "nombre" => $na[0],
-                  "apellidos" => implode($na)
-                ));
-              } catch (Exception $e) {
-                exit($e);
-              }
-
-            }else{
-              // Logeado OK
-              exit("Siiii");
+              $this->client->save(array(
+                "email" => $res['user']->getField('email'),
+                "username" => $res['user']->getField('id'),
+                "nombre" => $na[0],
+                "apellidos" => implode($na)
+              ));
+              self::setSession('username', $res['user']->getField('id'));
+            } catch (Exception $e) {
+              exit($e);
             }
-          }else if($res['error']){
-            switch ($res['error']) {
-              case 400:
-                return require VIEWS . 'error/400.php';
-                break;
-              case 401:
-                return require VIEWS . 'error/401.php';
-                break;
-              default:
-                return require VIEWS . 'error/404.php';
-                break;
-            }
+
+          }else{
+            // Ya lo teniamos
+            self::setSession('username', $userDB['username']);
+            self::setSession('admin',    $userDB['rol']);
           }
-
+          return header("location: /");
+        }else if($res['error']){
+          switch ($res['error']) {
+            case 400:
+              return require VIEWS . 'error/400.php';
+              break;
+            case 401:
+              return require VIEWS . 'error/401.php';
+              break;
+            default:
+              return require VIEWS . 'error/404.php';
+              break;
+          }
+        }
       }
   }
 
