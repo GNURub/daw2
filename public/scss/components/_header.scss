@@ -54,6 +54,9 @@ header{
       align-items: center;
       flex-wrap: nowrap;
       height: 100px;
+
+
+
       div.dropdown_menu{
         position:absolute;
         background-color: rgb(246,246,246);
@@ -110,8 +113,10 @@ header{
           }
         }
       }
+
       div{
         flex: 1;
+        
         &.buscador{
           flex: 2;
           display: flex;

@@ -60,6 +60,7 @@ div.content {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap-reverse;
+
   @media screen and (max-device-width: 640px) {
     & > div.menu-container {
       display: none!important;
@@ -74,7 +75,10 @@ div.content {
           flex-basis: 100%;
           div.items-container{
             justify-content: center!important;
-            padding: 0;
+            padding: 0!important;
+            x-item{
+              width: 100%;
+            }
           }
       }
   }
