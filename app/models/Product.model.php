@@ -58,17 +58,19 @@
     }
 
     public function toArray($id = false){
-      if($id === false){
-        // $query = "SELECT * FROM {$this->table}";
-        $query = "SELECT *
-          FROM {$this->table}
-          NATURAL JOIN imagenes";
-      }else{
+      if(!!$id){
         $id = escapeText($id);
         $query = "SELECT *
-          FROM {$this->table} p
-          NATURAL JOIN imagenes i WHERE idproducto = '{$id}'";
+        FROM {$this->table} p
+        NATURAL JOIN imagenes i WHERE idproducto = '{$id}'";
+        if(!$_puntero = $this->db->query($query)){
+          throw new Exception($this->db->error, 1);
+        }
+        return $_puntero->fetch_assoc();
       }
+      $query = "SELECT *
+      FROM {$this->table}
+      NATURAL JOIN imagenes";
 
       if(!$_puntero = $this->db->query($query)){
         throw new Exception($this->db->error, 1);
@@ -78,7 +80,6 @@
         array_push($result, $row);
       }
       return $result;
-
     }
 
   }

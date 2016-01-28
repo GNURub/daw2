@@ -1,4 +1,4 @@
-<?php require VIEWS . '_layout/header.php'; ?>
+<?php require VIEWS.'_layout/header.php'; ?>
 
 <div class="content form ">
   <h2 class="center">Formulario de Login</h2>
@@ -27,11 +27,10 @@
         <li>
           <button class="btn lg" type="submit"><span>Login</span></button>
         </li>
-        <hr>
       </ul>
       <social-buttons fb-url="<?=$fbUrl;?>" go-url="<?=$goUrl;?>"></social-buttons>
     </form>
   </div>
 </div>
 
-<?php require VIEWS . '_layout/footer.php'; ?>
+<?php require VIEWS.'_layout/footer.php'; ?>

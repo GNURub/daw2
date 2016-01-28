@@ -8,7 +8,6 @@
 <html lang="es">
 <head>
     <meta charset="utf-8">
-
     <link rel="apple-touch-icon" sizes="57x57" href="<?=URL; ?>images/icons/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="<?=URL; ?>images/icons/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="<?=URL; ?>images/icons/apple-icon-72x72.png">
@@ -27,21 +26,20 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="<?=URL; ?>images/icons/ms-icon-144x144.png">
     <meta name="theme-color" content="#303F9F">
-
-
-
-    <title>TheCatLong...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheCatLong...</title>
+
+    <!-- Scripts -->
     <script src="<?=URL; ?>js/wc.js" async></script>
 
+    <!-- Style Sheets  -->
     <link href="<?=URL; ?>css/all.css" rel="stylesheet">
 
-
+    <!-- Web Components -->
     <link rel="import" href="<?=URL; ?>components/item.html">
     <link rel="import" href="<?=URL; ?>components/social-buttons.html">
-
 </head>
 <body>
     <header class="cabecera">
@@ -105,7 +103,7 @@
               <div class="hidden dropdown_menu">
                 <ul>
                   <li>
-                    <a href="" class="carrito">
+                    <a href="<?=self::getSession('username') ? '/client/checkout' : '/home/signin'?>" class="carrito">
                       <i class="material-icons">shopping_basket</i>
                       <small>
                         Tienes <?=self::getSession('productos') ? count(self::getSession('productos')) : 0;?> productos.
@@ -113,7 +111,7 @@
                     </a>
                   </li>
                   <li class="btn-li">
-                    <button class="btn lg">Cerrar compra</button>
+                    <a class="btn lg green" href="<?=self::getSession('username') ? '/client/checkout' : '/home/signin'?>">Cerrar compra</a>
                   </li>
                 </ul>
               </div>

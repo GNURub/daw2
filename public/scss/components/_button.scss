@@ -1,3 +1,12 @@
+a.btn{
+  margin: 0;
+  text-align: center!important;
+  height: 32px;
+  line-height: 32px;
+  color: white!important;
+  font-size: small;
+  text-decoration: none;
+}
 .btn {
   position: relative;
 
@@ -79,7 +88,7 @@
     background-color: $accent_color;
   }
 
-  &.red:hover, &.red:focus {
+  &.green:hover, &.green:focus {
     background-color: darken($accent_color, 15%);
   }
 

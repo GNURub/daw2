@@ -4,16 +4,9 @@
 }
 
 .wrap{
-  // padding: 3em;
   display: flex;
   flex-direction: column;
-  // width: 40%;
   margin: 0 auto;
-  // height: 30em;
-}
-
-.center{
-  // margin: 0 auto;
 }
 
 h2{
@@ -23,9 +16,58 @@ h2{
 }
 form{
   margin: auto;
+  &.signin{
+    ul{
+      border-bottom: 1px solid rgba(0,0,0,.2);
+    }
+  }
 
   &.signin.center{
     @extend .center;
     width: auto;
+  }
+  &.ticket{
+    margin: 1em;
+    ul{
+      height: 100%;
+      li, span.q{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+      }
+      li{
+        border-bottom: 1px solid lighten($divider_color, 15%);
+        &.divider{
+          border-top: 1px dashed black;
+          border-bottom: inherit;
+          padding-top: 1em;
+          align-self: flex-end;
+        }
+        &:hover{
+          border-bottom-color: $divider_color;
+        }
+        span.title{
+          max-width: 126px;
+          hyphens: auto;
+          word-break: break-word;
+          overflow-wrap: break-word;
+          word-wrap: break-word;
+          flex: 2;
+        }
+        span.q{
+          margin-left: 1em;
+          flex: 1;
+        }
+        span.price{
+          flex: 1;
+        }
+        input{
+          width: 3em;
+          appearance:none;
+          border: 0;
+        }
+      }
+    }
   }
 }

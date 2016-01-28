@@ -23,11 +23,9 @@
 
       public function index($params = array()){
           if(empty($params[0])){
-            require VIEWS . 'error/404.php';
-          }else{
-            header('location: /');
+            return require VIEWS . 'error/404.php';
           }
-          return;
+          return header('location: /');
       }
 
       public function notifyAction()
@@ -41,11 +39,8 @@
               header('location: /');
             }
             $clientes = $this->clients->toArray();
-            $item = $this->product->toArray($itemid);
-
 
             $mail = new PHPMailer;
-            // $mail->SMTPDebug = 3;
 
             $mail->isSMTP();
             $mail->Host       = SMTP_HOST;
@@ -74,23 +69,19 @@
                                   </body>
                                 </html>";
             }
-            foreach ($item as $i) {
+            foreach ($pro as $i) {
               $mail->addAttachment(IMGS. $i['path']);
             }
             $mail->AltBody = $detalles;
 
             if($mail->send()) {
-                header('location: /');
-                return;
+                return header('location: /');
             }
-
-
-
           }
+
           $pa = $this->product->toArray($this->_params[0]);
           if(empty($this->_params[0]) || empty($pa)){
-            header('location: /');
-            return;
+            return header('location: /');
           }
           $itemId = $this->_params[0];
           self::$lastItem = $itemId;

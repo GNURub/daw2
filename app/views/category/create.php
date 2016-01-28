@@ -13,6 +13,20 @@
       </li>
 
       <li>
+        <div class="mdl-selectfield">
+          <label>Seleccione las Subcategorias: </label>
+          <select class="browser-default" name="subcategoria[]" multiple>
+            <option value="" disabled selected>Elige las subcategorias</option>
+            <!-- <?php
+              foreach ($categorias as $categoria) {
+                echo "<option value='{$categoria["idcategoria"]}' class='capitalize'>{$categoria["idcategoria"]}</option>";
+              }
+            ?> -->
+          </select>
+        </div>
+      </li>
+
+      <li>
         <button class="btn lg" type="submit"><span>Crear Categoría</span></button>
       </li>
     </ul>

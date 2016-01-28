@@ -1,13 +1,6 @@
 header{
     width: 100%;
     height: 136px;
-    // position: fixed;
-
-
-    div.logotipo{
-
-    }
-
     &.cabecera{
       display: flex;
       flex-direction: column;
@@ -49,7 +42,6 @@ header{
                 font-size: 90%;
             }
         }
-
       }
     }
     nav.utils{

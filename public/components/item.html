@@ -38,6 +38,7 @@
       color: white;
       line-height: 2em;
       left: 0;
+      text-transform: capitalize;
     }
     .header_item  button{
       position: absolute;
@@ -73,14 +74,14 @@
     a.btn.lg{
       text-decoration: none;
       text-align: center;
-      padding: .5em 1em;
+      /*padding: .5em 1em;*/
       font-weight: bold;
       background-color: rgb(25, 143, 26);
     }
   </style>
     <div class="container_item">
       <div class="header_item">
-        <span class="new_item" hidden>New!</span>
+        <span class="new_item" hidden>Novedad!</span>
         <img src="http://lorempixel.com/300/300" alt="" />
         <span class="title_item">
 
@@ -147,7 +148,11 @@
 
         }.bind(this), false);
 
-        this.newContainer.hidden = !this.hasAttribute('new');
+        if(this.hasAttribute('new')){
+          this.newContainer.removeAttribute('hidden');
+        }else{
+          this.newContainer.hidden = true;
+        }
 
         if (this.hasAttribute('url')) {
             var url = this.getAttribute('url');
@@ -208,7 +213,11 @@
             this.setTitle(newVal);
             break;
           case 'new':
-            this.newContainer.hidden = !this.hasAttribute('new');
+            if(this.hasAttribute('new')){
+              this.newContainer.removeAttribute('hidden');
+            }else{
+              this.newContainer.hidden = true;
+            }
             break;
           case 'num':
             this.linker.href = "/admin/notify/" + this.getAttribute('num');

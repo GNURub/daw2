@@ -1,6 +1,22 @@
 <template>
   <style>
     @import '../css/all.css';
+    #container{
+      display: flex;
+      flex-direction: column;
+    }
+    fb-button{
+      order: 1;
+    }
+    go-button{
+      order: 2;
+    }
+    gh-button{
+      order: 3;
+    }
+    tw-button{
+      order: 4;
+    }
   </style>
   <div id="container"></div>
 </template>
@@ -39,7 +55,6 @@
         this.importHref('/components/fb.html', function(){
           var fb = thisDoc.createElement('fb-button');
           fb.setAttribute('url', this.getAttribute('fb-url'));
-          // animate(fb);
 
           shadowRoot.querySelector('div').appendChild(fb);
         });

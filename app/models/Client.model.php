@@ -46,19 +46,17 @@
           throw new Exception($this->db->error, 1);
         }
         return $resultado->fetch_assoc();
-      }else{
-        $query = "SELECT * FROM {$this->table}";
-        if(!$resultado = $this->db->query($query)){
-          throw new Exception($this->db->error, 1);
-        }
-        $result = array();
-        while ($row = $resultado->fetch_assoc()) {
-          array_push($result, $row);
-        }
-        return $result;
       }
+      $query = "SELECT * FROM {$this->table}";
+      if(!$resultado = $this->db->query($query)){
+        throw new Exception($this->db->error, 1);
+      }
+      $result = array();
+      while ($row = $resultado->fetch_assoc()) {
+        array_push($result, $row);
+      }
+      return $result;
     }
-
   }
 
  ?>

@@ -2,7 +2,7 @@
 <footer>
   <div>
     <div class="data">
-      <h3>Sobre la comapañia</h3>
+      <h4>Sobre la comapañia</h4>
       <ul>
         <li>
           <i class="material-icons">place</i>
@@ -22,7 +22,7 @@
       </ul>
     </div>
     <div class="about">
-      <h3>Sobre nosotros</h3>
+      <h4>Sobre nosotros</h4>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae iusto, maiores provident dolor ut aliquam ea perspiciatis praesentium necessitatibus eaque nobis sint quibusdam, adipisci excepturi, incidunt animi reprehenderit soluta quis.
       </p>
