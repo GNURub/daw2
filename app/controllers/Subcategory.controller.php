@@ -8,42 +8,38 @@
 
       public function __construct($params = array())
       {
-          $this->_params  = $params;
-          $this->subcategory = new SubcategoryModel();
-          $this->admin    = new ClientModel();
-          $this->product  = new ProductModel();
+        $this->_params  = $params;
+        $this->subcategory = new SubcategoryModel();
+        $this->admin    = new ClientModel();
+        $this->product  = new ProductModel();
       }
 
       public function index($params = array()){
           if(empty($params[0])){
             Log::write("Error en la subcategoria, no hay parametro para encontrar una.");
-            require VIEWS . 'error/404.php';
-            return;
-          }else{
-            try {
-              $subcatego = $this->subcategory->toArray($params[0]);
+            return require VIEWS . 'error/404.php';
+          }
+          try {
+            $subcatego = $this->subcategory->toArray($params[0]);
 
-              if(empty($subcatego[0])){
-                Log::write("No existe la subcategoria que se esta buscando.");
-                require VIEWS . 'error/404.php';
-              }else{
-                try {
-                  $selectedSubcategory = $subcatego[0]['idsubcategoria'];
-                  // $productos = $this->product->selecWithSubcategory($subcatego[0]['idcategoria']);
-                  // no va
-                  Log::write("Se muestra la categoria.");
-                  require VIEWS . 'subcategory/show.php';
-                } catch (Exception $e) {
-                  echo $e->getMessage();
-                }
-
-              }
-            } catch (Exception $e) {
-              $error = $e->getMessage();
-              Log::write("Se ha producido una excepción, ". $error);
-              require VIEWS . 'error/500.php';
+            if(empty($subcatego[0])){
+              Log::write("No existe la subcategoria que se esta buscando.");
+              return require VIEWS . 'error/404.php';
             }
-
+            try {
+              $selectedSubcategory = $subcatego[0]['idsubcategoria'];
+              // $productos = $this->product->selecWithSubcategory($subcatego[0]['idcategoria']);
+              // no va
+              Log::write("Se muestra la categoria.");
+              return require VIEWS . 'subcategory/show.php';
+            } catch (Exception $e) {
+              echo $e->getMessage();
+              return;
+            }
+          } catch (Exception $e) {
+            $error = $e->getMessage();
+            Log::write("Se ha producido una excepción, ". $error);
+            return require VIEWS . 'error/500.php';
           }
       }
 
@@ -61,28 +57,22 @@
             if($isValidSubcategory){
               try {
                 $this->subcategory->save(array(
-                  'idcategoria' => $nombre
+                  'idsubcategoria' => $nombre
                 ));
+                return header('location: /');
               } catch (Exception $e) {
                 $error = $e->getMessage();
-                require VIEWS . 'error/500.php';
+                return require VIEWS . 'error/500.php';
               }
-
-            }
-
-          }else{
-            $client = $this->admin->toArray(self::getSession('username'));
-            if($client['rol'] == 'admin' || $client['rol'] == 'administrador'){
-              require VIEWS . 'subcategory/create.php';
-            }else{
-              require VIEWS . 'error/401.php';
             }
           }
-        }else{
-          require VIEWS . 'error/400.php';
+          $client = $this->admin->toArray(self::getSession('username'));
+          if($client['rol'] == 'admin' || $client['rol'] == 'administrador'){
+            return require VIEWS . 'subcategory/create.php';
+          }
+          return require VIEWS . 'error/401.php';
         }
-
-
+        return require VIEWS . 'error/400.php';
       }
 
       public function jsonAction(){
@@ -103,7 +93,7 @@
           );
           echo json_encode($error);
         }
-
+        return;
       }
 
       public function xmlAction(){

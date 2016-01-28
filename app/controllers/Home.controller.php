@@ -13,7 +13,6 @@
         $this->category = new CategoryModel();
         self::$fb = new FacebookLogin();
         self::$go = new GoogleLogin();
-
       }
       public function index()
       {
@@ -62,8 +61,8 @@
 
       public function filosofyAction()
       {
-          // load VIEWSs
-          return require VIEWS . 'home/lost.php';
+        // load VIEWSs
+        return require VIEWS . 'home/lost.php';
       }
 
       public function multimediaAction()

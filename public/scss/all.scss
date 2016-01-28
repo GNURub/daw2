@@ -11,8 +11,6 @@
 @import 'components/images';
 
 
-
-
 *, *:before, *:after{
   box-sizing: border-box;
   outline: none;
@@ -41,14 +39,17 @@ ul{
 h1,h2,h3,h4,h5,h6{
   font-family: 'Montserrat';
 }
+h2{
+  color: $secundary_text;
+  font-size: 3rem;
+  margin: 1em auto;
+}
 h3{
   font-weight: 300;
   font-size: 30px;
   margin-top: 0;
 }
-.capitalize{
-  text-transform: capitalize;
-}
+
 div.content {
   display: flex;
   width: 100%;
@@ -59,6 +60,24 @@ div.content {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap-reverse;
+  @media screen and (max-device-width: 640px) {
+    & > div.menu-container {
+      display: none!important;
+    }
+    h2{
+      font-size: 9vw;
+    }
+  }
+
+  @media screen and (max-device-width: 360px) {
+      & > div.main-container {
+          flex-basis: 100%;
+          div.items-container{
+            justify-content: center!important;
+            padding: 0;
+          }
+      }
+  }
 
   div.menu-container{
     @extend div.main-container;
@@ -80,6 +99,7 @@ div.content {
         }
       }
     }
+
   }
 
 
@@ -88,6 +108,9 @@ div.content {
     flex-direction: column;
     flex-wrap: nowrap;
     flex-basis: 80%;
+    flex-grow: 1;
+    flex-shrink: 2;
+
     .title-container{
       margin: 0 1em;
       border-bottom: 1px solid lighten($divider_color, 15%);
@@ -108,9 +131,8 @@ div.content {
       padding: 0 1em 1em 1em;
     }
   }
-
-
 }
+
 div.content x-item{
   margin: 1em 0;
 }
@@ -133,8 +155,10 @@ div.content x-item{
 .submenu{
     background-color: $primary;
 }
-
 .hidden{
   display: none!important;
   visibility: hidden;
+}
+.capitalize{
+  text-transform: capitalize;
 }

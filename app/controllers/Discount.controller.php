@@ -4,7 +4,7 @@
 
       public function __construct($params = array())
       {
-          $this->_params = $params;
+        $this->_params = $params;
       }
 
       public function createAction()

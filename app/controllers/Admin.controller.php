@@ -12,20 +12,20 @@
 
       public function __construct($params = array())
       {
-          $this->product    = new ProductModel();
-          $this->clients    = new ClientModel();
-          $this->category   = new CategoryModel();
-          $this->_params    = $params;
-          self::$products   = $this->product->toArray();
-          $this->isAdmin    = (self::getSession('admin') == "admin" ||
-                              self::getSession('admin') == "administrador");
+        $this->product    = new ProductModel();
+        $this->clients    = new ClientModel();
+        $this->category   = new CategoryModel();
+        $this->_params    = $params;
+        self::$products   = $this->product->toArray();
+        $this->isAdmin    = (self::getSession('admin') == "admin" ||
+                            self::getSession('admin') == "administrador");
       }
 
       public function index($params = array()){
-          if(empty($params[0])){
-            return require VIEWS . 'error/404.php';
-          }
-          return header('location: /');
+        if(empty($params[0])){
+          return require VIEWS . 'error/404.php';
+        }
+        return header('location: /');
       }
 
       public function notifyAction()

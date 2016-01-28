@@ -9,11 +9,11 @@
 
       public function __construct($params = array())
       {
-          $this->client = new ClientModel();
-          $this->product = new ProductModel();
-          $this->_params = $params;
-          self::$fb = new FacebookLogin();
-          self::$go = new GoogleLogin();
+        $this->client = new ClientModel();
+        $this->product = new ProductModel();
+        $this->_params = $params;
+        self::$fb = new FacebookLogin();
+        self::$go = new GoogleLogin();
       }
 
       public function index($params = array())

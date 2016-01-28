@@ -32,12 +32,15 @@
     }
 
     public function toArray($id = false){
-      if($id === false){
-        $query = "SELECT * FROM {$this->table}";
-      }else{
+      if(!!$id){
         $query = "SELECT * FROM {$this->table}
-                    WHERE idsubcategoria = '{$id}'";
+        WHERE idsubcategoria = '{$id}'";
+        if(!$_puntero = $this->db->query($query)){
+          throw new Exception($this->db->error, 1);
+        }
+        return $_puntero->fetch_assoc();
       }
+      $query = "SELECT * FROM {$this->table}";
       if(!$_puntero = $this->db->query($query)){
         throw new Exception($this->db->error, 1);
       }

@@ -17,11 +17,11 @@
           <label>Seleccione las Subcategorias: </label>
           <select class="browser-default" name="subcategoria[]" multiple>
             <option value="" disabled selected>Elige las subcategorias</option>
-            <!-- <?php
-              foreach ($categorias as $categoria) {
-                echo "<option value='{$categoria["idcategoria"]}' class='capitalize'>{$categoria["idcategoria"]}</option>";
+            <?php
+              foreach ($subcategorias as $sub) {
+                echo "<option value='{$sub["idsubcategoria"]}' class='capitalize'>{$sub["idsubcategoria"]}</option>";
               }
-            ?> -->
+            ?>
           </select>
         </div>
       </li>

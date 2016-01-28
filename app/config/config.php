@@ -8,17 +8,17 @@
  */
 define('ENVIRONMENT', 'producction');
 if (ENVIRONMENT == 'development' || ENVIRONMENT == 'dev' || !getenv("OPENSHIFT_MYSQL_DB_HOST")) {
-    error_reporting(E_ALL);
-    ini_set("display_errors", 1);
-    /**
-     * Configuration for: Database
-     */
-    define('DB_HOST', 'localhost');
-    define('DB_NAME', 'thecatlong');
-    define('DB_USER', 'root');
-    define('DB_PASS', 'root');
-    define('DB_CHARSET', 'utf8');
-    define('URL_PROTOCOL', 'http://');
+  error_reporting(E_ALL);
+  ini_set("display_errors", 1);
+  /**
+   * Configuration for: Database
+   */
+  define('DB_HOST', 'localhost');
+  define('DB_NAME', 'thecatlong');
+  define('DB_USER', 'root');
+  define('DB_PASS', 'root');
+  define('DB_CHARSET', 'utf8');
+  define('URL_PROTOCOL', 'http://');
 }else{
   error_reporting(E_ALL);
   ini_set('display_errors', 1);

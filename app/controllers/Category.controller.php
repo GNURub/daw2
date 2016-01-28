@@ -4,56 +4,56 @@
   {
       private $_params;
       private $category;
+      private $subcategory;
       private $product;
       private $admin;
 
       public function __construct($params = array())
       {
-          $this->_params = $params;
-          $this->category = new CategoryModel();
-          $this->admin = new ClientModel();
-          $this->product = new ProductModel();
+        $this->_params     = $params;
+        $this->category    = new CategoryModel();
+        $this->admin       = new ClientModel();
+        $this->product     = new ProductModel();
+        $this->subcategory = new SubcategoryModel();
       }
 
       public function index($params = array())
       {
-          if (empty($params[0])) {
-              Log::write('Error en categoria, no hay parametro para encontrar una.');
-              return require VIEWS.'error/404.php';
+        if (empty($params[0])) {
+          Log::write('Error en categoria, no hay parametro para encontrar una.');
+          return require VIEWS.'error/404.php';
+        }
+        $selectedCategory = $params[0];
+        if ($params[0] == 'Imagenes') {
+          $gallery_imgs = scandir(PUBLICO.'images_gallery'.DIRECTORY_SEPARATOR, 1);
+          // echo isImageValid(PUBLICO. 'images_gallery'. DIRECTORY_SEPARATOR . $gallery_img[0]);
+          $categories = array(array('idcategoria' => 'Imagenes'), array('idcategoria' => 'Videos'));
+          return require VIEWS.'category/imagenes.php';
+        } elseif ($params[0] == 'Videos') {
+          $categories = array(array('idcategoria' => 'Imagenes'), array('idcategoria' => 'Videos'));
+          return require VIEWS.'category/imagenes.php';
+        }
+        try {
+          $catego = $this->category->toArray($params[0]);
+          if (empty($catego)) {
+            Log::write('No existe la categoria que se esta buscando.');
+            return require VIEWS.'error/404.php';
           }
-          $selectedCategory = $params[0];
-          if ($params[0] == 'Imagenes') {
-            $gallery_imgs = scandir(PUBLICO.'images_gallery'.DIRECTORY_SEPARATOR, 1);
-            // echo isImageValid(PUBLICO. 'images_gallery'. DIRECTORY_SEPARATOR . $gallery_img[0]);
-            $categories = array(array('idcategoria' => 'Imagenes'), array('idcategoria' => 'Videos'));
-            return require VIEWS.'category/imagenes.php';
-          } elseif ($params[0] == 'Videos') {
-            $categories = array(array('idcategoria' => 'Imagenes'), array('idcategoria' => 'Videos'));
-            return require VIEWS.'category/imagenes.php';
-          }
-
           try {
-              $catego = $this->category->toArray($params[0]);
-              if (empty($catego[0])) {
-                Log::write('No existe la categoria que se esta buscando.');
-                return require VIEWS.'error/404.php';
-              }
-              try {
-                $selectedCategory = $catego[0]['idcategoria'];
-                $productos = $this->product->selecWithCategory($catego[0]['idcategoria']);
-                // no va
-                Log::write('Se muestra la categoria.');
-                return require VIEWS.'category/show.php';
-              } catch (Exception $e) {
-                echo $e->getMessage();
-                return;
-              }
-
+            $selectedCategory = $catego['idcategoria'];
+            $productos = $this->product->selecWithCategory($catego['idcategoria']);
+            // no va
+            Log::write('Se muestra la categoria.');
+            return require VIEWS.'category/show.php';
           } catch (Exception $e) {
-            $error = $e->getMessage();
-            Log::write('Se ha producido una excepción, '.$error);
-            return require VIEWS.'error/500.php';
+            echo $e->getMessage();
+            return;
           }
+        } catch (Exception $e) {
+          $error = $e->getMessage();
+          Log::write('Se ha producido una excepción, '.$error);
+          return require VIEWS.'error/500.php';
+        }
       }
 
       public function createAction()
@@ -61,26 +61,31 @@
           if (self::getSession('username')) {
               // viene de un formulario
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                extract($_POST);
-                $isValidCategory = (
-                  isset($nombre) &&
-                  !empty($nombre)
-                );
-                if ($isValidCategory) {
-                  try {
-                      $this->category->save(array(
-                        'idcategoria' => $nombre,
-                      ));
-                      return header('location: /');
-                  } catch (Exception $e) {
-                      $error = $e->getMessage();
-                      return require VIEWS.'error/500.php';
-                  }
+              extract($_POST);
+              $isValidCategory = (
+                isset($nombre) &&
+                !empty($nombre)
+              );
+              if ($isValidCategory) {
+                try {
+                  $this->category->save(array(
+                    'idcategoria' => $nombre,
+                  ));
+                  return header('location: /');
+                } catch (Exception $e) {
+                  $error = $e->getMessage();
+                  return require VIEWS.'error/500.php';
                 }
+              }
             }
             $client = $this->admin->toArray(self::getSession('username'));
             if ($client['rol'] == 'admin' || $client['rol'] == 'administrador') {
+              try {
+                $subcategorias = $this->subcategory->toArray();
                 return require VIEWS.'category/create.php';
+              } catch (Exception $e) {
+                return require VIEWS.'error/500.php';
+              }
             }
             return require VIEWS.'error/401.php';
           }
@@ -90,23 +95,24 @@
 
       public function jsonAction()
       {
-          try {
-              $id = !empty($this->_params[0]) ? $this->_params[0] : false;
-              $categories = $this->category->toArray($id);
-              if (empty($categories)) {
-                  $categories = array(
+        try {
+          $id = !empty($this->_params[0]) ? $this->_params[0] : false;
+          $categories = $this->category->toArray($id);
+          if (empty($categories)) {
+            $categories = array(
               'error' => 400,
               'errorMsg' => 'Categoria no encontrada',
             );
-              }
-              echo json_encode($categories);
-          } catch (Exception $e) {
-              $error = array(
+          }
+          echo json_encode($categories);
+        } catch (Exception $e) {
+          $error = array(
             'error' => 200,
             'errorMsg' => $e->getMessage(),
           );
-              echo json_encode($error);
-          }
+          echo json_encode($error);
+        }
+        return;
       }
 
       public function xmlAction()

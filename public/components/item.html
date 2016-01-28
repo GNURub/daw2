@@ -149,6 +149,11 @@
         }.bind(this), false);
 
         if(this.hasAttribute('new')){
+          if(this.getAttribute('new') != null){
+            this.newContainer.innerHTML = this.getAttribute('new');
+          }else{
+            this.newContainer.innerHTML = 'Novedad!';
+          }
           this.newContainer.removeAttribute('hidden');
         }else{
           this.newContainer.hidden = true;
@@ -214,6 +219,11 @@
             break;
           case 'new':
             if(this.hasAttribute('new')){
+              if(this.getAttribute('new') != null){
+                this.newContainer.innerHTML = this.getAttribute('new');
+              }else{
+                this.newContainer.innerHTML = 'Novedad!';
+              }
               this.newContainer.removeAttribute('hidden');
             }else{
               this.newContainer.hidden = true;

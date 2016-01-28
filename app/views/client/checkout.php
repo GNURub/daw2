@@ -46,6 +46,5 @@
       calc();
     }, false);
   });
-
 </script>
 <?php require VIEWS . '_layout/footer.php'; ?>
