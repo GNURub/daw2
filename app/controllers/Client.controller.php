@@ -196,7 +196,7 @@
           $email = filter_var($res['user']['email'], FILTER_SANITIZE_EMAIL);
           $userDB = $this->client->toArray($email);
           if (empty($userDB)) {
-            $na = explode(' ', $res['user']['name']);
+            $na = explode(' ', utf8_decode($res['user']['name']));
             $name = $na[0];
             array_shift($na);
             try {
@@ -239,7 +239,7 @@
               $userDB = $this->client->toArray($email);
               if (empty($userDB)) {
                   // el usuario de fb se debe registrar
-                  $na = explode(' ', $res['user']->getField('name'));
+                  $na = explode(' ', utf8_decode($res['user']->getField('name')));
                   $name = $na[0];
                   array_shift($na);
                   try {
