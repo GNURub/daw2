@@ -192,9 +192,22 @@
       }
       public function goAction($a){
         $res = self::$go->getToken();
-        print_r($a);
-        echo $_REQUEST['code'];
-        exit;
+        if (!empty($res['user'])) {
+          echo $res['user']->get('email');
+          exit;
+        }elseif ($res['error']) {
+            switch ($res['error']) {
+              case 400:
+                return require VIEWS.'error/400.php';
+                break;
+              case 401:
+                return require VIEWS.'error/401.php';
+                break;
+              default:
+                return require VIEWS.'error/404.php';
+                break;
+            }
+        }
       }
       public function fbAction($a)
       {
