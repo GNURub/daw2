@@ -23,19 +23,8 @@ class GoogleLogin
     } catch (Exception $e) {
       return array("error"=> $e->getMessage(), "user"=>null);
     }
-    if (! isset($accessToken)) {
-      if ($this->helper->getError()) {
-        header('HTTP/1.0 401 Unauthorized');
-        // echo "Error: " . $this->helper->getError() . "\n";
-        // echo "Error Code: " . $this->helper->getErrorCode() . "\n";
-        // echo "Error Reason: " . $this->helper->getErrorReason() . "\n";
-        // echo "Error Description: " . $this->helper->getErrorDescription() . "\n";
-        return array("error"=> 401, "user"=>null);
-      } else {
-        // header('HTTP/1.0 400 Bad Request');
-        // echo 'Bad request';
+    if (!isset($accessToken)) {
         return array("error"=> 400, "user"=>null);
-      }
     }else{
       $userinfo = $this->helper->userinfo;
       print_r($userinfo->get());
