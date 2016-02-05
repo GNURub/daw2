@@ -193,7 +193,7 @@
       public function goAction($a){
         $res = self::$go->getToken();
         if (!empty($res['user'])) {
-          echo $res['user']->get('email');
+          echo filter_var($res['user']['email'], FILTER_SANITIZE_EMAIL);
           exit;
         }elseif ($res['error']) {
             switch ($res['error']) {

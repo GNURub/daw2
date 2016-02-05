@@ -34,7 +34,7 @@ class GoogleLogin
         return array("error"=> 400, "user"=>null);
     }else{
       $userinfo = $this->helper->userinfo;
-      return array("error"=> null, "user"=>$userinfo);
+      return array("error"=> null, "user"=>$userinfo->get());
     }
 
   }
