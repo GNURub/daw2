@@ -196,7 +196,8 @@
           $email = filter_var($res['user']['email'], FILTER_SANITIZE_EMAIL);
           $userDB = $this->client->toArray($email);
           if (empty($userDB)) {
-
+            print_r($res['user']);
+            exit;
           }else {
               // Ya lo teniamos
               self::setSession('username', $userDB['username']);
@@ -221,7 +222,8 @@
       {
           $res = self::$fb->getToken();
           if (!empty($res['user'])) {
-              $userDB = $this->client->toArray($res['user']->getField('email'));
+              $email = filter_var($res['user']->getField('email'), FILTER_SANITIZE_EMAIL);
+              $userDB = $this->client->toArray($email);
               if (empty($userDB)) {
                   // el usuario de fb se debe registrar
                   $na = explode(' ', $res['user']->getField('name'));
