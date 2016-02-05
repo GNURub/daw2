@@ -193,8 +193,16 @@
       public function goAction($a){
         $res = self::$go->getToken();
         if (!empty($res['user'])) {
-          echo filter_var($res['user']['email'], FILTER_SANITIZE_EMAIL);
-          exit;
+          $email = filter_var($res['user']['email'], FILTER_SANITIZE_EMAIL);
+          $userDB = $this->client->toArray($email);
+          if (empty($userDB)) {
+
+          }else {
+              // Ya lo teniamos
+              self::setSession('username', $userDB['username']);
+              self::setSession('admin',    $userDB['rol']);
+          }
+          return header('location: /');
         }elseif ($res['error']) {
             switch ($res['error']) {
               case 400:
