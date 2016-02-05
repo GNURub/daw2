@@ -1,7 +1,7 @@
 <?php
 class GoogleLogin
 {
-  protected $go, $helper, $permissions;
+  private $go, $helper, $permissions;
   function __construct()
   {
     $this->go = new Google_Client();
@@ -37,7 +37,7 @@ class GoogleLogin
         return array("error"=> 400, "user"=>null);
       }
     }else{
-      $userinfo = $plus->userinfo;
+      $userinfo = $this->helper->userinfo;
       print_r($userinfo->get());
       exit;
       return array("error"=> null, "user"=>$userinfo->get());
