@@ -191,7 +191,7 @@
           }
       }
       public function goAction($a){
-        $res = self::$go->getToken();
+        // $res = self::$go->getToken();
       }
       public function fbAction($a)
       {

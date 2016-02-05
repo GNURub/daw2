@@ -2,7 +2,7 @@
 
 class FacebookLogin
 {
-  protected $fb, $helper, $permissions;
+  private $fb, $helper, $permissions;
   function __construct($permissions = array('email'))
   {
     $this->permissions = $permissions;
