@@ -196,8 +196,22 @@
           $email = filter_var($res['user']['email'], FILTER_SANITIZE_EMAIL);
           $userDB = $this->client->toArray($email);
           if (empty($userDB)) {
+            // Google_Service_Oauth2_Userinfoplus Object ( [internal_gapi_mappings:protected] => Array ( [familyName] => family_name [givenName] => given_name [verifiedEmail] => verified_email ) [email] => compaco.cat@gmail.com [familyName] => cat [gender] => male [givenName] => compaco [hd] => [id] => 101916006514263102011 [link] => https://plus.google.com/101916006514263102011 [locale] => es [name] => compaco cat [picture] => https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg [verifiedEmail] => 1 [modelData:protected] => Array ( [verified_email] => 1 [given_name] => compaco [family_name] => cat ) [processed:protected] => Array ( ) )
             print_r($res['user']);
-            exit;
+            $na = explode(' ', $res['user']['name']);
+            array_shift($na);
+            try {
+              $this->client->save(array(
+                'email' => $email,
+                'username' => $res['user']['id'],
+                'nombre' => $na[0],
+                'apellidos' => implode(" ", $na),
+              ));
+              self::setSession('username', $res['user']['id']);
+            } catch (Exception $e) {
+                exit($e);
+            }
+
           }else {
               // Ya lo teniamos
               self::setSession('username', $userDB['username']);
@@ -230,10 +244,10 @@
                   array_shift($na);
                   try {
                       $this->client->save(array(
-                        'email' => $res['user']->getField('email'),
+                        'email' => $email,
                         'username' => $res['user']->getField('id'),
                         'nombre' => $na[0],
-                        'apellidos' => implode($na),
+                        'apellidos' => implode(" ", $na),
                       ));
                       self::setSession('username', $res['user']->getField('id'));
                   } catch (Exception $e) {
