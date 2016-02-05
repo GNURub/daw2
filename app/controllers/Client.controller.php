@@ -193,7 +193,7 @@
       public function goAction($a){
         $res = self::$go->getToken();
         print_r($a);
-        print_r($_REQUEST);
+        echo $_REQUEST['code'];
         exit;
       }
       public function fbAction($a)
