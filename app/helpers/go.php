@@ -7,7 +7,7 @@ class GoogleLogin
     $this->go = new Google_Client();
     $this->go->setClientId(GOOGLE_ID);
     $this->go->setClientSecret(GOOGLE_SECRET);
-    $this->go->setRedirectUri('https://thecatlong-gnurub.rhcloud.com/home/go');
+    $this->go->setRedirectUri('https://thecatlong-gnurub.rhcloud.com/client/go');
     // $this->go->addScope("email");
     // $this->go->addScope("profile");
     $this->go->setScopes(array('https://www.googleapis.com/auth/userinfo.email','https://www.googleapis.com/auth/userinfo.profile'));
