@@ -1,5 +1,7 @@
 <?php
-
+  // use Spipu\Html2Pdf\Html2Pdf;
+  // use Spipu\Html2Pdf\Exception\Html2PdfException;
+  // use Spipu\Html2Pdf\Exception\ExceptionFormatter;
   class Client extends Controller
   {
       private $_params;
@@ -188,7 +190,9 @@
               return require VIEWS.'error/500.php';
           }
       }
-
+      public function goAction($a){
+        $res = self::$go->getToken();
+      }
       public function fbAction($a)
       {
           $res = self::$fb->getToken();
@@ -233,21 +237,72 @@
       public function checkoutAction()
       {
 
-          if (self::getSession('username')) {
-            $productos = array();
-            if(self::getSession('productos')){
-              $a = self::getSession('productos');
-            }else{
-              $a = array();
-            }
-            foreach ($a as $id => $q) {
-              $pro = $this->product->toArray($id);
-              $pro['q'] = $q;
-              array_push($productos, $pro);
-            }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            return require VIEWS.'client/checkout.php';
+          $miObj = new RedsysAPI;
+
+        	// Valores de entrada
+        	$fuc="999008881";
+        	$terminal="871";
+        	$moneda="978";
+        	$trans="0";
+        	$url="https://thecatlong-gnurub.rhcloud.com/";
+          $urlKO="https://thecatlong-gnurub.rhcloud.com/client/ok";
+          $urlOK="https://thecatlong-gnurub.rhcloud.com/client/ko";
+        	$id=uniqid(time());
+        	$amount = number_format($_POST['amount'], 2);
+
+        	// Se Rellenan los campos
+        	$miObj->setParameter("DS_MERCHANT_AMOUNT",$amount);
+        	$miObj->setParameter("DS_MERCHANT_ORDER",strval($id));
+        	$miObj->setParameter("DS_MERCHANT_MERCHANTCODE",$fuc);
+        	$miObj->setParameter("DS_MERCHANT_CURRENCY",$moneda);
+        	$miObj->setParameter("DS_MERCHANT_TRANSACTIONTYPE",$trans);
+        	$miObj->setParameter("DS_MERCHANT_TERMINAL",$terminal);
+        	$miObj->setParameter("DS_MERCHANT_MERCHANTURL",$url);
+        	$miObj->setParameter("DS_MERCHANT_URLOK",$urlOK);
+        	$miObj->setParameter("DS_MERCHANT_URLKO",$urlKO);
+
+        	//Datos de configuración
+        	$version="HMAC_SHA256_V1";
+        	$kc = 'Mk9m98IfEblmPfrpsawt7BmxObt98Jev';//Clave recuperada de CANALES
+        	// Se generan los parámetros de la petición
+        	$request = "";
+        	$params = $miObj->createMerchantParameters();
+        	$signature = $miObj->createMerchantSignature($kc);
+          return require VIEWS.'client/confirmpay.php';
+          // print_r($_POST); Array ( [idproduct] => Array ( [0] => 1 ) [q] => Array ( [0] => 1 ) [precio] => Array ( [0] => 32 ) )
+          // PDF
+          // try {
+          //     ob_start();
+          //     include APP.'/templates/pdf/ticket.php';
+          //     $content = ob_get_contents();
+          //     ob_end_clean();
+          //     $html2pdf = new Html2Pdf('P', 'A4', 'fr', true, 'UTF-8', 0);
+          //     $html2pdf->pdf->SetDisplayMode('fullpage');
+          //     $html2pdf->writeHTML($content);
+          //     $html2pdf->Output('ticket.pdf');
+          // } catch (Exception $e) {
+          //     echo $e->getMessage();
+          // }
+
+          // return;
+        }
+        if (self::getSession('username')) {
+          $productos = array();
+          if(self::getSession('productos')){
+            $a = self::getSession('productos');
+          }else{
+            $a = array();
           }
-          return header('location: /');
+          foreach ($a as $id => $q) {
+            $pro = $this->product->toArray($id);
+            $pro['q'] = $q;
+            array_push($productos, $pro);
+          }
+
+          return require VIEWS.'client/checkout.php';
+        }
+        return header('location: /');
       }
   }

@@ -2,7 +2,7 @@
 
 class FacebookLogin
 {
-  private $fb, $helper, $permissions;
+  protected $fb, $helper, $permissions;
   function __construct($permissions = array('email'))
   {
     $this->permissions = $permissions;
@@ -48,7 +48,6 @@ class FacebookLogin
         // echo 'Bad request';
         return array("error"=> 400, "user"=>null);
       }
-      exit;
     }
 
     // Logged in

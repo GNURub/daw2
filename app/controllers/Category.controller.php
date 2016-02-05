@@ -31,7 +31,7 @@
           return require VIEWS.'category/imagenes.php';
         } elseif ($params[0] == 'Videos') {
           $categories = array(array('idcategoria' => 'Imagenes'), array('idcategoria' => 'Videos'));
-          return require VIEWS.'category/imagenes.php';
+          return require VIEWS.'category/videos.php';
         }
         try {
           $catego = $this->category->toArray($params[0]);

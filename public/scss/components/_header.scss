@@ -39,7 +39,7 @@ header{
           font-size: 2em;
         @media screen and (max-width: 750px) {
             & {
-                font-size: 90%;
+                font-size: 3vw!important;
             }
         }
       }
@@ -54,9 +54,6 @@ header{
       align-items: center;
       flex-wrap: nowrap;
       height: 100px;
-
-
-
       div.dropdown_menu{
         position:absolute;
         background-color: rgb(246,246,246);
@@ -64,7 +61,7 @@ header{
         z-index: 30;
         box-shadow: 0 0 20px rgba(0,0,0, .2);
         border-radius: 3px;
-        left: -70px;
+        left: -85px;
         transition: all 1000ms ease;
         min-width: 11.5rem;
 
@@ -113,10 +110,8 @@ header{
           }
         }
       }
-
       div{
         flex: 1;
-        
         &.buscador{
           flex: 2;
           display: flex;
@@ -218,11 +213,12 @@ header{
         }
       }
     }
-
     @media screen and (max-width: 500px) {
-        div.logotipo{
-            display: none;
-        }
+      div.logotipo{
+          display: none;
+      }
+    }
+    @media screen and (max-width: 640px) {
         ul.menu{
           margin-left: 2em;
           flex: 2!important;
@@ -230,7 +226,6 @@ header{
         div{
           flex: auto;
         }
-
     }
 
 }

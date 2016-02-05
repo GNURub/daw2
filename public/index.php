@@ -51,6 +51,8 @@ require_once APP.'helpers/pdf.php';
 require_once APP.'helpers/fb.php';
 require_once APP.'helpers/go.php';
 require_once APP.'helpers/utils.php';
+require_once APP.'helpers/apiRedsys.php';
+
 
 Log::write("Atendiendo peticion.");
 $app = new Application();

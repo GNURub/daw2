@@ -1,0 +1,51 @@
+.why-its-rad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  section {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-grow: 0;
+    flex-basis: 30%;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+    .column {
+      flex-grow: 0;
+      flex-basis: 30%;
+      flex-shrink: 0;
+      &:first-child{
+        margin-right: 1em;
+      }
+      &:last-child{
+        margin-right: 1em;
+      }
+      video {
+        position: relative;
+        width: 100%;
+        border-radius: 5px;
+      }
+      .video-container {
+      	position:relative;
+      	padding-bottom:56.25%;
+      	padding-top:30px;
+      	height:0;
+      	overflow:hidden;
+        width: 100%;
+      }
+
+      .video-container iframe, .video-container object, .video-container embed {
+      	position:absolute;
+      	top:0;
+      	left:0;
+      	width:100%;
+      	height:100%;
+      }
+
+
+    }
+  }
+}

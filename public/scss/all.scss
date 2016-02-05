@@ -9,6 +9,7 @@
 @import 'components/footer';
 @import 'components/icons';
 @import 'components/images';
+@import 'components/videos';
 
 
 *, *:before, *:after{
@@ -61,16 +62,16 @@ div.content {
   flex-direction: row;
   flex-wrap: wrap-reverse;
 
-  @media screen and (max-device-width: 640px) {
+  @media screen and (max-width: 640px) {
     & > div.menu-container {
       display: none!important;
     }
     h2{
-      font-size: 9vw;
+      font-size: 7vw;
     }
   }
 
-  @media screen and (max-device-width: 360px) {
+  @media screen and (max-width: 360px) {
       & > div.main-container {
           flex-basis: 100%;
           div.items-container{
