@@ -18,6 +18,13 @@ class GoogleLogin
     return htmlspecialchars($loginUrl);
   }
   function getToken(){
+    if (isset($_REQUEST['code'])) {
+      $this->go->authenticate($_REQUEST['code']);
+      $_SESSION['access_token'] = $this->go->getAccessToken();
+    }
+    if (isset($_SESSION['access_token'])) {
+      $this->go->setAccessToken($_SESSION['access_token']);
+    }
     try {
       $accessToken = $this->go->getAccessToken();
     } catch (Exception $e) {
