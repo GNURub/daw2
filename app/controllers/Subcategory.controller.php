@@ -8,39 +8,38 @@
 
       public function __construct($params = array())
       {
-        $this->_params  = $params;
+        $this->_params     = $params;
         $this->subcategory = new SubcategoryModel();
-        $this->admin    = new ClientModel();
-        $this->product  = new ProductModel();
+        $this->admin       = new ClientModel();
+        $this->product     = new ProductModel();
       }
 
       public function index($params = array()){
-          if(empty($params[0])){
-            Log::write("Error en la subcategoria, no hay parametro para encontrar una.");
+        if(empty($params[0])){
+          Log::write("Error en la subcategoria, no hay parametro para encontrar una.");
+          return require VIEWS . 'error/404.php';
+        }
+        try {
+          $subcatego = $this->subcategory->toArray($params[0]);
+
+          if(empty($subcatego)){
+            Log::write("No existe la subcategoria que se esta buscando.");
             return require VIEWS . 'error/404.php';
           }
           try {
-            $subcatego = $this->subcategory->toArray($params[0]);
-
-            if(empty($subcatego[0])){
-              Log::write("No existe la subcategoria que se esta buscando.");
-              return require VIEWS . 'error/404.php';
-            }
-            try {
-              $selectedSubcategory = $subcatego[0]['idsubcategoria'];
-              // $productos = $this->product->selecWithSubcategory($subcatego[0]['idcategoria']);
-              // no va
-              Log::write("Se muestra la categoria.");
-              return require VIEWS . 'subcategory/show.php';
-            } catch (Exception $e) {
-              echo $e->getMessage();
-              return;
-            }
+            $selectedSubcategory = $subcatego['idsubcategoria'];
+            // $productos = $this->product->selecWithSubcategory($subcatego[0]['idcategoria']);
+            Log::write("Se muestra la categoria.");
+            return require VIEWS . 'subcategory/show.php';
           } catch (Exception $e) {
-            $error = $e->getMessage();
-            Log::write("Se ha producido una excepción, ". $error);
-            return require VIEWS . 'error/500.php';
+            echo $e->getMessage();
+            return;
           }
+        } catch (Exception $e) {
+          $error = $e->getMessage();
+          Log::write("Se ha producido una excepción, ". $error);
+          return require VIEWS . 'error/500.php';
+        }
       }
 
 

@@ -138,6 +138,7 @@
             <?php
               // categorias personalizadas o las de la bbdd
               $categories = (!isset($categories) || empty($categories)) ? CategoryModel::$categories : $categories;
+              $subcategories = (!isset($subcategories) || empty($subcategories)) ? SubcategoryModel::$subcategories : $subcategories;
               foreach ($categories as $cat): ?>
               <li>
                 <?php if (isset($selectedCategory) && $selectedCategory == $cat['idcategoria']){ ?>

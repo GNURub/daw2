@@ -5,6 +5,7 @@
       private $_params;
       private $product;
       private $category;
+      private $subcategory;
       private $clients;
       static $products;
       private $isAdmin;
@@ -15,6 +16,7 @@
         $this->product    = new ProductModel();
         $this->clients    = new ClientModel();
         $this->category   = new CategoryModel();
+        $this->subcategory= new SubcategoryModel();
         $this->_params    = $params;
         self::$products   = $this->product->toArray();
         $this->isAdmin    = (self::getSession('admin') == "admin" ||

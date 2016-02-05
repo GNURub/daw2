@@ -4,14 +4,16 @@
       private $_params;
       private $product;
       private $category;
+      private $subcategory;
       private $admin;
       public static $products;
 
       public function __construct($params = array())
       {
-        $this->product = new ProductModel();
-        $this->admin = new ClientModel();
-        $this->category = new CategoryModel();
+        $this->product     = new ProductModel();
+        $this->admin       = new ClientModel();
+        $this->category    = new CategoryModel();
+        $this->subcategory = new SubcategoryModel();
         $this->_params = $params;
         self::$products = $this->product->toArray();
       }
@@ -46,6 +48,55 @@
             echo json_encode($error);
           }
           return;
+      }
+
+      public function soapAction(){
+        $server = new soap_server();
+        $server->configureWSDL('GetArr','urn:GetArr');
+        $server->wsdl->schemaTargetNamespaces = 'urn:GetArr';
+        $server->wsdl->addComplexType(
+        'ArrayReq',
+        'complexType',
+        'struct',
+        'all',
+        '',
+        array(
+        'name' => array('name' => 'name', 'type' => 'xsd:string'),
+        'code' => array('name' => 'code', 'type' => 'xsd:string'),
+        'price' => array('name' => 'price', 'type' => 'xsd:integer'),
+        'quantity' => array('name' => 'quantity', 'type' => 'xsd:integer')
+        ));
+
+        //function that get and return values
+        function GetTotalPrice ($proArray) {
+        $temparray = array();
+
+          array_push($temparray, array('name' => $proArray['name'], 'code' => $proArray['code'], 'price' => $proArray['price'], 'quantity'
+          => $proArray['quantity'], 'total_price' => $proArray['quantity'] * $proArray['price']));
+          array_push($temparray, array('name' => $proArray['name'], 'code' => $proArray['code'], 'price' => $proArray['price'], 'quantity'
+          => $proArray['quantity'], 'total_price' => $proArray['quantity'] * $proArray['price']));
+          return $temparray;
+        };
+
+        //register the method
+        $server->register('GetTotalPrice',
+          array('proArray' => 'tns:ArrayReq'),// and this line also.
+          array('result' => 'xsd:Array'),
+          'urn:GetArr',
+          'urn:GetArr#GetTotalPrice',
+          'rpc',
+          'encoded',
+          'Get the product total price'
+        );
+
+
+        // Get our posted data if the service is being consumed
+        // otherwise leave this data blank.
+        $POST_DATA = isset($GLOBALS['HTTP_RAW_POST_DATA']) ? $GLOBALS['HTTP_RAW_POST_DATA'] : '';
+
+        // pass our posted data (or nothing) to the soap service
+        $server->service($POST_DATA);
+        exit();
       }
 
       public function createAction()
@@ -117,6 +168,7 @@
           $client = $this->admin->toArray(self::getSession('username'));
           if ($client['rol'] == 'admin' || $client['rol'] == 'administrador') {
             $categorias = $this->category->toArray();
+            $subcategorias = $this->subcategory->toArray();
             return require VIEWS.'product/create.php';
           }
           return require VIEWS.'error/401.php';

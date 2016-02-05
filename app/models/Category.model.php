@@ -31,6 +31,16 @@
 
     }
 
+    function saveWithSubcategory($data){
+      $parsed = DB::parseValues($data, true);
+      $keys   = $parsed["keys"];
+      $values = $parsed["values"];
+      $query = "INSERT INTO subcategorias_categorias($keys) VALUES ({$values})";
+      if(!$this->db->query($query)){
+        throw new Exception($this->db->error);
+      }
+    }
+
     public function toArray($id = false){
       if(!!$id){
         $id = escapeText($id);

@@ -13,21 +13,13 @@
     </div>
     <menu>
       <ul>
-        <li>
-          <a href="#">
-            Camiseta
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            Pantalones
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            Zapatillas
-          </a>
-        </li>
+        <?php foreach ($subcategories as $subcat): ?>
+          <li>
+            <a href="subcategory/<?=$subcat['idsubcategoria'] ?>" class="capitalize">
+              <?=$subcat['idsubcategoria'] ?>
+            </a>
+          </li>
+        <?php endforeach; ?>
         <li>
           <a href="/home/multimedia">
             Multimedia

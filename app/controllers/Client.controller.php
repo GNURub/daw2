@@ -1,12 +1,11 @@
 <?php
-  // use Spipu\Html2Pdf\Html2Pdf;
-  // use Spipu\Html2Pdf\Exception\Html2PdfException;
-  // use Spipu\Html2Pdf\Exception\ExceptionFormatter;
+
   class Client extends Controller
   {
       private $_params;
       private $client;
       private $product;
+      private $subcategory;
       protected static $fb, $go;
 
       public function __construct($params = array())

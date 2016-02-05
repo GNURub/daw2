@@ -4,15 +4,17 @@
   {
       private $product;
       private $category;
+      private $subcategory;
       private $client;
       protected static $fb, $go;
       public function __construct()
       {
-        $this->product  = new ProductModel();
-        $this->client   = new ClientModel();
-        $this->category = new CategoryModel();
-        self::$fb = new FacebookLogin();
-        self::$go = new GoogleLogin();
+        $this->product     = new ProductModel();
+        $this->client      = new ClientModel();
+        $this->category    = new CategoryModel();
+        $this->subcategory = new SubcategoryModel();
+        self::$fb          = new FacebookLogin();
+        self::$go          = new GoogleLogin();
       }
       public function index()
       {

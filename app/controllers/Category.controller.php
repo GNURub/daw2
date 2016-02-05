@@ -24,15 +24,30 @@
           return require VIEWS.'error/404.php';
         }
         $selectedCategory = $params[0];
-        if ($params[0] == 'Imagenes') {
-          $gallery_imgs = scandir(PUBLICO.'images_gallery'.DIRECTORY_SEPARATOR, 1);
-          // echo isImageValid(PUBLICO. 'images_gallery'. DIRECTORY_SEPARATOR . $gallery_img[0]);
-          $categories = array(array('idcategoria' => 'Imagenes'), array('idcategoria' => 'Videos'));
-          return require VIEWS.'category/imagenes.php';
-        } elseif ($params[0] == 'Videos') {
-          $categories = array(array('idcategoria' => 'Imagenes'), array('idcategoria' => 'Videos'));
-          return require VIEWS.'category/videos.php';
+        switch ($params[0]) {
+          case 'Imagenes':
+            $gallery_imgs = scandir(PUBLICO.'images_gallery'.DIRECTORY_SEPARATOR, 1);
+            // echo isImageValid(PUBLICO. 'images_gallery'. DIRECTORY_SEPARATOR . $gallery_img[0]);
+            $categories = array(array('idcategoria' => 'Imagenes'), array('idcategoria' => 'Videos'));
+            return require VIEWS.'category/imagenes.php';
+          case 'Videos':
+            $categories = array(array('idcategoria' => 'Imagenes'), array('idcategoria' => 'Videos'));
+            return require VIEWS.'category/videos.php';
+          case 'subcategory':
+          echo "Mostrar productos de subcategoria: ";
+          print_r($params[1]);
+          exit();
+          break;
         }
+        // if ($params[0] == 'Imagenes') {
+        //   $gallery_imgs = scandir(PUBLICO.'images_gallery'.DIRECTORY_SEPARATOR, 1);
+        //   // echo isImageValid(PUBLICO. 'images_gallery'. DIRECTORY_SEPARATOR . $gallery_img[0]);
+        //   $categories = array(array('idcategoria' => 'Imagenes'), array('idcategoria' => 'Videos'));
+        //   return require VIEWS.'category/imagenes.php';
+        // } elseif ($params[0] == 'Videos') {
+        //   $categories = array(array('idcategoria' => 'Imagenes'), array('idcategoria' => 'Videos'));
+        //   return require VIEWS.'category/videos.php';
+        // }
         try {
           $catego = $this->category->toArray($params[0]);
           if (empty($catego)) {
@@ -41,7 +56,8 @@
           }
           try {
             $selectedCategory = $catego['idcategoria'];
-            $productos = $this->product->selecWithCategory($catego['idcategoria']);
+            $productos        = $this->product->selecWithCategory($selectedCategory);
+            $subcategories    = $this->subcategory->ofCategory($selectedCategory);
             // no va
             Log::write('Se muestra la categoria.');
             return require VIEWS.'category/show.php';
@@ -62,6 +78,7 @@
               // viene de un formulario
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               extract($_POST);
+
               $isValidCategory = (
                 isset($nombre) &&
                 !empty($nombre)
@@ -71,6 +88,16 @@
                   $this->category->save(array(
                     'idcategoria' => $nombre,
                   ));
+                  foreach ($subcategoria as $sub) {
+                    try {
+                      $this->category->saveWithSubcategory(array(
+                        'idcategoria' => $nombre,
+                        'idsubcategoria' => $sub,
+                      ));
+                    } catch (Exception $e) {
+                      exit($e->getMessage());
+                    }
+                  }
                   return header('location: /');
                 } catch (Exception $e) {
                   $error = $e->getMessage();

@@ -4,11 +4,11 @@
   {
     private $table = "subcategorias";
     public  $id;
-    static $categories;
+    static $subcategories;
 
     function __construct(){
       $this->connect();
-      self::$categories = $this->toArray();
+      self::$subcategories = $this->toArray();
     }
 
     function save($data){
@@ -29,6 +29,18 @@
 
     function update(){
 
+    }
+
+    function ofCategory($category){
+      $query = "SELECT * FROM subcategorias_categorias WHERE idcategoria = '{$category}'";
+      if(!$_puntero = $this->db->query($query)){
+        throw new Exception($this->db->error, 1);
+      }
+      $result = array();
+      while ($row = $_puntero->fetch_assoc()) {
+        array_push($result, $row);
+      }
+      return $result;
     }
 
     public function toArray($id = false){
