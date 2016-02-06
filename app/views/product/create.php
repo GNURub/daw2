@@ -8,7 +8,7 @@
       <li>
         <div class="mdl-selectfield">
           <label>Categoria: </label>
-          <select class="browser-default" name="categoria[]" multiple required>
+          <select class="browser-default capitalize" name="categoria[]" multiple required>
             <option value="" disabled>Elige una categoría</option>
             <?php
               foreach ($categorias as $categoria) {
@@ -22,7 +22,7 @@
       <li>
         <div class="mdl-selectfield">
           <label>Subcategoria: </label>
-          <select class="browser-default" name="subcategoria" required>
+          <select class="browser-default capitalize" name="subcategoria" required>
             <option value="" disabled>Elige una subcategoría</option>
             <?php
               foreach ($subcategorias as $subcategoria) {

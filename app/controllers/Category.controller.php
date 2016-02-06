@@ -33,21 +33,8 @@
           case 'Videos':
             $categories = array(array('idcategoria' => 'Imagenes'), array('idcategoria' => 'Videos'));
             return require VIEWS.'category/videos.php';
-          case 'subcategory':
-          echo "Mostrar productos de subcategoria: ";
-          print_r($params[1]);
-          exit();
-          break;
         }
-        // if ($params[0] == 'Imagenes') {
-        //   $gallery_imgs = scandir(PUBLICO.'images_gallery'.DIRECTORY_SEPARATOR, 1);
-        //   // echo isImageValid(PUBLICO. 'images_gallery'. DIRECTORY_SEPARATOR . $gallery_img[0]);
-        //   $categories = array(array('idcategoria' => 'Imagenes'), array('idcategoria' => 'Videos'));
-        //   return require VIEWS.'category/imagenes.php';
-        // } elseif ($params[0] == 'Videos') {
-        //   $categories = array(array('idcategoria' => 'Imagenes'), array('idcategoria' => 'Videos'));
-        //   return require VIEWS.'category/videos.php';
-        // }
+
         try {
           $catego = $this->category->toArray($params[0]);
           if (empty($catego)) {
@@ -55,8 +42,13 @@
             return require VIEWS.'error/404.php';
           }
           try {
+            $idsub = false;
+            if(!empty($params[1])){
+              $idsub = $params[1];
+
+            }
             $selectedCategory = $catego['idcategoria'];
-            $productos        = $this->product->selecWithCategory($selectedCategory);
+            $productos        = $this->product->selecWithCategorySubcatAndProduct($selectedCategory, $idsub);
             $subcategories    = $this->subcategory->ofCategory($selectedCategory);
             // no va
             Log::write('Se muestra la categoria.');

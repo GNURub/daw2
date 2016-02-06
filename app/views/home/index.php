@@ -15,7 +15,7 @@
       <ul>
         <?php foreach ($subcategories as $subcat): ?>
           <li>
-            <a href="subcategory/<?=$subcat['idsubcategoria'] ?>" class="capitalize">
+            <a href="/subcategory/<?=$subcat['idsubcategoria'] ?>" class="capitalize">
               <?=$subcat['idsubcategoria'] ?>
             </a>
           </li>
@@ -37,7 +37,7 @@
       $imAdmin = self::getSession('admin') && self::getSession('username') ? "admin" : null;
       foreach ($productos as $producto) {
 
-        echo "<x-item {$imAdmin}  url='images/{$producto['path']}' num='{$producto['idproducto']}' label='{$producto['titulo']}' descripcion='{$producto['descripcion']}'></x-item>";
+        echo "<x-item {$imAdmin}  url='/images/{$producto['path']}' num='{$producto['idproducto']}' label='{$producto['titulo']}' descripcion='{$producto['descripcion']}'></x-item>";
       }
       ?>
     </div>

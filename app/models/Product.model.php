@@ -20,11 +20,11 @@
       return $this->id = $this->db->insert_id;
     }
 
-    function saveWithCategory($data){
+    function saveWithCategoryAndSubCat($data){
       $parsed = DB::parseValues($data);
       $keys = $parsed["keys"];
       $values = $parsed["values"];
-      $query = "INSERT INTO productos_categorias($keys) VALUES ({$values})";
+      $query = "INSERT INTO productos_subcategorias_categorias($keys) VALUES ({$values})";
       if(!$this->db->query($query)){
         throw new Exception($this->db->error);
       }
@@ -42,11 +42,23 @@
       return $this->id = $this->db->insert_id;
     }
 
-    function selecWithCategory($id){
+    function selecWithCategorySubcatAndProduct($id, $idsub = false){
       $id = escapeText($id);
+      $idsub = escapeText($idsub);
       $query = "SELECT *
         FROM productos p
-        NATURAL JOIN productos_categorias a NATURAL JOIN imagenes i WHERE idcategoria = '{$id}'";
+        NATURAL JOIN productos_subcategorias_categorias a NATURAL JOIN imagenes i WHERE idcategoria = '{$id}'";
+      if($idsub){
+        if(!$id){
+          $query = "SELECT *
+            FROM productos p
+            NATURAL JOIN productos_subcategorias_categorias a NATURAL JOIN imagenes i WHERE idsubcategoria = '{$idsub}'";
+        }else{
+          $query = "SELECT *
+            FROM productos p
+            NATURAL JOIN productos_subcategorias_categorias a NATURAL JOIN imagenes i WHERE idcategoria = '{$id}' AND idsubcategoria = '{$idsub}'";
+        }
+      }
       if(!$_puntero = $this->db->query($query)){
         throw new Exception($this->db->error);
       }

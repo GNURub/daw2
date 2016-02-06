@@ -52,51 +52,58 @@
 
       public function soapAction(){
         $server = new soap_server();
-        $server->configureWSDL('GetArr','urn:GetArr');
-        $server->wsdl->schemaTargetNamespaces = 'urn:GetArr';
+        $server->configureWSDL('productservice','urn:ProductModel', URL.'/product/soap');
+        $server->wsdl->schemaTargetNamespaces = 'urn:ProductModel';
         $server->wsdl->addComplexType(
-        'ArrayReq',
-        'complexType',
-        'struct',
-        'all',
-        '',
-        array(
-        'name' => array('name' => 'name', 'type' => 'xsd:string'),
-        'code' => array('name' => 'code', 'type' => 'xsd:string'),
-        'price' => array('name' => 'price', 'type' => 'xsd:integer'),
-        'quantity' => array('name' => 'quantity', 'type' => 'xsd:integer')
+          'Producto',
+          'complexType',
+          'struct',
+          'all',
+          '',
+          array(
+          'idproducto' => array('name' => 'idproducto', 'type' => 'xsd:string'),
+          'titulo' => array('name' => 'titulo', 'type' => 'xsd:string'),
+          'descripcion' => array('name' => 'descripcion', 'type' => 'xsd:string'),
+          'precio' => array('name' => 'precio', 'type' => 'xsd:integer'),
+          'gatosdeenvio' => array('name' => 'gatosdeenvio', 'type' => 'xsd:integer'),
+          'marca' => array('name' => 'marca', 'type' => 'xsd:string'),
+          'createdAt' => array('name' => 'createdAt', 'type' => 'xsd:string'),
+          'iddescuento' => array('name' => 'iddescuento', 'type' => 'xsd:string'),
+          'idsubcategoria' => array('name' => 'idsubcategoria', 'type' => 'xsd:string'),
+          'idimagen' => array('name' => 'idimagen', 'type' => 'xsd:integer'),
+          'path' => array('name' => 'path', 'type' => 'xsd:string')
         ));
-
-        //function that get and return values
-        function GetTotalPrice ($proArray) {
-        $temparray = array();
-
-          array_push($temparray, array('name' => $proArray['name'], 'code' => $proArray['code'], 'price' => $proArray['price'], 'quantity'
-          => $proArray['quantity'], 'total_price' => $proArray['quantity'] * $proArray['price']));
-          array_push($temparray, array('name' => $proArray['name'], 'code' => $proArray['code'], 'price' => $proArray['price'], 'quantity'
-          => $proArray['quantity'], 'total_price' => $proArray['quantity'] * $proArray['price']));
-          return $temparray;
-        };
-
-        //register the method
-        $server->register('GetTotalPrice',
-          array('proArray' => 'tns:ArrayReq'),// and this line also.
-          array('result' => 'xsd:Array'),
-          'urn:GetArr',
-          'urn:GetArr#GetTotalPrice',
-          'rpc',
-          'encoded',
-          'Get the product total price'
+        $server->wsdl->addComplexType(
+                'Productos',
+                'complexType',
+                'array',
+                'sequence',
+                '',
+                array(),
+                array(array('ref' => 'http://schemas.xmlsoap.org/soap/encoding/:arrayType',
+                 'wsdl:arrayType' => 'tns:Producto[]')
+                ),
+                'tns:Producto'
         );
-
-
-        // Get our posted data if the service is being consumed
-        // otherwise leave this data blank.
+        $server->register("ProductModel.selecWithCategorySubcatAndProduct",
+            array("category" => "xsd:string", "subcategory" => "xsd:string"),
+            array("return" => "tns:Productos"),
+            "urn:ProductModel",
+            "urn:ProductModel#selecWithCategorySubcatAndProduct",
+            "rpc",
+            "encoded",
+            "Get products by category or subcategory");
+        $server->register("ProductModel.toArray",
+            array("id" => "xsd:string"),
+            array("return" => "xsd:Array"),
+            "urn:ProductModel",
+            "urn:ProductModel#toArray",
+            "rpc",
+            "encoded",
+            "Get products id or all");
         $POST_DATA = isset($GLOBALS['HTTP_RAW_POST_DATA']) ? $GLOBALS['HTTP_RAW_POST_DATA'] : '';
+        @$server->service($POST_DATA);
 
-        // pass our posted data (or nothing) to the soap service
-        $server->service($POST_DATA);
-        exit();
       }
 
       public function createAction()
@@ -112,6 +119,8 @@
               isset($gastoenvio) &&
               isset($categoria) &&
               isset($descripcion) &&
+              isset($subcategoria) &&
+              !empty($subcategoria) &&
               !empty($titulo) &&
               !empty($marca) &&
               !empty($categoria) &&
@@ -141,9 +150,20 @@
                   ))) {
                     try {
                       foreach ($categoria as $cat) {
-                        $this->product->saveWithCategory(array(
+                        // controlamos cuando creamos un Producto
+                        // en el que no hay una relacion entre categoria y
+                        // subcategoria
+                        try {
+                          $this->category->saveWithSubcategory(array(
+                            'idcategoria' => $cat,
+                            'idsubcategoria' => $subcategoria,
+                          ));
+                        } catch (Exception $e) {
+                        }
+                        $this->product->saveWithCategoryAndSubCat(array(
                           'idproducto' => $idProduct,
                           'idcategoria' => $cat,
+                          'idsubcategoria' => $subcategoria
                         ));
                       }
                       // subimos la imagen si existe

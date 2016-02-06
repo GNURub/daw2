@@ -9,7 +9,7 @@
       <ul>
         <?php foreach ($subcategories as $subcat): ?>
           <li>
-            <a href="subcategory/<?=$subcat['idsubcategoria'] ?>" class="capitalize">
+            <a href="/category/<?=$selectedCategory ?>/<?=$subcat['idsubcategoria'] ?>" class="capitalize">
               <?=$subcat['idsubcategoria'] ?>
             </a>
           </li>

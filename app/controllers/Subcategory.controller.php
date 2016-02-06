@@ -28,9 +28,9 @@
           }
           try {
             $selectedSubcategory = $subcatego['idsubcategoria'];
-            // $productos = $this->product->selecWithSubcategory($subcatego[0]['idcategoria']);
+            $productos = $this->product->selecWithCategorySubcatAndProduct(false, $subcatego['idsubcategoria']);
             Log::write("Se muestra la categoria.");
-            return require VIEWS . 'subcategory/show.php';
+            return require VIEWS . 'home/index.php';
           } catch (Exception $e) {
             echo $e->getMessage();
             return;
