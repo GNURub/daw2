@@ -150,7 +150,7 @@
                   ))) {
                     try {
                       foreach ($categoria as $cat) {
-                        // controlamos cuando creamos un Producto
+                        // Controlamos cuando creamos un Producto
                         // en el que no hay una relacion entre categoria y
                         // subcategoria
                         try {
