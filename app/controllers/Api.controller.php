@@ -77,8 +77,9 @@ class Api extends Controller {
 
     function ordersAction(){
       try {
-        $id = !empty($this->_params[0]) ? $this->_params[0] : false;
-        $pedidos = $this->clients->getOrders($id);
+        $user = !empty($this->_params[0]) ? $this->_params[0] : false;
+        $id = !empty($this->_params[1]) ? $this->_params[1] : false;
+        $pedidos = $this->clients->getOrders($user, $id);
         echo json_encode($pedidos);
       } catch (Exception $e) {
         $error = array(
