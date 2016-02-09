@@ -284,11 +284,6 @@
           foreach ($_POST['productos'] as $pro) {
             $_SESSION['productos'][$pro['idproducto']] = $pro['q'];
           }
-          $this->client->save(array(
-            "hash_compra" => $hash_compra,
-            "estado"      => "pagado",
-            "username"    => self::getSession("username")
-          ), "compras");
 
           $miObj = new RedsysAPI;
 
@@ -344,6 +339,7 @@
 
       public function okAction(){
         if(isset($_SERVER['HTTP_REFERER'])){
+          echo $_SERVER['HTTP_REFERER'];
           try {
             $hash_compra = md5(uniqid(time()));
             $this->client->save(array(
