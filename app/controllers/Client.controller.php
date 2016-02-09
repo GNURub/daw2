@@ -358,9 +358,10 @@
             $html2pdf->Output('ticket.pdf');
           } catch (Exception $e) {
             echo $e->getMessage();
-            return;
           }
+          return;
         }
+        return require VIEWS.'error/401.php';
       }
       public function koAction(){
         return require VIEWS.'error/400.php';
