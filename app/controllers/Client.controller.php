@@ -298,8 +298,8 @@
         	$moneda="978";
         	$trans="0";
         	$url="https://thecatlong-gnurub.rhcloud.com/";
-          $urlKO="https://thecatlong-gnurub.rhcloud.com/client/ok";
-          $urlOK="https://thecatlong-gnurub.rhcloud.com/client/ko";
+          $urlKO="https://thecatlong-gnurub.rhcloud.com/client/ko";
+          $urlOK="https://thecatlong-gnurub.rhcloud.com/client/ok";
         	$id = $hash_compra;
         	$amount = number_format($_POST['amount'], 2, '', '');
 
