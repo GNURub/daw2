@@ -7,6 +7,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema thecatlong
 -- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `thecatlong` ;
 
 -- -----------------------------------------------------
 -- Schema thecatlong
@@ -72,6 +73,7 @@ CREATE TABLE IF NOT EXISTS `thecatlong`.`usuarios` (
   `rol` VARCHAR(45) NULL DEFAULT 'cliente' COMMENT '',
   `password` VARCHAR(45) NULL COMMENT '',
   `public` TINYINT(1) NULL DEFAULT 0 COMMENT '',
+  `provider` VARCHAR(45) NULL DEFAULT 'local' COMMENT '',
   PRIMARY KEY (`username`)  COMMENT '',
   UNIQUE INDEX `email_UNIQUE` (`email` ASC)  COMMENT '')
 ENGINE = InnoDB;
@@ -283,7 +285,7 @@ CREATE TABLE IF NOT EXISTS `thecatlong`.`productos_subcategorias_categorias` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-INSERT INTO usuarios VALUES('test', 'test', 'test', '2015-11-27 00:56:09', 'test@gmail.com', NULL, NULL, '1', 'administrador', '56a/NpXpEac4I', '0');
+INSERT INTO usuarios VALUES('test', 'test', 'test', '2015-11-27 00:56:09', 'test@gmail.com', NULL, NULL, '1', 'administrador', '56a/NpXpEac4I', '0', 'local');
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

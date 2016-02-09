@@ -204,6 +204,7 @@
                 'username' => $res['user']['id'],
                 'nombre' => $name,
                 'apellidos' => implode(" ", $na),
+                'provider'  => 'google'
               ));
               self::setSession('username', $res['user']['id']);
             } catch (Exception $e) {
@@ -247,6 +248,7 @@
                         'username' => $res['user']->getField('id'),
                         'nombre' => $name,
                         'apellidos' => implode(" ", $na),
+                        'provider' => 'facebook'
                       ));
                       self::setSession('username', $res['user']->getField('id'));
                   } catch (Exception $e) {
