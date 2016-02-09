@@ -34,22 +34,6 @@
           }
       }
 
-      public function jsonAction()
-      {
-          try {
-            $id = !empty($this->_params[0]) ? $this->_params[0] : false;
-            $proucts = $this->product->toArray($id);
-            echo json_encode($proucts);
-          } catch (Exception $e) {
-            $error = array(
-              'error' => 200,
-              'errorMsg' => $e->getMessage(),
-            );
-            echo json_encode($error);
-          }
-          return;
-      }
-
       public function soapAction(){
         $server = new soap_server();
         $server->configureWSDL('productservice','urn:ProductModel', URL.'/product/soap');
@@ -142,11 +126,11 @@
               if ($isValidProduct) {
                 try {
                   if ($idProduct = $this->product->save(array(
-                      'titulo' => $titulo,
-                      'marca' => $marca,
-                      'precio' => $precio,
+                      'titulo'       => $titulo,
+                      'marca'        => $marca,
+                      'precio'       => $precio,
                       'gatosdeenvio' => $gastoenvio,
-                      'descripcion' => $descripcion,
+                      'descripcion'  => $descripcion,
                   ))) {
                     try {
                       foreach ($categoria as $cat) {

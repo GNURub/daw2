@@ -58,6 +58,22 @@
       }
       return $result;
     }
+
+    function getOrders($username = false){
+      $by = !empty($username) ? $username : $this->id;
+      $by = escapeText($by);
+      $query = "SELECT * FROM compras
+      WHERE username = '{$by}'";
+      if(!$resultado = $this->db->query($query)){
+        throw new Exception($this->db->error, 1);
+      }
+      $result = array();
+      while ($row = $resultado->fetch_assoc()) {
+        array_push($result, $row);
+      }
+      return $result;
+    }
+
   }
 
  ?>
