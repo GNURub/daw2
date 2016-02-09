@@ -338,8 +338,8 @@
 
 
       public function okAction(){
-        if(isset($_SERVER['HTTP_REFERER'])){
-          echo $_SERVER['HTTP_REFERER'];
+        if(isset($_SERVER['HTTP_REFERER']) &&
+        $_SERVER['HTTP_REFERER'] == "http://jguasch.esy.es/redsys/lacaixaOK.php"){
           try {
             $hash_compra = md5(uniqid(time()));
             $this->client->save(array(
