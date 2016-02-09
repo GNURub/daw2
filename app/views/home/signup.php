@@ -61,7 +61,7 @@
         <button class="btn lg" type="submit"><span>Registrarse</span></button>
       </li>
     </ul>
-    <social-buttons fb-url></social-buttons>
+    <social-buttons fb-url="<?=$fbUrl;?>" go-url="<?=$goUrl;?>"></social-buttons>
 
   </form>
 

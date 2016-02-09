@@ -44,6 +44,8 @@
           return;
         }
         // load VIEWSs
+        $fbUrl = self::$fb->getUrl();
+        $goUrl = self::$go->getUrl();
         return require VIEWS . 'home/signup.php';
       }
 
