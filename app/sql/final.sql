@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `thecatlong`.`productos` (
   `precio` DECIMAL NULL COMMENT '',
   `gatosdeenvio` DECIMAL NULL COMMENT '',
   `marca` VARCHAR(45) NULL COMMENT '',
-  `createdAt` DATETIME NULL DEFAULT CURRENT_TIMESTAMP COMMENT '',
+  `createdAt` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '',
   `iddescuento` INT NULL COMMENT '',
   PRIMARY KEY (`idproducto`)  COMMENT '',
   INDEX `fk_productos_descuentos1_idx` (`iddescuento` ASC)  COMMENT '',
@@ -81,7 +81,7 @@ ENGINE = InnoDB;
 -- Table `thecatlong`.`compras`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `thecatlong`.`compras` (
-  `idcompra` INT NOT NULL COMMENT '',
+  `idcompra` INT NOT NULL AUTO_INCREMENT COMMENT '',
   `idmetodo` VARCHAR(45) NULL COMMENT '',
   `hash_compra` VARCHAR(45) NOT NULL COMMENT '',
   `estado` VARCHAR(20) NULL COMMENT '',
@@ -283,8 +283,8 @@ CREATE TABLE IF NOT EXISTS `thecatlong`.`productos_subcategorias_categorias` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-# 'test', 'test', 'test', '2015-11-27 00:56:09', 'test@gmail.com', NULL, NULL, '1', 'administrador', '56a/NpXpEac4I', '0'
 INSERT INTO usuarios VALUES('test', 'test', 'test', '2015-11-27 00:56:09', 'test@gmail.com', NULL, NULL, '1', 'administrador', '56a/NpXpEac4I', '0');
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

@@ -273,10 +273,22 @@
               }
           }
       }
+
+
       public function checkoutAction()
       {
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+          $hash_compra = md5(uniqid(time()));
+          foreach ($_POST['productos'] as $pro) {
+            $_SESSION['productos'][$pro['idproducto']] = $pro['q'];
+          }
+          $this->client->save(array(
+            "hash_compra" => $hash_compra,
+            "estado"      => "pagado",
+            "username"    => self::getSession("username")
+          ), "compras");
 
           $miObj = new RedsysAPI;
 
@@ -288,8 +300,8 @@
         	$url="https://thecatlong-gnurub.rhcloud.com/";
           $urlKO="https://thecatlong-gnurub.rhcloud.com/client/ok";
           $urlOK="https://thecatlong-gnurub.rhcloud.com/client/ko";
-        	$id=uniqid(time());
-        	$amount = number_format($_POST['amount'], 2);
+        	$id = $hash_compra;
+        	$amount = number_format($_POST['amount'], 2, '', '');
 
         	// Se Rellenan los campos
         	$miObj->setParameter("DS_MERCHANT_AMOUNT",$amount);
@@ -310,22 +322,6 @@
         	$params = $miObj->createMerchantParameters();
         	$signature = $miObj->createMerchantSignature($kc);
           return require VIEWS.'client/confirmpay.php';
-          // print_r($_POST); Array ( [idproduct] => Array ( [0] => 1 ) [q] => Array ( [0] => 1 ) [precio] => Array ( [0] => 32 ) )
-          // PDF
-          // try {
-          //     ob_start();
-          //     include APP.'/templates/pdf/ticket.php';
-          //     $content = ob_get_contents();
-          //     ob_end_clean();
-          //     $html2pdf = new Html2Pdf('P', 'A4', 'fr', true, 'UTF-8', 0);
-          //     $html2pdf->pdf->SetDisplayMode('fullpage');
-          //     $html2pdf->writeHTML($content);
-          //     $html2pdf->Output('ticket.pdf');
-          // } catch (Exception $e) {
-          //     echo $e->getMessage();
-          // }
-
-          // return;
         }
         if (self::getSession('username')) {
           $productos = array();
@@ -343,5 +339,34 @@
           return require VIEWS.'client/checkout.php';
         }
         return header('location: /');
+      }
+
+
+      public function okAction(){
+        if(isset($_SERVER['HTTP_REFERER'])){
+          try {
+            $hash_compra = md5(uniqid(time()));
+            $this->client->save(array(
+              "hash_compra" => $hash_compra,
+              "estado"      => "pagado",
+              "username"    => self::getSession("username")
+            ), "compras");
+
+            ob_start();
+            include APP.'/templates/pdf/ticket.php';
+            $content = ob_get_contents();
+            ob_end_clean();
+            $html2pdf = new Html2Pdf('P', 'A4', 'fr', true, 'UTF-8', 0);
+            $html2pdf->pdf->SetDisplayMode('fullpage');
+            $html2pdf->writeHTML($content);
+            $html2pdf->Output('ticket.pdf');
+          } catch (Exception $e) {
+            echo $e->getMessage();
+            return;
+          }
+        }
+      }
+      public function koAction(){
+        return require VIEWS.'error/400.php';
       }
   }

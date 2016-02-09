@@ -31,8 +31,11 @@
 
     }
 
-    function ofCategory($category){
+    function ofCategory($category, $subcategory = false){
       $query = "SELECT * FROM subcategorias_categorias WHERE idcategoria = '{$category}'";
+      if($subcategory){
+        $query = "SELECT * FROM subcategorias_categorias WHERE idcategoria = '{$category}' AND idsubcategoria = '{$subcategory}'";
+      }
       if(!$_puntero = $this->db->query($query)){
         throw new Exception($this->db->error, 1);
       }

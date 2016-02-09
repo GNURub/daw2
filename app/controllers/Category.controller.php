@@ -45,7 +45,6 @@
             $idsub = false;
             if(!empty($params[1])){
               $idsub = $params[1];
-
             }
             $selectedCategory = $catego['idcategoria'];
             $productos        = $this->product->selecWithCategorySubcatAndProduct($selectedCategory, $idsub);
@@ -92,7 +91,25 @@
                   }
                   return header('location: /');
                 } catch (Exception $e) {
-                  $error = $e->getMessage();
+                  $error = $e->getCode();
+                  if($error == 0){
+                    try {
+                      foreach ($subcategoria as $sub) {
+                        $rel = $this->subcategory->ofCategory($nombre, $sub);
+                        if(empty($rel)){
+                          $this->category->saveWithSubcategory(array(
+                            'idcategoria' => $nombre,
+                            'idsubcategoria' => $sub,
+                          ));
+
+                        }
+                      }
+                      return header('location: /');
+                    } catch (Exception $e) {
+                      exit($e->getMessage());
+                    }
+                    return;
+                  }
                   return require VIEWS.'error/500.php';
                 }
               }

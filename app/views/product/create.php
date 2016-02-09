@@ -81,7 +81,7 @@
 
       <li>
         <div class="group">
-          <input type="file" style="opacity:0" name="imagen" required>
+          <input type="file" style="opacity:0" accept="image/*;capture=camera" name="imagen" required>
           <span class="highlight"></span>
           <span class="bar"></span>
           <label>Imagen:</label>

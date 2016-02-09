@@ -11,11 +11,11 @@
       $this->category = new CategoryModel();
     }
 
-    function save($data){
+    function save($data, $table = "usuarios"){
       $parsed = DB::parseValues($data);
       $keys = $parsed["keys"];
       $values = $parsed["values"];
-      $query = "INSERT INTO {$this->table}($keys) VALUES ({$values})";
+      $query = "INSERT INTO {$table}($keys) VALUES ({$values})";
       if(!$this->db->query($query)){
         throw new Exception($this->db->error);
       }
@@ -35,6 +35,7 @@
     function update($id){
 
     }
+
 
     function toArray($id = false){
       $by = !empty($id) ? $id : $this->id;

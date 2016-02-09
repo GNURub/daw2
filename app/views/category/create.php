@@ -15,8 +15,8 @@
       <li>
         <div class="mdl-selectfield">
           <label>Seleccione las Subcategorias: </label>
-          <select class="browser-default" name="subcategoria[]" multiple>
-            <option value="" disabled selected>Elige las subcategorias</option>
+          <select class="browser-default" name="subcategoria[]" multiple required>
+            <option value="" disabled>Elige las subcategorias</option>
             <?php
               foreach ($subcategorias as $sub) {
                 echo "<option value='{$sub["idsubcategoria"]}' class='capitalize'>{$sub["idsubcategoria"]}</option>";

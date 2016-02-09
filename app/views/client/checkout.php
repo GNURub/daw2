@@ -5,18 +5,18 @@
       <form class="ticket" method="POST">
         <h5>Ticket</h5>
         <ul>
-          <?php foreach ($productos as $pro): ?>
+          <?php foreach ($productos as $id=>$pro): ?>
             <li>
               <span class="title">
                 <?=$pro['titulo']?>
-                <input type="hidden" name="idproduct[]" value="<?=$pro['idproducto']?>">
+                <input type="hidden" name="productos[<?=$id?>][idproducto]" value="<?=$pro['idproducto']?>">
               </span>
               <span class="q">
                 <span>  x</span>
-                <input type="number" name="q[]" min="1" max="99" value="<?=$pro['q']?>">
+                <input type="number" name="productos[<?=$id?>][q]" min="1" value="<?=$pro['q']?>">
               </span>
               <span class="price"><?=$pro['precio']?></span>€
-              <input type="hidden" name="precio[]" value="<?=$pro['precio']?>">
+              <input type="hidden" name="productos[<?=$id?>][precio]" value="<?=$pro['precio']?>">
             </li>
           <?php endforeach; ?>
           <li class="divider">

@@ -42,21 +42,21 @@
       return $this->id = $this->db->insert_id;
     }
 
-    function selecWithCategorySubcatAndProduct($id, $idsub = false){
-      $id = escapeText($id);
+    function selecWithCategorySubcatAndProduct($idcat, $idsub = false){
+      $idcat = escapeText($idcat);
       $idsub = escapeText($idsub);
       $query = "SELECT *
         FROM productos p
-        NATURAL JOIN productos_subcategorias_categorias a NATURAL JOIN imagenes i WHERE idcategoria = '{$id}'";
+        NATURAL JOIN productos_subcategorias_categorias a NATURAL JOIN imagenes i WHERE idcategoria = '{$idcat}'";
       if($idsub){
-        if(!$id){
+        if(!$idcat){
           $query = "SELECT *
             FROM productos p
             NATURAL JOIN productos_subcategorias_categorias a NATURAL JOIN imagenes i WHERE idsubcategoria = '{$idsub}'";
         }else{
           $query = "SELECT *
             FROM productos p
-            NATURAL JOIN productos_subcategorias_categorias a NATURAL JOIN imagenes i WHERE idcategoria = '{$id}' AND idsubcategoria = '{$idsub}'";
+            NATURAL JOIN productos_subcategorias_categorias a NATURAL JOIN imagenes i WHERE idcategoria = '{$idcat}' AND idsubcategoria = '{$idsub}'";
         }
       }
       if(!$_puntero = $this->db->query($query)){
