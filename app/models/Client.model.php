@@ -59,11 +59,16 @@
       return $result;
     }
 
-    function getOrders($username = false){
+    function getOrders($username = false, $id = false){
       $by = !empty($username) ? $username : $this->id;
       $by = escapeText($by);
+      $id =  escapeText($id);
       $query = "SELECT * FROM compras
       WHERE username = '{$by}'";
+      if($id){
+        $query = "SELECT * FROM compras
+        WHERE username = '{$by}' AND (idcompra = {$id} OR hash_compra = '{$id}')";
+      }
       if(!$resultado = $this->db->query($query)){
         throw new Exception($this->db->error, 1);
       }
