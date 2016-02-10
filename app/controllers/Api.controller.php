@@ -115,6 +115,7 @@ class Api extends Controller {
               'order' => $idorder
             );
             echo json_encode($res);
+            return;
           }
 
           throw new Exception("Parametros POSTS incorrectos", 1);
