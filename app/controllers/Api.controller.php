@@ -85,15 +85,16 @@ class Api extends Controller {
           if(!$user){
             throw new Exception("Inica el nombre e usuario", 1);
           }
+          print_r($_POST);
+          exit;
           extract($_POST);
+
           $hash_compra = md5(uniqid(time()));
           $isValidOrder = (
-          isset($productos) &&
-          !empty($productos) &&
-          !empty($estado) &&
-          isset($estado) &&
-          isset($productos) &&
-          !empty($productos)
+            isset($productos) &&
+            !empty($productos) &&
+            !empty($estado) &&
+            isset($estado)
           );
           if($isValidOrder){
             $idorder = $this->client->save(array(
