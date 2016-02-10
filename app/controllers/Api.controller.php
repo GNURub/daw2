@@ -2,6 +2,7 @@
 // /product/[{id}]/
 // /category/{cat}
 // /subcategory/{sub}
+header('Access-Control-Allow-Origin: *');
 class Api extends Controller {
     private $_params;
     private $product;
@@ -76,6 +77,7 @@ class Api extends Controller {
     }
 
     function ordersAction(){
+      header('Access-Control-Allow-Origin: *');
       try {
         $user = !empty($this->_params[0]) ? $this->_params[0] : false;
         $id = !empty($this->_params[1]) ? $this->_params[1] : false;
