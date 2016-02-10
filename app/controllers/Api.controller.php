@@ -79,11 +79,50 @@ class Api extends Controller {
       try {
         $user = !empty($this->_params[0]) ? $this->_params[0] : false;
         $id = !empty($this->_params[1]) ? $this->_params[1] : false;
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+          if(!$user){
+            throw new Exception("Inica el nombre e usuario", 1);
+          }
+          extract($_POST);
+          $hash_compra = md5(uniqid(time()));
+          $isValidOrder = (
+          isset($productos) &&
+          !empty($productos) &&
+          !empty($estado) &&
+          isset($estado) &&
+          isset($productos) &&
+          !empty($productos)
+          );
+          if($isValidOrder){
+            $idorder = $this->client->save(array(
+              "hash_compra" => $hash_compra,
+              "estado"      => $estado,
+              "username"    => $user
+            ), "compras");
+            foreach ($productos as $producto) {
+              $this->client->save(array(
+                "idcompra"   => $idorder,
+                "idproducto" => $producto['idproducto'],
+                "cantidad"   => $producto['q'],
+                "username"   => $user
+              ), "compras_productos_tallas_colores");
+            }
+            $res = array(
+              'code' => 200,
+              'Msg' => "OK",
+              'order' => $idorder
+            );
+            echo json_encode($res);
+          }
+
+          throw new Exception("Parametros POSTS incorrectos", 1);
+        }
+
         $pedidos = $this->clients->getOrders($user, $id);
         echo json_encode($pedidos);
       } catch (Exception $e) {
         $error = array(
-          'error' => 200,
+          'error' => 400,
           'errorMsg' => $e->getMessage(),
         );
         echo json_encode($error);

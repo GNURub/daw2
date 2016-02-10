@@ -39,6 +39,7 @@ CREATE TABLE IF NOT EXISTS `thecatlong`.`productos` (
   `marca` VARCHAR(45) NULL COMMENT '',
   `createdAt` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '',
   `iddescuento` INT NULL COMMENT '',
+  `proveedor` VARCHAR(45) NULL DEFAULT 'local' COMMENT '',
   PRIMARY KEY (`idproducto`)  COMMENT '',
   INDEX `fk_productos_descuentos1_idx` (`iddescuento` ASC)  COMMENT '',
   CONSTRAINT `fk_productos_descuentos1`
@@ -216,7 +217,7 @@ CREATE TABLE IF NOT EXISTS `thecatlong`.`compras_productos_tallas_colores` (
   `idtalla` VARCHAR(45) NOT NULL COMMENT '',
   `idcolor` VARCHAR(45) NOT NULL COMMENT '',
   `cantidad` INT NULL COMMENT '',
-  PRIMARY KEY (`idcompra`, `username`, `idproducto`, `idtalla`, `idcolor`)  COMMENT '',
+  PRIMARY KEY (`idcompra`, `username`, `idproducto`)  COMMENT '',
   INDEX `fk_compras_has_productos_tallas_colores_productos_tallas_co_idx` (`idproducto` ASC, `idtalla` ASC, `idcolor` ASC)  COMMENT '',
   INDEX `fk_compras_has_productos_tallas_colores_compras1_idx` (`idcompra` ASC, `username` ASC)  COMMENT '',
   CONSTRAINT `fk_compras_has_productos_tallas_colores_compras1`
@@ -284,8 +285,8 @@ CREATE TABLE IF NOT EXISTS `thecatlong`.`productos_subcategorias_categorias` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
 INSERT INTO usuarios VALUES('test', 'test', 'test', '2015-11-27 00:56:09', 'test@gmail.com', NULL, NULL, '1', 'administrador', '56a/NpXpEac4I', '0', 'local');
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

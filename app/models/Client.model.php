@@ -20,7 +20,7 @@
         throw new Exception($this->db->error);
       }
       $this->id = $this->db->insert_id;
-
+      return $this->id;
     }
 
     function  delete($id){
