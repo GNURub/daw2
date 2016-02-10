@@ -85,7 +85,7 @@ class Api extends Controller {
           if(!$user){
             throw new Exception("Inica el nombre e usuario", 1);
           }
-          print_r(json_decode($_POST['productos']));
+          var_dump(json_decode($_POST['productos']));
           exit;
           extract($_POST);
 
