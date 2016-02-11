@@ -9,9 +9,11 @@ class Api extends Controller {
     private $category;
     private $subcategory;
     private $clients;
-    static $products;
     private $isAdmin;
-    static $lastItem;
+    private $color;
+    private $size;
+    static  $products;
+    static  $lastItem;
 
     public function __construct($params = array())
     {
@@ -19,6 +21,8 @@ class Api extends Controller {
       $this->clients    = new ClientModel();
       $this->category   = new CategoryModel();
       $this->subcategory= new SubcategoryModel();
+      $this->color      = new ColorModel();
+      $this->size       = new SizeModel();
       $this->_params    = $params;
       self::$products   = $this->product->toArray();
       $this->isAdmin    = (self::getSession('admin') == "admin" ||
@@ -85,32 +89,66 @@ class Api extends Controller {
           if(!$user){
             throw new Exception("Inica el nombre e usuario", 1);
           }
-          $data = json_decode(stripslashes($_POST['productos']));
-          print_r($data);
-          exit;
           extract($_POST);
 
-          $hash_compra = md5(uniqid(time()));
+          $productos    = isJson($productos) ?
+                          json_decode(stripslashes($productos), true) :
+                          $productos;
+          $estado       = isJson($estado) ?
+                          json_decode(stripslashes($estado), true) :
+                          $estado;
+          $hash_compra  = md5(uniqid(time()));
           $isValidOrder = (
             isset($productos) &&
             !empty($productos) &&
             !empty($estado) &&
             isset($estado)
           );
+
           if($isValidOrder){
-            $idorder = $this->client->save(array(
+            $idorder = $this->clients->save(array(
               "hash_compra" => $hash_compra,
               "estado"      => $estado,
               "username"    => $user
             ), "compras");
+
             foreach ($productos as $producto) {
-              $this->client->save(array(
-                "idcompra"   => $idorder,
-                "idproducto" => $producto['idproducto'],
-                "cantidad"   => $producto['q'],
-                "username"   => $user
-              ), "compras_productos_tallas_colores");
+              $isValidColor = $this->color->toArray($producto['color']);
+              $isValidSize  = $this->size->toArray($producto['talla']);
+              if(empty($isValidColor)){
+                try {
+                  $this->color->save(array(
+                    "idcolor" => $producto['color']
+                  ));
+                } catch (Exception $e) {
+                  throw new Exception("El color no es válido", 1);
+                }
+              }
+              if(empty($isValidSize)){
+                try {
+                  $this->size->toArray(array(
+                    "idtalla" => $producto['talla']
+                  ));
+                } catch (Exception $e) {
+                  throw new Exception("La talla no es válida", 1);
+                }
+              }
+              try {
+                $this->clients->save(array(
+                  "idcompra"   => $idorder,
+                  "idproducto" => $producto['idproducto'],
+                  "cantidad"   => $producto['q'],
+                  "username"   => $user,
+                  "idtalla"    => $producto['talla'],
+                  "idcolor"    => $producto['color']
+                ), "compras_productos_tallas_colores");
+              } catch (Exception $e) {
+                echo $e->getMessage();
+                return;
+              }
+
             }
+
             $res = array(
               'code' => 200,
               'Msg' => "OK",

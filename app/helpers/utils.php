@@ -12,6 +12,10 @@
   function isImageValid($file){
     return !!preg_match('/image\/*/', mime_content_type($file));
   }
+  function isJson($string) {
+   json_decode($string, true);
+   return (json_last_error() == JSON_ERROR_NONE);
+  }
 
   function escapeText($text){
     return htmlentities(htmlspecialchars($text));

@@ -9,7 +9,7 @@
         <div class="mdl-selectfield">
           <label>Categoria: </label>
           <select class="browser-default capitalize" name="categoria[]" multiple required>
-            <option value="" disabled>Elige una categoría</option>
+            <option value="" disabled>Categorías del producto</option>
             <?php
               foreach ($categorias as $categoria) {
                 echo "<option value='{$categoria["idcategoria"]}' class='capitalize'>{$categoria["idcategoria"]}</option>";
@@ -49,6 +49,43 @@
           <span class="highlight"></span>
           <span class="bar"></span>
           <label>Marca:</label>
+        </div>
+      </li>
+
+      <li>
+        <div class="mdl-selectfield">
+          <label>Colores: </label>
+          <select class="browser-default capitalize" name="colores[]" multiple required>
+            <option value="" disabled>Colores disponibles</option>
+            <?php
+              foreach ($colores as $color) {
+                echo "<option value='{$color["idcolor"]}' class='capitalize'>{$color["idcolor"]}</option>";
+              }
+            ?>
+          </select>
+        </div>
+      </li>
+
+      <li>
+        <div class="mdl-selectfield">
+          <label>Tallas: </label>
+          <select class="browser-default capitalize" name="tallas[]" multiple required>
+            <option value="" disabled>Tallas disponibles</option>
+            <?php
+              foreach ($tallas as $talla) {
+                echo "<option value='{$talla["idtalla"]}' class='capitalize'>{$talla["idtalla"]}</option>";
+              }
+            ?>
+          </select>
+        </div>
+      </li>
+
+      <li>
+        <div class="group">
+          <input type="text" name="stock" required>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label>Stock:</label>
         </div>
       </li>
 

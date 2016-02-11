@@ -14,6 +14,7 @@
     function save($data, $table = "usuarios"){
       $parsed = DB::parseValues($data);
       $keys = $parsed["keys"];
+
       $values = $parsed["values"];
       $query = "INSERT INTO {$table}($keys) VALUES ({$values})";
       if(!$this->db->query($query)){

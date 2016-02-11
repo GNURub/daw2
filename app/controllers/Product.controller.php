@@ -6,6 +6,8 @@
       private $category;
       private $subcategory;
       private $admin;
+      private $color;
+      private $size;
       public static $products;
 
       public function __construct($params = array())
@@ -14,6 +16,8 @@
         $this->admin       = new ClientModel();
         $this->category    = new CategoryModel();
         $this->subcategory = new SubcategoryModel();
+        $this->color       = new ColorModel();
+        $this->size        = new SizeModel();
         $this->_params = $params;
         self::$products = $this->product->toArray();
       }
@@ -144,18 +148,28 @@
                           ));
                         } catch (Exception $e) {
                         }
-                        $this->product->saveWithCategoryAndSubCat(array(
+                        $this->product->save(array(
                           'idproducto' => $idProduct,
                           'idcategoria' => $cat,
                           'idsubcategoria' => $subcategoria
-                        ));
+                        ), "productos_subcategorias_categorias");
+                      }
+                      foreach ($tallas as $talla) {
+                        foreach ($colores as $color) {
+                          $this->product->save(array(
+                            'idproducto' => $idProduct,
+                            'idtalla'    => $talla,
+                            'idcolor'    => $color,
+                            'stock'      => $stock,
+                          ), "productos_tallas_colores");
+                        }
                       }
                       // subimos la imagen si existe
                       if ($path) {
-                        $this->product->saveWithImage(array(
+                        $this->product->save(array(
                           'idproducto' => $idProduct,
                           'path' => $path,
-                        ));
+                        ), "imagenes");
                       }
                       return header('location: /');
                     } catch (Exception $e) {
@@ -173,6 +187,8 @@
           if ($client['rol'] == 'admin' || $client['rol'] == 'administrador') {
             $categorias = $this->category->toArray();
             $subcategorias = $this->subcategory->toArray();
+            $colores = $this->color->toArray();
+            $tallas  = $this->size->toArray();
             return require VIEWS.'product/create.php';
           }
           return require VIEWS.'error/401.php';

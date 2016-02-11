@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `thecatlong`.`productos` (
   `precio` DECIMAL NULL COMMENT '',
   `gatosdeenvio` DECIMAL NULL COMMENT '',
   `marca` VARCHAR(45) NULL COMMENT '',
-  `createdAt` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '',
+  `createdAt` DATETIME NULL DEFAULT CURRENT_TIMESTAMP COMMENT '',
   `iddescuento` INT NULL COMMENT '',
   `proveedor` VARCHAR(45) NULL DEFAULT 'local' COMMENT '',
   PRIMARY KEY (`idproducto`)  COMMENT '',
@@ -162,46 +162,30 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `thecatlong`.`tallas_color`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `thecatlong`.`tallas_color` (
-  `idtalla` VARCHAR(45) NOT NULL COMMENT '',
-  `idcolor` VARCHAR(45) NOT NULL COMMENT '',
-  PRIMARY KEY (`idtalla`, `idcolor`)  COMMENT '',
-  INDEX `fk_tallas_has_color_color1_idx` (`idcolor` ASC)  COMMENT '',
-  INDEX `fk_tallas_has_color_tallas1_idx` (`idtalla` ASC)  COMMENT '',
-  CONSTRAINT `fk_tallas_has_color_tallas1`
-    FOREIGN KEY (`idtalla`)
-    REFERENCES `thecatlong`.`tallas` (`idtalla`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_tallas_has_color_color1`
-    FOREIGN KEY (`idcolor`)
-    REFERENCES `thecatlong`.`color` (`idcolor`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `thecatlong`.`productos_tallas_colores`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `thecatlong`.`productos_tallas_colores` (
   `idproducto` INT NOT NULL COMMENT '',
+  `stock` DECIMAL NULL COMMENT '',
   `idtalla` VARCHAR(45) NOT NULL COMMENT '',
   `idcolor` VARCHAR(45) NOT NULL COMMENT '',
-  `stock` DECIMAL NULL COMMENT '',
   PRIMARY KEY (`idproducto`, `idtalla`, `idcolor`)  COMMENT '',
-  INDEX `fk_productos_has_tallas_color_tallas_color1_idx` (`idtalla` ASC, `idcolor` ASC)  COMMENT '',
   INDEX `fk_productos_has_tallas_color_productos1_idx` (`idproducto` ASC)  COMMENT '',
+  INDEX `fk_productos_tallas_colores_tallas1_idx` (`idtalla` ASC)  COMMENT '',
+  INDEX `fk_productos_tallas_colores_color1_idx` (`idcolor` ASC)  COMMENT '',
   CONSTRAINT `fk_productos_has_tallas_color_productos1`
     FOREIGN KEY (`idproducto`)
     REFERENCES `thecatlong`.`productos` (`idproducto`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_productos_has_tallas_color_tallas_color1`
-    FOREIGN KEY (`idtalla` , `idcolor`)
-    REFERENCES `thecatlong`.`tallas_color` (`idtalla` , `idcolor`)
+  CONSTRAINT `fk_productos_tallas_colores_tallas1`
+    FOREIGN KEY (`idtalla`)
+    REFERENCES `thecatlong`.`tallas` (`idtalla`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_productos_tallas_colores_color1`
+    FOREIGN KEY (`idcolor`)
+    REFERENCES `thecatlong`.`color` (`idcolor`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -213,19 +197,18 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `thecatlong`.`compras_productos_tallas_colores` (
   `idcompra` INT NOT NULL COMMENT '',
   `username` VARCHAR(45) NOT NULL COMMENT '',
+  `cantidad` INT NULL COMMENT '',
   `idproducto` INT NOT NULL COMMENT '',
   `idtalla` VARCHAR(45) NOT NULL COMMENT '',
   `idcolor` VARCHAR(45) NOT NULL COMMENT '',
-  `cantidad` INT NULL COMMENT '',
-  PRIMARY KEY (`idcompra`, `username`, `idproducto`)  COMMENT '',
-  INDEX `fk_compras_has_productos_tallas_colores_productos_tallas_co_idx` (`idproducto` ASC, `idtalla` ASC, `idcolor` ASC)  COMMENT '',
-  INDEX `fk_compras_has_productos_tallas_colores_compras1_idx` (`idcompra` ASC, `username` ASC)  COMMENT '',
+  PRIMARY KEY (`idcompra`, `username`, `idproducto`, `idtalla`, `idcolor`)  COMMENT '',
+  INDEX `fk_compras_productos_tallas_colores_productos_tallas_colore_idx` (`idproducto` ASC, `idtalla` ASC, `idcolor` ASC)  COMMENT '',
   CONSTRAINT `fk_compras_has_productos_tallas_colores_compras1`
     FOREIGN KEY (`idcompra` , `username`)
     REFERENCES `thecatlong`.`compras` (`idcompra` , `username`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_compras_has_productos_tallas_colores_productos_tallas_colo1`
+  CONSTRAINT `fk_compras_productos_tallas_colores_productos_tallas_colores1`
     FOREIGN KEY (`idproducto` , `idtalla` , `idcolor`)
     REFERENCES `thecatlong`.`productos_tallas_colores` (`idproducto` , `idtalla` , `idcolor`)
     ON DELETE NO ACTION
@@ -285,7 +268,6 @@ CREATE TABLE IF NOT EXISTS `thecatlong`.`productos_subcategorias_categorias` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-INSERT INTO usuarios VALUES('test', 'test', 'test', '2015-11-27 00:56:09', 'test@gmail.com', NULL, NULL, '1', 'administrador', '56a/NpXpEac4I', '0', 'local');
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

@@ -9,54 +9,33 @@
       $this->connect();
     }
 
-    function save($data){
+    function save($data, $table = "productos"){
       $parsed = DB::parseValues($data, true);
       $keys = $parsed["keys"];
       $values = $parsed["values"];
-      $query = "INSERT INTO {$this->table}($keys) VALUES ({$values})";
+      $query = "INSERT INTO {$table}($keys) VALUES ({$values})";
       if(!$this->db->query($query)){
         throw new Exception($this->db->error);
       }
       return $this->id = $this->db->insert_id;
     }
 
-    function saveWithCategoryAndSubCat($data){
-      $parsed = DB::parseValues($data);
-      $keys = $parsed["keys"];
-      $values = $parsed["values"];
-      $query = "INSERT INTO productos_subcategorias_categorias($keys) VALUES ({$values})";
-      if(!$this->db->query($query)){
-        throw new Exception($this->db->error);
-      }
-      return $this->id = $this->db->insert_id;
-    }
-
-    function saveWithImage($data){
-      $parsed = DB::parseValues($data);
-      $keys = $parsed["keys"];
-      $values = $parsed["values"];
-      $query = "INSERT INTO imagenes($keys) VALUES ({$values})";
-      if(!$this->db->query($query)){
-        throw new Exception($this->db->error);
-      }
-      return $this->id = $this->db->insert_id;
-    }
 
     function selecWithCategorySubcatAndProduct($idcat, $idsub = false){
       $idcat = escapeText($idcat);
       $idsub = escapeText($idsub);
       $query = "SELECT *
         FROM productos p
-        NATURAL JOIN productos_subcategorias_categorias a NATURAL JOIN imagenes i WHERE idcategoria = '{$idcat}'";
+        NATURAL JOIN productos_subcategorias_categorias a NATURAL JOIN imagenes i NATURAL JOIN productos_tallas_colores WHERE idcategoria = '{$idcat}'";
       if($idsub){
         if(!$idcat){
           $query = "SELECT *
             FROM productos p
-            NATURAL JOIN productos_subcategorias_categorias a NATURAL JOIN imagenes i WHERE idsubcategoria = '{$idsub}'";
+            NATURAL JOIN productos_subcategorias_categorias a NATURAL JOIN imagenes i NATURAL JOIN productos_tallas_colores WHERE idsubcategoria = '{$idsub}'";
         }else{
           $query = "SELECT *
             FROM productos p
-            NATURAL JOIN productos_subcategorias_categorias a NATURAL JOIN imagenes i WHERE idcategoria = '{$idcat}' AND idsubcategoria = '{$idsub}'";
+            NATURAL JOIN productos_subcategorias_categorias a NATURAL JOIN imagenes i NATURAL JOIN productos_tallas_colores WHERE idcategoria = '{$idcat}' AND idsubcategoria = '{$idsub}'";
         }
       }
       if(!$_puntero = $this->db->query($query)){

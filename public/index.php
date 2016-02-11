@@ -39,6 +39,7 @@ require_once APP.'models/Category.model.php';
 require_once APP.'models/Product.model.php';
 require_once APP.'models/Client.model.php';
 require_once APP.'models/Color.model.php';
+require_once APP.'models/Size.model.php';
 require_once APP.'models/Discount.model.php';
 require_once APP.'models/Subcategory.model.php';
 
