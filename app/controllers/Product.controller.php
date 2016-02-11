@@ -40,7 +40,7 @@
 
       public function soapAction(){
         $server = new soap_server();
-        $server->configureWSDL('productservice','urn:ProductModel', URL.'/product/soap');
+        $server->configureWSDL('productservice','urn:ProductModel', URL.'product/soap');
         $server->wsdl->schemaTargetNamespaces = 'urn:ProductModel';
         $server->wsdl->addComplexType(
           'Producto',
@@ -57,6 +57,9 @@
           'marca' => array('name' => 'marca', 'type' => 'xsd:string'),
           'createdAt' => array('name' => 'createdAt', 'type' => 'xsd:string'),
           'iddescuento' => array('name' => 'iddescuento', 'type' => 'xsd:string'),
+          'idcolor' => array('name' => 'idcolor', 'type' => 'xsd:string'),
+          'idtalla' => array('name' => 'idtalla', 'type' => 'xsd:string'),
+          'stock' => array('name' => 'stock', 'type' => 'xsd:string'),
           'idsubcategoria' => array('name' => 'idsubcategoria', 'type' => 'xsd:string'),
           'idimagen' => array('name' => 'idimagen', 'type' => 'xsd:integer'),
           'path' => array('name' => 'path', 'type' => 'xsd:string')
@@ -74,7 +77,11 @@
                 'tns:Producto'
         );
         $server->register("ProductModel.selecWithCategorySubcatAndProduct",
-            array("category" => "xsd:string", "subcategory" => "xsd:string"),
+            array(
+              "category" => "xsd:string",
+              "subcategory" => "xsd:string",
+              "group" => "xsd:string"
+            ),
             array("return" => "tns:Productos"),
             "urn:ProductModel",
             "urn:ProductModel#selecWithCategorySubcatAndProduct",

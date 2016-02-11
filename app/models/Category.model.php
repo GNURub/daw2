@@ -41,17 +41,25 @@
       }
     }
 
-    public function toArray($id = false){
+    public function toArray($id = false, $withSubcat = false, $group =""){
+      $selectSubcat = "";
+      $group = escapeText($group);
+      if($withSubcat){
+        $selectSubcat = "NATURAL JOIN subcategorias_categorias";
+      }
+      if(!empty($group)){
+        $group = "GROUP BY ".$group;
+      }
       if(!!$id){
         $id = escapeText($id);
-        $query = "SELECT * FROM {$this->table}
-        WHERE idcategoria = '{$id}'";
+        $query = "SELECT * FROM {$this->table} $selectSubcat
+        WHERE idcategoria = '{$id}' " .$group;
         if(!$_puntero = $this->db->query($query)){
           throw new Exception($this->db->error, 1);
         }
         return $_puntero->fetch_assoc();
       }
-      $query = "SELECT * FROM {$this->table}";
+      $query = "SELECT * FROM {$this->table} $selectSubcat " .$group;
       if(!$_puntero = $this->db->query($query)){
         throw new Exception($this->db->error, 1);
       }

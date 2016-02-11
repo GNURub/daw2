@@ -78,27 +78,6 @@
         return require VIEWS . 'error/400.php';
       }
 
-      public function jsonAction(){
-        try {
-          $id = !empty($this->_params[0]) ? $this->_params[0] : false;
-          $categories = $this->subcategory->toArray($id);
-          if (empty($categories)) {
-            $categories = array(
-              'error' => 400,
-              'errorMsg' => "Categoria no encontrada"
-            );
-          }
-          echo json_encode($categories);
-        } catch (Exception $e) {
-          $error = array(
-            'error' => 200,
-            'errorMsg' => $e->getMessage()
-          );
-          echo json_encode($error);
-        }
-        return;
-      }
-
       public function xmlAction(){
 
       }

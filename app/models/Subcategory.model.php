@@ -47,6 +47,7 @@
     }
 
     public function toArray($id = false){
+      $id = escapeText($id);
       if(!!$id){
         $query = "SELECT * FROM {$this->table}
         WHERE idsubcategoria = '{$id}'";

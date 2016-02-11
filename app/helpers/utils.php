@@ -28,7 +28,7 @@
   }
 
   function escapeText($text){
-    return htmlentities(htmlspecialchars($text));
+    return htmlspecialchars(htmlentities($text));
   }
 
   // Subir imagen

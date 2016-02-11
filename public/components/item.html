@@ -5,6 +5,9 @@
     :host{
       width: 300px;
     }
+    [hidden]{
+      display: none;
+    }
     .container_item{
       width: inherit;
       height: 306px;
@@ -68,12 +71,36 @@
       border-radius: 4px;
 
     }
+    .header_item > .edit{
+      position: absolute;
+      right: 4px;
+      top: 5px;
+      padding: 4px;
+      color: white;
+      background-color: rgba(0, 0, 0, .2);
+      font-weight: bold;
+      font-size: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all .2s linear;
+
+    }
+    .header_item > .edit:hover{
+      background-color: rgb(170, 58, 238);
+
+    }
     .footer_item > .description{
       padding: 10px;
     }
     .promo textarea{
       width: 100%;
       height: 4em;
+    }
+    p.admin{
+      margin: 0;
+    }
+    p.description{
+      margin-bottom: 0;
     }
     a.btn.lg{
       text-decoration: none;
@@ -86,6 +113,7 @@
     <div class="container_item">
       <div class="header_item">
         <span class="new_item" hidden>Novedad!</span>
+        <span class="edit material-icons" hidden>create</span>
         <img src="http://lorempixel.com/300/300" alt="" />
         <span class="title_item">
 
@@ -193,8 +221,10 @@
 
         if (this.hasAttribute('admin')) {
           shadowRoot.querySelector('.admin').removeAttribute('hidden');
+          shadowRoot.querySelector('.edit').removeAttribute('hidden');
         }else{
           shadowRoot.querySelector('.admin').setAttribute('hidden', true);
+          shadowRoot.querySelector('.edit').setAttribute('hidden', true);
         }
 
         if (this.hasAttribute('descripcion')) {

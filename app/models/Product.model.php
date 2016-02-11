@@ -52,12 +52,23 @@
       return $result;
     }
 
+    public function productoTallaColor($pro, $size, $color){
+      $query = "SELECT *
+      FROM productos_tallas_colores WHERE idproducto = '{$pro}' AND
+      idcolor = '{$color}' AND idtalla = '{$size}'";
+      if(!$_puntero = $this->db->query($query)){
+        throw new Exception($this->db->error, 1);
+      }
+      return $_puntero->fetch_assoc();
+    }
+
     public function toArray($id = false){
       if(!!$id){
         $id = escapeText($id);
+
         $query = "SELECT *
         FROM {$this->table} p
-        NATURAL JOIN imagenes i WHERE idproducto = '{$id}'";
+        NATURAL JOIN imagenes i WHERE idproducto = '{$id}' OR titulo = '{$id}'";
         if(!$_puntero = $this->db->query($query)){
           throw new Exception($this->db->error, 1);
         }

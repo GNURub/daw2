@@ -1,5 +1,7 @@
 <?php
 // /product/[{id}]/
+// /category/
+// /category/{group}
 // /category/{cat}/{group}
 // /subcategory/{sub}/{group}
 header('Access-Control-Allow-Origin: *');
@@ -30,11 +32,12 @@ class Api extends Controller {
     }
 
     public function index($params = array()){
-      $this->productAction();
+      // $this->productAction();
     }
 
-    public function productAction()
+    public function productAction($params)
     {
+
         try {
           $id = !empty($this->_params[0]) ? $this->_params[0] : false;
           $proucts = $this->product->toArray($id);
@@ -48,20 +51,11 @@ class Api extends Controller {
         }
         return;
     }
-
     public function categoryAction()
     {
 
       $idcat = !empty($this->_params[0]) ? $this->_params[0] : false;
       $group = !empty($this->_params[1]) ? $this->_params[1] : false;
-      if(!$idcat){
-        $error = array(
-          'error' => 400,
-          'errorMsg' => "Debe de indicar una categoría correcta",
-        );
-        echo json_encode($error);
-        return;
-      }
       try {
         $products = $this->product->selecWithCategorySubcatAndProduct(
         $idcat,
@@ -69,12 +63,18 @@ class Api extends Controller {
         $group
         );
         if (empty($products)) {
-          $products = array(
-            'error' => 400,
-            'errorMsg' => 'No hay productos',
-          );
-        }
-        echo json_encode($products);
+          $products = $this->category->toArray(false, true, $group);
+          if (empty($products)) {
+            $products = array(
+              'error' => 400,
+              'errorMsg' => 'No hay productos',
+            );
+          }
+          echo json_encode($products);
+          return;
+          }
+          echo json_encode($products);
+          return;
       } catch (Exception $e) {
         $error = array(
           'error' => 200,
@@ -109,6 +109,19 @@ class Api extends Controller {
             !empty($estado) &&
             isset($estado)
           );
+
+          foreach ($productos as $producto) {
+            $check = $this->product->productoTallaColor(
+              $producto['idproducto'],
+              $producto['talla'],
+              $producto['color']
+            );
+            if(empty($check)){
+              throw new Exception("No existe la relacion del producto
+              {$producto['idproducto']}
+               con a talla {$producto['talla']} y color {$producto['color']}", 1);
+            }
+          }
 
           if($isValidOrder){
             $idorder = $this->clients->save(array(

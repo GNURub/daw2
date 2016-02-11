@@ -19,11 +19,13 @@
 a{
   outline: none;
 }
-
+html,body{
+  height: 100%;
+}
 body{
     margin: 0;
     width: 100%;
-    min-height: 100vh;
+    // min-height: 100vh;
     font-family: 'Roboto';
     color: $primary_text;
     display: flex;
@@ -54,10 +56,10 @@ h3{
 div.content {
   display: flex;
   width: 100%;
-  // flex-basis: 100vh;
+  flex-basis: 100%;
   box-shadow: 0 10px 40px rgba(0,0,0, .2);
   z-index: 1;
-  padding-top: 1em;
+  // padding-top: 1em;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap-reverse;
