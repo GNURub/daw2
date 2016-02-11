@@ -1,7 +1,7 @@
 <?php
 // /product/[{id}]/
-// /category/{cat}
-// /subcategory/{sub}
+// /category/{cat}/{group}
+// /subcategory/{sub}/{group}
 header('Access-Control-Allow-Origin: *');
 class Api extends Controller {
     private $_params;
@@ -53,6 +53,7 @@ class Api extends Controller {
     {
 
       $idcat = !empty($this->_params[0]) ? $this->_params[0] : false;
+      $group = !empty($this->_params[1]) ? $this->_params[1] : false;
       if(!$idcat){
         $error = array(
           'error' => 400,
@@ -62,7 +63,11 @@ class Api extends Controller {
         return;
       }
       try {
-        $products = $this->product->selecWithCategorySubcatAndProduct($idcat);
+        $products = $this->product->selecWithCategorySubcatAndProduct(
+        $idcat,
+        false,
+        $group
+        );
         if (empty($products)) {
           $products = array(
             'error' => 400,
@@ -81,10 +86,10 @@ class Api extends Controller {
     }
 
     function ordersAction(){
-      header('Access-Control-Allow-Origin: *');
+      // header('Access-Control-Allow-Origin: *');
       try {
         $user = !empty($this->_params[0]) ? $this->_params[0] : false;
-        $id = !empty($this->_params[1]) ? $this->_params[1] : false;
+        $id   = !empty($this->_params[1]) ? $this->_params[1] : false;
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
           if(!$user){
             throw new Exception("Inica el nombre e usuario", 1);

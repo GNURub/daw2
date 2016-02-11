@@ -21,21 +21,25 @@
     }
 
 
-    function selecWithCategorySubcatAndProduct($idcat, $idsub = false){
+    function selecWithCategorySubcatAndProduct($idcat, $idsub = false, $group = ""){
       $idcat = escapeText($idcat);
       $idsub = escapeText($idsub);
+      $group = escapeText($group);
+      if(!empty($group)){
+        $group = "GROUP BY " . $group;
+      }
       $query = "SELECT *
         FROM productos p
-        NATURAL JOIN productos_subcategorias_categorias a NATURAL JOIN imagenes i NATURAL JOIN productos_tallas_colores WHERE idcategoria = '{$idcat}'";
+        NATURAL JOIN productos_subcategorias_categorias a NATURAL JOIN imagenes i NATURAL JOIN productos_tallas_colores WHERE idcategoria = '{$idcat}' ".$group;
       if($idsub){
         if(!$idcat){
           $query = "SELECT *
             FROM productos p
-            NATURAL JOIN productos_subcategorias_categorias a NATURAL JOIN imagenes i NATURAL JOIN productos_tallas_colores WHERE idsubcategoria = '{$idsub}'";
+            NATURAL JOIN productos_subcategorias_categorias a NATURAL JOIN imagenes i NATURAL JOIN productos_tallas_colores WHERE idsubcategoria = '{$idsub}' ".$group;
         }else{
           $query = "SELECT *
             FROM productos p
-            NATURAL JOIN productos_subcategorias_categorias a NATURAL JOIN imagenes i NATURAL JOIN productos_tallas_colores WHERE idcategoria = '{$idcat}' AND idsubcategoria = '{$idsub}'";
+            NATURAL JOIN productos_subcategorias_categorias a NATURAL JOIN imagenes i NATURAL JOIN productos_tallas_colores WHERE idcategoria = '{$idcat}' AND idsubcategoria = '{$idsub}' ".$group;
         }
       }
       if(!$_puntero = $this->db->query($query)){

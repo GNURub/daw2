@@ -1,4 +1,5 @@
 <?php
+  use \stojg\crop\CropEntropy;
   // Validar email
   function isValidEmail($email){
     return filter_var($email, FILTER_VALIDATE_EMAIL);
@@ -12,6 +13,15 @@
   function isImageValid($file){
     return !!preg_match('/image\/*/', mime_content_type($file));
   }
+
+  function isNew($product, $msg = "Novedad", $days = 14){
+    $dStart = new DateTime($product['createdAt']);
+    $dEnd  = new DateTime();
+    $dDiff = $dStart->diff($dEnd);
+    $new = ($dDiff->days <= $days) ? "new='{$msg}'" : "";
+    return $new;
+  }
+
   function isJson($string) {
    json_decode($string, true);
    return (json_last_error() == JSON_ERROR_NONE);
@@ -47,7 +57,10 @@
     $newfilename = uniqid() . '.' . end($temp);
 
     if (move_uploaded_file($file["tmp_name"], IMGS . $newfilename)) {
-        return $newfilename;
+      $center = new CropEntropy(IMGS . $newfilename);
+      $croppedImage = $center->resizeAndCrop(300, 225);
+      $croppedImage->writeimage(IMGS . $newfilename);
+      return $newfilename;
     }
     throw new Exception("Error al subir la imagen", 1);
   }

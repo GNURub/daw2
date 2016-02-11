@@ -47,7 +47,10 @@
               $idsub = $params[1];
             }
             $selectedCategory = $catego['idcategoria'];
-            $productos        = $this->product->selecWithCategorySubcatAndProduct($selectedCategory, $idsub);
+            $productos        = $this->product->selecWithCategorySubcatAndProduct(
+            $selectedCategory,
+            $idsub,
+            "idproducto");
             $subcategories    = $this->subcategory->ofCategory($selectedCategory);
             // no va
             Log::write('Se muestra la categoria.');

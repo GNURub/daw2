@@ -28,7 +28,11 @@
           }
           try {
             $selectedSubcategory = $subcatego['idsubcategoria'];
-            $productos = $this->product->selecWithCategorySubcatAndProduct(false, $subcatego['idsubcategoria']);
+            $productos = $this->product->selecWithCategorySubcatAndProduct(
+            false,
+            $subcatego['idsubcategoria'],
+            'idproducto'
+            );
             Log::write("Se muestra la categoria.");
             return require VIEWS . 'home/index.php';
           } catch (Exception $e) {

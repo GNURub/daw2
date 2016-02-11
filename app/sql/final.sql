@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `thecatlong`.`productos` (
   `precio` DECIMAL NULL COMMENT '',
   `gatosdeenvio` DECIMAL NULL COMMENT '',
   `marca` VARCHAR(45) NULL COMMENT '',
-  `createdAt` DATETIME NULL DEFAULT CURRENT_TIMESTAMP COMMENT '',
+  `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '',
   `iddescuento` INT NULL COMMENT '',
   `proveedor` VARCHAR(45) NULL DEFAULT 'local' COMMENT '',
   PRIMARY KEY (`idproducto`)  COMMENT '',
