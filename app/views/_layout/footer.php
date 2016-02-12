@@ -51,6 +51,6 @@
 </footer>
 
 <!-- our JavaScript -->
-<script src="<?php echo URL; ?>js/app.js"></script>
+<script src="<?php echo URL; ?>js/app.js" async></script>
 </body>
 </html>
