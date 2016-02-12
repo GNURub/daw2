@@ -19,10 +19,6 @@
 
       public function index($params = array())
       {
-          if (!self::getSession('username')) {
-              Log::write('Se ha intentado a acceder a la zona de usuarios registrados /client');
-              return header('location: /');
-          }
           if (empty($params[0])) {
             $userData = $this->client->toArray($_SESSION['username']);
             $canAccess = (
