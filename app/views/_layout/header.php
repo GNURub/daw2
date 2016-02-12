@@ -5,7 +5,7 @@
   );
  ?>
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" manifest="app.appcache">
 <head>
     <meta charset="utf-8">
     <link rel="apple-touch-icon" sizes="57x57" href="<?=URL; ?>images/icons/apple-icon-57x57.png">
@@ -35,7 +35,7 @@
     <script src="<?=URL; ?>js/wc.js" async></script>
 
     <!-- Style Sheets  -->
-    <link href="<?=URL; ?>css/all.css" rel="stylesheet">
+    <link href="<?=URL; ?>css/all.css" rel="stylesheet" media="none" onload="if(media!='all')media='all'">
 
     <!-- Web Components -->
     <link rel="import" href="<?=URL; ?>components/item.html">

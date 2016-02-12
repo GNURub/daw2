@@ -1,0 +1,18 @@
+CACHE MANIFEST
+# v1.3 2011-08-15
+# Este es otro comentario
+/components/item.html
+/components/social-buttons.html
+/js/wc.js
+*.png
+#all.css
+# Usar desde la red si está disponible
+NETWORK:
+index.php
+/css/all.css
+/js/app.js
+*
+
+# Contenido de fallback
+FALLBACK:
+#/ fallback.html
