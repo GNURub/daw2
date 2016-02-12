@@ -1,5 +1,5 @@
 USE thecatlong;
-INSERT INTO usuarios VALUES('test', 'test', 'test', '2015-11-27 00:56:09', 'test@gmail.com', NULL, NULL, '1', 'administrador', '56a/NpXpEac4I', '0', 'local');
+INSERT INTO usuarios VALUES('test', 'test', 'test', '2015-11-27 00:56:09', 'test@gmail.com', NULL, NULL, '1', 'administrador', '56a/NpXpEac4I', '0', 'local', NULL, 'Hola soy ruben tengo 23 años, soy programador');
 
 INSERT INTO color VALUES('azul');
 INSERT INTO color VALUES('rojo');

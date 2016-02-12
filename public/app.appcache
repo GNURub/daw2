@@ -3,6 +3,8 @@ CACHE MANIFEST
 # Este es otro comentario
 /components/item.html
 /components/social-buttons.html
+/components/go.html
+/components/fb.html
 /js/wc.js
 *.png
 #all.css

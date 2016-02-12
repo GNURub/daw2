@@ -20,13 +20,16 @@
       public function index($params = array())
       {
           if (empty($params[0])) {
-            $userData = $this->client->toArray($_SESSION['username']);
-            $canAccess = (
-              !empty($userData)
-            );
-            if ($canAccess) {
-                Log::write('El usuario accede a su perfil.');
-                return require VIEWS.'client/index.php';
+            if(isset($_SESSION['username'])){
+
+              $userData = $this->client->toArray($_SESSION['username']);
+              $canAccess = (
+                !empty($userData)
+              );
+              if ($canAccess) {
+                  Log::write('El usuario accede a su perfil.');
+                  return require VIEWS.'client/index.php';
+              }
             }
             Log::write('El usuario no tiene acceso');
             return require VIEWS.'error/401.php';
@@ -108,6 +111,9 @@
         if ($isValidUser) {
           try {
             $userData = $this->client->toArray($username);
+            if(empty($userData) || empty($userData['password'])){
+              throw new Exception("No existe el usuario {$username}", 1);
+            }
             if (hash_equals($userData['password'], crypt($password, $userData['password']))) {
                 self::setSession('username', $userData['username']);
                 self::setSession('admin', $userData['rol']);

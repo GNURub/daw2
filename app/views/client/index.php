@@ -19,7 +19,10 @@
         Hola soy ruben tengo 23 años, soy programador
       </p>
     </header>
-    <section class="stream">
+    <section class="stream-container">
+      <ul class="stream-activity">
+        <li class="stream-item"></li>
+      </ul>
     </section>
   </div>
 </div>

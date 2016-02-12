@@ -5,7 +5,7 @@
   );
  ?>
 <!DOCTYPE html>
-<html lang="es" manifest="app.appcache">
+<html lang="es">
 <head>
     <meta charset="utf-8">
     <link rel="apple-touch-icon" sizes="57x57" href="<?=URL; ?>images/icons/apple-icon-57x57.png">
