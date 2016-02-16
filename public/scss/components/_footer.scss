@@ -1,34 +1,30 @@
 footer{
   width: 100%;
   height: 205px;
-  display: flex;
-  flex-direction: column;
+  @extend .layout.vertical;
   color: rgba(255,255,255, .7);
   background-color: $dark_primary;
   h3{
     color: $text_color;
   }
   div{
-    display: flex;
-    flex-direction: row;
+    @extend .layout.horizontal;
     width: 100%;
     &:nth-of-type(1){
       padding-bottom: 1em;
-      justify-content: space-around;
+      @extend .layout.around-justified;
       background-color: $dark_primary;
       div.data{
-        justify-content: flex-start;
+        @extend .layout.vertical;
+        @extend .layout.start-justified;
         margin-left: 1em;
-        display: flex;
-        flex-direction: column;
         ul{
-          display: flex;
-          justify-content: space-between;
-          flex-direction: column;
+          @extend .layout.vertical;
+          @extend .layout.justified;
           li{
             display: flex;
-            justify-content: flex-start;
-            align-items: center;
+            @extend .layout.start-justified;
+            @extend .layout.center;
             margin-bottom: .2em;
             i.material-icons{
               width: 30px;
@@ -37,9 +33,7 @@ footer{
               text-align: center;
               background-color: $primary;
               display: flex;
-              justify-content: center;
-              align-items: center;
-
+              @extend .layout.center-center;
             }
             & > * {
               margin: 0 .5em;
@@ -49,8 +43,7 @@ footer{
         }
       }
       div.about{
-        display: flex;
-        flex-direction: column;
+        @extend .layout.vertical;
       }
     }
     &.social{
@@ -58,10 +51,8 @@ footer{
       background-color: $primary;
       height: 20%;
       ul{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: row;
+        @extend .layout.horizontal;
+        @extend .layout.center-center;
         li{
           margin: 0 1em;
         }

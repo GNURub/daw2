@@ -73,7 +73,7 @@
       {
         // load VIEWSs
         $categories = array(array('idcategoria'=> 'Imagenes'), array('idcategoria'=>'Videos'));
-        return require VIEWS . 'home/lost.php';
+        return require VIEWS . 'home/multimedia.php';
       }
 
 

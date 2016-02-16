@@ -1,0 +1,50 @@
+.layout.horizontal,
+.layout.horizontal-reverse,
+.layout.vertical,
+.layout.vertical-reverse {
+    display: flex;
+  }
+.layout.horizontal {
+  flex-direction: row;
+}
+
+.layout.horizontal-reverse {
+  flex-direction: row-reverse;
+}
+.layout.vertical {
+  flex-direction: column;
+}
+.layout.vertical-reverse {
+  flex-direction: row-reverse;
+}
+.layout.wrap {
+  flex-wrap: wrap;
+}
+.layout.wrap-reverse {
+  flex-wrap: wrap-reverse;
+}
+.layout.center,
+.layout.center-center {
+  align-items: center;
+}
+.layout.end {
+  align-items: flex-end;
+}
+.layout.start-justified {
+  justify-content: flex-start;
+}
+.layout.center-center {
+  justify-content: center;
+}
+.layout.end-justified {
+  justify-content: flex-end;
+}
+.layout.around-justified {
+  justify-content: space-around;
+}
+.layout.justified {
+  justify-content: space-between;
+}
+.self-start {
+  align-self: flex-start;
+}

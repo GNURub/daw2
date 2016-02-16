@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Pacifico|Roboto:400,700,300,500,400italic|Montserrat:400,700|Material+Icons);
 @import 'components/theme';
+@import 'components/layout';
 @import 'components/header';
 @import 'components/form';
 @import 'components/input';
@@ -25,11 +26,9 @@ html,body{
 body{
     margin: 0;
     width: 100%;
-    // min-height: 100vh;
     font-family: 'Roboto';
     color: $primary_text;
-    display: flex;
-    flex-direction: column;
+    @extend .layout.vertical;
 }
 
 ul{
@@ -54,14 +53,13 @@ h3{
 }
 
 div.content {
-  display: flex;
+  @extend .layout.horizontal;
+  @extend .layout.wrap-reverse;
+
   width: 100%;
   flex-basis: 100%;
   box-shadow: 0 10px 40px rgba(0,0,0, .2);
   z-index: 1;
-  // padding-top: 1em;
-  display: flex;
-  flex-direction: row;
   flex-wrap: wrap-reverse;
 
   @media screen and (max-width: 640px) {
@@ -77,7 +75,7 @@ div.content {
       & > div.main-container {
           flex-basis: 100%;
           div.items-container{
-            justify-content: center!important;
+            @extend .layout.center-center;
             padding: 0!important;
             x-item{
               width: 100%;
@@ -111,8 +109,7 @@ div.content {
 
 
   & > div.main-container{
-    display: flex;
-    flex-direction: column;
+    @extend .layout.vertical;
     flex-wrap: nowrap;
     flex-basis: 80%;
     flex-grow: 1;
@@ -129,20 +126,18 @@ div.content {
     }
 
     div.items-container{
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      align-items: flex-end;
+      @extend .layout.horizontal;
+      @extend .layout.justified;
+      @extend .layout.wrap;
+      @extend .layout.end;
       align-content: flex-end;
       padding: 0 1em 1em 1em;
     }
   }
   div.profile{
+    @extend .layout.vertical;
+    @extend .layout.center;
     width: 40%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     padding: 35px 40px 40px 40px;
     margin: 70px auto;
     background-color: rgb(244, 244, 244);
@@ -226,6 +221,27 @@ div.content {
       }
     }
   }
+
+
+  div.multimedia{
+    @extend .layout.horizontal;
+    @extend .layout.center-center;
+    @extend .layout.wrap;
+    flex-basis: 90%;
+    .card{
+      width: 250px;
+      text-align: center;
+      a{
+        text-decoration: none;
+        color: black;
+      }
+      img{
+        width: 250px;
+        height: 200px
+      }
+    }
+  }
+
 }
 
 div.content x-item{
@@ -234,8 +250,12 @@ div.content x-item{
 
 .wrapper{
   width: 100%;
-  margin: 0 auto;
+  margin: 1em auto;
   overflow: hidden;
+}
+.wrap{
+  @extend .layout.vertical;
+  margin: 0 auto;
 }
 
 .roboto{

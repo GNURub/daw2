@@ -1,15 +1,6 @@
 .content.form{
-  display: flex;
-  flex-direction: column;
-  
+  @extend .layout.vertical;
 }
-
-.wrap{
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-}
-
 
 form{
   margin: auto;
@@ -28,10 +19,9 @@ form{
     ul{
       height: 100%;
       li, span.q{
-        display: flex;
-        flex-direction: row;
+        @extend .layout.horizontal;
+        @extend .layout.center;
         flex-wrap: nowrap;
-        align-items: center;
       }
       li{
         border-bottom: 1px solid lighten($divider_color, 15%);
