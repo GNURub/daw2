@@ -4,6 +4,9 @@ div.multimedia.imagenes{
   @extend .layout.around-justified;
   @extend .layout.center-center;
   flex-basis: 100%!important;
+  img{
+    display: block;
+  }
 }
 .lightbox-target {
   position: fixed;

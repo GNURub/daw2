@@ -9,9 +9,10 @@
   width: 300px;
 }
 .card.lightbox{
-  width: auto;
+  width: auto!important;
   min-height: 0;
   height: auto;
+  padding: 6px;
 }
 
 .card-1 {

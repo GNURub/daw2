@@ -36,12 +36,25 @@ class Api extends Controller {
     }
 
     public function productAction($params)
-    {
+    {   
+        function absUrl($pro){
+                $pro['path'] = URL . 'images/' .$pro['path'];
+                return $pro;
+        }
 
         try {
           $id = !empty($this->_params[0]) ? $this->_params[0] : false;
-          $proucts = $this->product->toArray($id);
-          echo json_encode($proucts);
+          $products = $this->product->toArray($id);
+          if(!empty($products)){    
+            if(isset($products['path'])){
+                $products['path'] = URL . 'images/' .$products['path'];
+            }else if(is_array($products)){
+                $products = array_map('absUrl', $products);
+            }
+            echo json_encode($products);
+            return;
+          }
+          throw new Exception("No hay productos");
         } catch (Exception $e) {
           $error = array(
             'error' => 200,

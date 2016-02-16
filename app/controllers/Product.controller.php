@@ -71,7 +71,7 @@
                 'sequence',
                 '',
                 array(),
-                array(array('ref' => 'http://schemas.xmlsoap.org/soap/encoding/:arrayType',
+                array(array('ref' => 'SOAP-ENC:arrayType',
                  'wsdl:arrayType' => 'tns:Producto[]')
                 ),
                 'tns:Producto'
@@ -88,6 +88,7 @@
             "rpc",
             "encoded",
             "Get products by category or subcategory");
+
         $server->register("ProductModel.toArray",
             array("id" => "xsd:string"),
             array("return" => "xsd:Array"),
