@@ -33,6 +33,20 @@
           </p>
         </div>
       </section>
+
+      <section class="columns">
+        <div class="column">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/5atBXpXs-X4" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="column">
+          <h3>Hola</h3>
+          <p >
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>
+      </section>
     </div>
   </article>
 </div>
