@@ -163,7 +163,8 @@
           if (!self::getSession('username')) {
               return header('location: /');
           }
-          // if(!empty(self::getSession('productos'))) {
+          
+          if(!isset($_SESSION['productos']) || !empty($_SESSION['productos'])){ 
             $productos = array();
             foreach (self::getSession('productos') as $id => $q) {
                 $pro = $this->product->toArray($id);
@@ -172,8 +173,9 @@
                   array_push($productos, $pro);
                 }
             }
-            return generate_facture($productos);
-          // }   
+            return generate_facture($productos);  
+          }
+          return header('location: /');
       }
 
       public function deleteAction()
