@@ -164,7 +164,7 @@
               return header('location: /');
           }
           
-          if(!isset($_SESSION['productos']) || !empty($_SESSION['productos'])){ 
+          if(isset($_SESSION['productos']) && !empty($_SESSION['productos'])){ 
             $productos = array();
             foreach (self::getSession('productos') as $id => $q) {
                 $pro = $this->product->toArray($id);
