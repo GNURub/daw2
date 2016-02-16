@@ -39,9 +39,6 @@
       }
 
       public function soapAction(){
-        function getAll($params){
-          return $this->product->selecWithCategorySubcatAndProduct($params[0], $params[1], $params[2]);
-        }
         $server = new soap_server();
         $server->configureWSDL('productservice','urn:ProductModel', URL.'product/soap');
         $server->wsdl->schemaTargetNamespaces = 'urn:ProductModel';
@@ -79,7 +76,7 @@
                 ),
                 'tns:Producto'
         );
-        $server->register("getAll",
+        $server->register("ProductModel.selecWithCategorySubcatAndProduct",
             array(
               "category" => "xsd:string",
               "subcategory" => "xsd:string",
