@@ -1,0 +1,29 @@
+{
+  "name": "thecatlong",
+  "version": "1.0.0",
+  "description": "The Cat Long! ===================",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-sass": "^2.1.0",
+    "node-sass": "^3.4.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GNURub/daw2.git"
+  },
+  "keywords": [
+    "MVC",
+    "PHP"
+  ],
+  "author": "Ruben Cid Lara",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GNURub/daw2/issues"
+  },
+  "homepage": "https://github.com/GNURub/daw2#readme"
+}
