@@ -3,12 +3,11 @@
   "version": "1.0.0",
   "description": "The Cat Long! ===================",
   "main": "gulpfile.js",
-  "dependencies": {
+  "devDependencies": {
     "gulp-autoprefixer": "^3.1.0",
     "gulp-sass": "^2.1.0",
     "node-sass": "^3.4.2"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
