@@ -26,8 +26,8 @@
           </li>
         </ul>
         <input type="hidden" name="amount" value=""/>
-        <!-- <a href="" class="btn btn-lg red">PDF</a> -->
-        <button class="btn btn-lg red" style="width: 100%;padding: 0.2em 1em;">Pagar ahora!</button>
+        <button class="btn btn-lg red" <?=count($productos)?"":"disabled"?> style="width: 100%;padding: 0.2em 1em;">Pagar ahora!</button>
+        <a href="/client/facture" class="btn btn-lg red">PDF</a> 
       </form>
     </div>
   </div>

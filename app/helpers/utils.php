@@ -83,6 +83,7 @@
   // Generar Factura
   function generate_facture($productos = array()){
       // print_r($productos);
+      // exit;
       $pdf = new PDF_Invoice( 'P', 'mm', 'A4' );
       $pdf->AddPage();
       $pdf->addSociete( "TheCatLong",
@@ -115,25 +116,27 @@
       $pdf->addLineFormat( $cols);
       $pdf->addLineFormat($cols);
 
-      // productos
+  
       $y  = 109;
+      $total = 0;
+      
       foreach ($productos as $id => $pro) {
-        foreach ($pro as $key => $value) {
-          $line = array( "REFERENCIA"    => "REF". $value['idproducto'],
-          "DESCRIPCION"  => ucfirst($value['descripcion']),
+          $totalProducto = ($pro["precio"] + $pro["precio"] * 0.21);
+          $total += $totalProducto;
+          $line = array( "REFERENCIA"    => "REF". $pro['idproducto'],
+          "DESCRIPCION"  => ucfirst($pro['descripcion']),
           "CANTIDAD"     => "1",
-          "PRECIO UNI."      => $value["precio"] . " ". EURO,
-          "PRECIO TOTAL" => "600.00",
-          "I.V.A."          => "1" );
+          "PRECIO UNI."      => $pro["precio"] . " ". EURO,
+          "PRECIO TOTAL" => $totalProducto,
+          "I.V.A."          => "21%" );
           $size = $pdf->addLine( $y, $line );
           $y   += $size + 2;
-        }
       }
-
+ 
 
       $pdf->addCadreTVAs();
 
-      $tot_prods = array( array ( "px_unit" => 600, "qte" => 1, "tva" => 1 ),
+      $tot_prods = array( array ( "px_unit" => $totalProducto, "qte" => 1, "tva" => 1 ),
       array ( "px_unit" =>  10, "qte" => 1, "tva" => 1 ));
       $tab_tva = array( "1"       => 19.6,
       "2"       => 5.5);
@@ -145,7 +148,7 @@
       "portTTC"        => 10,      // montant des frais de ports TTC
       // par defaut la TVA = 19.6 %
       "portHT"         => 0,       // montant des frais de ports HT
-      "portTVA"        => 19.6,    // valeur de la TVA a appliquer sur le montant HT
+      "portTVA"        => 21,    // valeur de la TVA a appliquer sur le montant HT
       "AccompteExige" => 1,
       "accompte"         => 0,     // montant de l'acompte (TTC)
       "accompte_percent" => 15,    // pourcentage d'acompte (TTC)

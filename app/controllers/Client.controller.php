@@ -163,14 +163,17 @@
           if (!self::getSession('username')) {
               return header('location: /');
           }
-
+          if(empty(self::getSession('productos'))) {
+            return header('location: /');
+          }   
           $productos = array();
           foreach (self::getSession('productos') as $id => $q) {
               $pro = $this->product->toArray($id);
-              $pro['q'] = $q;
-              array_push($productos, $pro);
+              if(!empty($pro)){  
+                $pro['q'] = $q;
+                array_push($productos, $pro);
+              }
           }
-
           return generate_facture($productos);
       }
 
@@ -282,7 +285,7 @@
       public function checkoutAction()
       {
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['productos']) && !empty($_POST['productos'])) {
 
           $hash_compra = md5(uniqid(time()));
           foreach ($_POST['productos'] as $pro) {
@@ -367,7 +370,9 @@
         }
         return require VIEWS.'error/401.php';
       }
+      
       public function koAction(){
         return require VIEWS.'error/400.php';
       }
+      
   }

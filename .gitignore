@@ -2,3 +2,5 @@ node_modules/
 public/images/*.png
 *.*~
 app/config/credentials.json
+.settings
+.codio
