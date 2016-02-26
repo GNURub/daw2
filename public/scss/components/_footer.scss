@@ -22,7 +22,6 @@ footer{
         ul{
           @extend .layout.vertical;
           @extend .layout.justified;
-          height: 237px;
           li{
             display: flex;
             @extend .layout.start-justified;

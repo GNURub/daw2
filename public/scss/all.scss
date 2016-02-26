@@ -21,8 +21,8 @@
 a{
   outline: none;
 }
-html,body{
-  height: 100%;
+html{
+  min-height: 100%;
 }
 body{
     margin: 0;
@@ -30,6 +30,7 @@ body{
     font-family: 'Roboto';
     color: $primary_text;
     @extend .layout.vertical;
+    height: 100%;
 }
 
 ul{
