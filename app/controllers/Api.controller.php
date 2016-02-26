@@ -36,7 +36,7 @@ class Api extends Controller {
     }
 
     public function productAction($params)
-    {   
+    {
         function absUrl($pro){
                 $pro['path'] = URL . 'images/' .$pro['path'];
                 return $pro;
@@ -45,7 +45,7 @@ class Api extends Controller {
         try {
           $id = !empty($this->_params[0]) ? $this->_params[0] : false;
           $products = $this->product->toArray($id);
-          if(!empty($products)){    
+          if(!empty($products)){
             if(isset($products['path'])){
                 $products['path'] = URL . 'images/' .$products['path'];
             }else if(is_array($products)){
@@ -99,10 +99,10 @@ class Api extends Controller {
     }
 
     function ordersAction(){
-      // header('Access-Control-Allow-Origin: *');
       try {
         $user = !empty($this->_params[0]) ? $this->_params[0] : false;
         $id   = !empty($this->_params[1]) ? $this->_params[1] : false;
+
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
           if(!$user){
             throw new Exception("Inica el nombre e usuario", 1);
@@ -203,7 +203,6 @@ class Api extends Controller {
       }
       return;
     }
-
 }
 
 ?>

@@ -1,6 +1,6 @@
 footer{
   width: 100%;
-  height: 205px;
+  height: auto;
   @extend .layout.vertical;
   color: rgba(255,255,255, .7);
   background-color: $dark_primary;
@@ -18,9 +18,11 @@ footer{
         @extend .layout.vertical;
         @extend .layout.start-justified;
         margin-left: 1em;
+        padding: 0;
         ul{
           @extend .layout.vertical;
           @extend .layout.justified;
+          height: 237px;
           li{
             display: flex;
             @extend .layout.start-justified;

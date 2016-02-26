@@ -30,13 +30,10 @@
     <meta name="description" content="">
 
     <title>TheCatLong...</title>
-
-    <!-- Scripts -->
-    <script src="<?=URL; ?>js/wc.js" async></script>
-
+    
     <!-- Style Sheets  -->
     <link href="<?=URL; ?>css/all.css" rel="stylesheet" media="none" onload="if(media!='all')media='all'">
-
+    <!-- // <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.21/webcomponents.min.js" async></script> -->
     <!-- Web Components -->
     <link rel="import" href="<?=URL; ?>components/item.html">
     <link rel="import" href="<?=URL; ?>components/social-buttons.html">

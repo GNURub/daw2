@@ -5,6 +5,6 @@
   && 'content' in doc.createElement('template'));
 
   if(!isCompatibleWC){
-    doc.write("<script src='https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.18/webcomponents.min.js'></script>");
+    doc.write("<script src='https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.21/webcomponents.min.js'></script>");
   }
 })(document);

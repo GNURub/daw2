@@ -57,7 +57,7 @@ div.content {
   @extend .layout.horizontal;
   @extend .layout.wrap-reverse;
 
-  width: 100%;
+  // width: 100%;
   flex-basis: 100%;
   box-shadow: 0 10px 40px rgba(0,0,0, .2);
   z-index: 1;
