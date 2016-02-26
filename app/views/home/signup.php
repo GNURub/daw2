@@ -57,6 +57,12 @@
         </div>
       </li>
 
+      <li class="list__item">
+        <input id='news' type="checkbox" class="checkbox" name="news" checked>
+        <label for="news" class="label--checkbox">Recibir notificaciones de los nuevos productos</label>
+
+      </li>
+
       <li>
         <button class="btn lg" type="submit"><span>Registrarse</span></button>
       </li>

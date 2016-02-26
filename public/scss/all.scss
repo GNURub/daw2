@@ -9,8 +9,9 @@
 @import 'components/select';
 @import 'components/footer';
 @import 'components/icons';
+@import 'components/animations';
 // @import 'components/images';
-// @import 'components/videos';
+@import 'components/checkbox';
 @import 'components/multimedia';
 
 
@@ -53,7 +54,11 @@ h3{
   font-size: 30px;
   margin-top: 0;
 }
-
+x-item{
+  user-select: text;
+  touch-callout: none;
+  -webkit-touch-callout: none;
+}
 div.content {
   @extend .layout.horizontal;
   @extend .layout.wrap-reverse;

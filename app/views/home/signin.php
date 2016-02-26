@@ -29,6 +29,7 @@
         </li>
       </ul>
       <social-buttons fb-url="<?=$fbUrl;?>" go-url="<?=$goUrl;?>"></social-buttons>
+      
     </form>
   </div>
 </div>

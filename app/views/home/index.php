@@ -7,7 +7,7 @@
  -->
 
 <div class="content index">
-  <div class="menu-container">
+  <div class="menu-container animated bounceInLeft">
     <div class="title-container">
       <h4>Categorias</h4>
     </div>
@@ -35,9 +35,9 @@
     <div class="items-container">
       <?php
       $imAdmin = self::getSession('admin') && self::getSession('username') ? "admin" : null;
-      foreach ($productos as $producto) {
+      foreach ($productos as $i=>$producto) {
         $new = isNew($producto);
-        echo "<x-item {$imAdmin} {$new} url='/images/{$producto['path']}' num='{$producto['idproducto']}' label='{$producto['titulo']}' descripcion='{$producto['descripcion']}'></x-item>";
+        echo "<x-item class='animated zoomIn' style='animation-delay: {$i}00ms;' {$imAdmin} {$new} url='/images/{$producto['path']}' num='{$producto['idproducto']}' label='{$producto['titulo']}' descripcion='{$producto['descripcion']}'></x-item>";
       }
       ?>
     </div>

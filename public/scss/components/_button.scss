@@ -8,10 +8,8 @@ a.btn{
   text-decoration: none;
 }
 .btn {
-  &[disabled]{
-    background-color: #999!important;
-  }
-  
+
+
   position: relative;
 
   display: block;
@@ -33,6 +31,9 @@ a.btn{
   font-size: 19px;
   font-weight: bold;
 
+  &[disabled]{
+    background-color: #999!important;
+  }
 
 
   &:hover, &:focus {

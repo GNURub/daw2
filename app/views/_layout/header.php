@@ -30,7 +30,7 @@
     <meta name="description" content="">
 
     <title>TheCatLong...</title>
-    
+
     <!-- Style Sheets  -->
     <link href="<?=URL; ?>css/all.css" rel="stylesheet" media="none" onload="if(media!='all')media='all'">
     <!-- // <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.21/webcomponents.min.js" async></script> -->
