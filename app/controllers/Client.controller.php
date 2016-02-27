@@ -61,6 +61,7 @@
               isset($email) &&
               isset($password) &&
               isset($con_password) &&
+              isset($news) &&
               !empty($username) &&
               !empty($nombre) &&
               !empty($apellidos) &&
@@ -82,6 +83,7 @@
                       'apellidos' => $apellidos,
                       'email' => $email,
                       'password' => $hash,
+                      'news' => $news
                     )
                   );
                   $_SESSION['username'] = $username;
@@ -368,32 +370,30 @@
 
       public function okAction(){
         // PRODUCTION
-        // if(isset($_SERVER['HTTP_REFERER']) &&
-        // $_SERVER['HTTP_REFERER'] == "http://jguasch.esy.es/redsys/lacaixaOK.php"){
-        //   try {
-        //     $hash_compra = md5(uniqid(time()));
-        //     $this->client->save(array(
-        //       "hash_compra" => $hash_compra,
-        //       "estado"      => "pagado",
-        //       "username"    => self::getSession("username")
-        //     ), "compras");
-        //
-
+        if(isset($_SERVER['HTTP_REFERER']) &&
+        $_SERVER['HTTP_REFERER'] == "http://jguasch.esy.es/redsys/lacaixaOK.php"){
+          try {
+            $hash_compra = md5(uniqid(time()));
+            $this->client->save(array(
+              "hash_compra" => $hash_compra,
+              "estado"      => "pagado",
+              "username"    => self::getSession("username")
+            ), "compras");
             $client = $this->client->toArray(self::getSession('username'));
             $productos = $this->_generate_products();
             if(!empty($productos) && !empty($client)){
               return generate_facture($productos , $client);
             }
-        //     return header('location: /');
-        //   } catch (Exception $e) {
-        //     $error = $e->getMessage();
-        //     return require VIEWS. 'error/500.php';
-        //   }
-        //   return;
-        // }
-        // $error = "El host de peticion debe ser -> http://jguasch.esy.es/redsys/lacaixaOK.php";
-        // require VIEWS.'error/401.php';
-        // return;
+            return header('location: /');
+          } catch (Exception $e) {
+            $error = $e->getMessage();
+            return require VIEWS. 'error/500.php';
+          }
+          return;
+        }
+        $error = "El host de peticion debe ser -> http://jguasch.esy.es/redsys/lacaixaOK.php";
+        require VIEWS.'error/401.php';
+        return;
       }
 
       public function koAction(){

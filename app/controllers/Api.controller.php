@@ -30,14 +30,16 @@ class Api extends Controller {
 
     public function index($params = array()){
       // $this->productAction();
-      echo json_encode(array(
+      echo json_encode(
         array(
           "endpoints" =>array(
-            "/api//product/[{id}]/",
-            "/api/category/[{group}]",
+            "/api/product/[{id}]/",
+            "/api/category/",
+            "/api/category/[{category}]/",
+            "/api/category/[{category}]/[{group}]",
           )
         )
-      ));
+      );
       return;
     }
 

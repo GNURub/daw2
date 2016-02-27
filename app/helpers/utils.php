@@ -205,7 +205,7 @@ function generate_ticket($productos = array()){
 
       return sendEmail(
         true,
-        $client,
+        array($client),
         'Factura',
         'Ya tiene disponible su factura. Grácias por su compra',
         array(
