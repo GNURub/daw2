@@ -285,13 +285,13 @@ function addNumTVA($tva)
 function addReference($ref)
 {
     $this->SetFont( "Arial", "", 10);
-    $length = $this->GetStringWidth( "Références : " . $ref );
+    $length = $this->GetStringWidth( "Referencias : " . $ref );
     $r1  = 10;
     $r2  = $r1 + $length;
     $y1  = 92;
     $y2  = $y1+5;
     $this->SetXY( $r1 , $y1 );
-    $this->Cell($length,4, "Références : " . $ref);
+    $this->Cell($length,4, "Referencias : " . $ref);
 }
 
 function addCols( $tab )

@@ -1,67 +1,113 @@
 <?php
-    $num = 'CMD01-'.date('ymd');
-    $nom = 'DUPONT Alphonse';
-    $date = '01/01/2012';
-?>
+  $total = 0;
+ ?>
 <style type="text/css">
-<!--
-    div.zone { border: none; border-radius: 6mm; background: #FFFFFF; border-collapse: collapse; padding:3mm; font-size: 2.7mm;}
-    h1 { padding: 0; margin: 0; color: #DD0000; font-size: 7mm; }
-    h2 { padding: 0; margin: 0; color: #222222; font-size: 5mm; position: relative; }
--->
+  h1{
+    font-family: Helvetica, sans-serif;
+
+  }
+  .address{
+    text-align: center;
+    color: rgb(111, 111, 111);
+    font-size: 10px;
+    font-weight: bold;
+  }
+  .center{
+    text-align: center;
+    display: block;
+  }
+  .margin{
+    margin-bottom: 50px;
+  }
+  table{
+    width: 100%;
+  }
+  th{
+    font-size: 10px;
+  }
+  td{
+    font-size: 9px;
+  }
+  .footer{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    margin: 20px auto;
+    font-size: 7px;
+  }
+  .descript{
+    text-transform: uppercase;
+  }
 </style>
-<page format="100x200" orientation="L" backcolor="#AAAACC" style="font: arial;">
-    <div style="rotate: 90; position: absolute; width: 100mm; height: 4mm; left: 195mm; top: 0; font-style: italic; font-weight: normal; text-align: center; font-size: 2.5mm;">
-        Ceci est votre e-ticket à présenter au contrôle d'accès -
-        billet généré par <a href="http://html2pdf.fr/" style="color: #222222; text-decoration: none;">html2pdf</a>
-    </div>
-    <table style="width: 99%;border: none;" cellspacing="4mm" cellpadding="0">
+<page format="130x90" orientation="R" backcolor="#fff" style="font: arial;">
+  <h1 class="center">
+    <img src="<?=IMGS.'icons/android-icon-36x36.png'?>" alt="" />
+    The Cat Long
+  </h1>
+  <div class="address center">Avenida Perez Matutes Noguera</div>
+  <div class="address center">Ibiza, 07800</div>
+  <div class="address center">(+34) 971 39 10 39</div>
+  <div class="address center margin"><?php echo date('d/m/Y H:i'); ?></div>
+  <table style="width: 100%;border: none;" cellspacing="4mm" cellpadding="0">
+      <tr>
+          <th style="width: 25%">
+            #REF
+          </th>
+          <th style="width: 25%">
+            DESCRIPCION
+          </th>
+          <th style="width: 25%">
+            CANTIDAD
+          </th>
+          <th style="width: 25%">
+            PRECIO
+          </th>
+          <!-- <td colspan="2" style="width: 100%"> -->
+          <!-- </td>
+          <td colspan="2" style="width: 100%">
+          </td> -->
+      </tr>
+      <?php foreach ($productos as $product):
+              $total += ($product['q'] * $product['precio']);
+      ?>
         <tr>
-            <td colspan="2" style="width: 100%">
-                <div class="zone" style="height: 34mm;position: relative;font-size: 5mm;">
-                    <div style="position: absolute; right: 3mm; top: 3mm; text-align: right; font-size: 4mm; ">
-                        <b><?php echo $nom; ?></b><br>
-                    </div>
-                    <div style="position: absolute; right: 3mm; bottom: 3mm; text-align: right; font-size: 4mm; ">
-                        <b>1</b> place <b>plein tarif</b><br>
-                        Prix unitaire TTC : <b>45,00&euro;</b><br>
-                        N° commande : <b><?php echo $num; ?></b><br>
-                        Date d'achat : <b><?php echo date('d/m/Y à H:i:s'); ?></b><br>
-                    </div>
-                    <h1>Billet soirée spécial Html2Pdf</h1>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<b>Valable le <?php echo $date; ?> à 20h30</b><br>
-                </div>
+            <td style="width: 25%">
+              <?=$product['idproducto'] ?>
+            </td >
+            <td style="width: 25%" class="descript">
+              <?=$product['descripcion'] ?>
+            </td>
+            <td style="width: 25%">
+              <?=$product['q'] ?>
+            </td>
+            <td style="width: 25%">
+              <?=$product['precio'] ?> €
             </td>
         </tr>
-        <tr>
-            <td style="width: 25%;">
-                <div class="zone" style="height: 40mm;vertical-align: middle;text-align: center;">
-                    <qrcode value="<?php echo $num."\n".$nom."\n".$date; ?>" ec="Q" style="width: 37mm; border: none;" ></qrcode>
-                </div>
-            </td>
-            <td style="width: 75%">
-                <div class="zone" style="height: 40mm;vertical-align: middle; text-align: justify">
-                    <b>Conditions d'utilisation du billet</b><br>
-                    Le billet est soumis aux conditions générales de vente que vous avez
-                    acceptées avant l'achat du billet. Le billet d'entrée est uniquement
-                    valable s'il est imprimé sur du papier A4 blanc, vierge recto et verso.
-                    L'entrée est soumise au contrôle de la validité de votre billet. Une bonne
-                    qualité d'impression est nécessaire. Les billets partiellement imprimés,
-                    souillés, endommagés ou illisibles ne seront pas acceptés et seront
-                    considérés comme non valables. En cas d'incident ou de mauvaise qualité
-                    d'impression, vous devez imprimer à nouveau votre fichier. Pour vérifier
-                    la bonne qualité de l'impression, assurez-vous que les informations écrites
-                    sur le billet, ainsi que les pictogrammes (code à barres 2D) sont bien
-                    lisibles. Ce titre doit être conservé jusqu'à la fin de la manifestation.
-                    Une pièce d'identité pourra être demandée conjointement à ce billet. En
-                    cas de non respect de l'ensemble des règles précisées ci-dessus, ce billet
-                    sera considéré comme non valable.<br>
-                    <br>
-                    <i>Ce billet est reconnu électroniquement lors de votre
-                    arrivée sur site. A ce titre, il ne doit être ni dupliqué, ni photocopié.
-                    Toute reproduction est frauduleuse et inutile.</i>
-                </div>
-            </td>
-        </tr>
-    </table>
+      <?php endforeach; ?>
+  </table>
+  <table style="width: 100%;border: none;" cellspacing="4mm" cellpadding="0">
+    <tr>
+      <th style="width: 75%">
+        Subtotal:
+      </th>
+      <td style="width: 25%; text-align:center">
+        <?=$total ?> €
+      </td>
+    </tr>
+    <tr>
+      <th style="width: 75%">
+        Total (+21% IVA):
+      </th>
+      <td style="width: 25%; text-align:center">
+        <?=$total + ($total * 0.21) ?> €
+      </td>
+    </tr>
+  </table>
+  <div class="footer center">
+    No se efecturan cambios, con una fecha de compra superior a los 30 dias.
+    Los elementos de seguridad estan excentos de cambios depués de haber sido usados.
+    Los cambios de los productos se deben realizar con la factura.
+    Grácias por haber comprado en TheCatLong!.
+  </div>
 </page>

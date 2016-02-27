@@ -113,9 +113,19 @@
     }
   }
 
+function generate_ticket($productos = array()){
+  ob_start();
+  include APP.'/templates/pdf/ticket.php';
+  $content = ob_get_contents();
+  ob_end_clean();
+  $html2pdf = new Html2Pdf('P', 'A4', 'fr', true, 'UTF-8', 0);
+  $html2pdf->pdf->SetDisplayMode('fullpage');
+  $html2pdf->writeHTML($content);
+  return $html2pdf->Output('ticket.pdf');
+}
 
   // Generar Factura
-  function generate_facture($productos = array()){
+  function generate_facture($productos = array(), $client = array()){
       // print_r($productos);
       // exit;
       $pdf = new PDF_Invoice( 'P', 'mm', 'A4' );
@@ -130,7 +140,7 @@
       $pdf->addClient("CL01");
       $pdf->addPageNumber("1");
       $pdf->addClientAdresse("Ste\nM. XXXX\n3ème étage\n33, rue d'ailleurs\n75000 PARIS");
-      $pdf->addReglement("Chèque à réception de facture");
+      $pdf->addReglement("Pago online");
       $pdf->addEcheance("03/12/2003");
       $pdf->addNumTVA("FR888777666");
       $pdf->addReference("Devis ... du ....");
@@ -155,7 +165,7 @@
       $total = 0;
 
       foreach ($productos as $id => $pro) {
-          $totalProducto = ($pro["precio"] + $pro["precio"] * 0.21);
+          $totalProducto = ($pro["precio"] + ($pro["precio"] * 0.21));
           $total += $totalProducto;
           $line = array( "REFERENCIA"    => "REF". $pro['idproducto'],
           "DESCRIPCION"  => ucfirst($pro['descripcion']),
@@ -190,7 +200,21 @@
 
       $pdf->addTVAs( $params, $tab_tva, $tot_prods);
       $pdf->addCadreEurosFrancs();
-      $pdf->Output();
+      $tmpFile = sys_get_temp_dir() . DIRECTORY_SEPARATOR .  uniqid(time()) . 'factura.pdf';
+      $pdf->Output($tmpFile, 'F');
+
+      return sendEmail(
+        true,
+        $client,
+        'Factura',
+        'Ya tiene disponible su factura. Grácias por su compra',
+        array(
+          array(
+            'absolute' => true,
+            'path' => $tmpFile
+          )
+        )
+      );
   }
 
 

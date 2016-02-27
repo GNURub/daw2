@@ -183,22 +183,15 @@
           }
       }
 
-      public function factureAction()
+      public function ticketAction()
       {
           if (!self::getSession('username')) {
               return header('location: /');
           }
 
           if(isset($_SESSION['productos']) && !empty($_SESSION['productos'])){
-            $productos = array();
-            foreach (self::getSession('productos') as $id => $q) {
-                $pro = $this->product->toArray($id);
-                if(!empty($pro)){
-                  $pro['q'] = $q;
-                  array_push($productos, $pro);
-                }
-            }
-            return generate_facture($productos);
+            $productos = $this->_generate_products();
+            return generate_ticket($productos);
           }
           return header('location: /');
       }
@@ -352,52 +345,55 @@
           return require VIEWS.'client/confirmpay.php';
         }
         if (self::getSession('username')) {
-          $productos = array();
-          if(self::getSession('productos')){
-            $a = self::getSession('productos');
-          }else{
-            $a = array();
-          }
-          foreach ($a as $id => $q) {
-            $pro = $this->product->toArray($id);
-            $pro['q'] = $q;
-            array_push($productos, $pro);
-          }
-
+          $productos = $this->_generate_products();
           return require VIEWS.'client/checkout.php';
         }
         return header('location: /');
       }
 
+      private function _generate_products(){
+        $productos = array();
+        if(self::getSession('productos')){
+          $a = self::getSession('productos');
+        }else{
+          $a = array();
+        }
+        foreach ($a as $id => $q) {
+          $pro = $this->product->toArray($id);
+          $pro['q'] = $q;
+          array_push($productos, $pro);
+        }
+        return $productos;
+      }
 
       public function okAction(){
-        if(isset($_SERVER['HTTP_REFERER']) &&
-        $_SERVER['HTTP_REFERER'] == "http://jguasch.esy.es/redsys/lacaixaOK.php"){
-          try {
-            $hash_compra = md5(uniqid(time()));
-            $this->client->save(array(
-              "hash_compra" => $hash_compra,
-              "estado"      => "pagado",
-              "username"    => self::getSession("username")
-            ), "compras");
+        // PRODUCTION
+        // if(isset($_SERVER['HTTP_REFERER']) &&
+        // $_SERVER['HTTP_REFERER'] == "http://jguasch.esy.es/redsys/lacaixaOK.php"){
+        //   try {
+        //     $hash_compra = md5(uniqid(time()));
+        //     $this->client->save(array(
+        //       "hash_compra" => $hash_compra,
+        //       "estado"      => "pagado",
+        //       "username"    => self::getSession("username")
+        //     ), "compras");
+        //
 
-            ob_start();
-            include APP.'/templates/pdf/ticket.php';
-            $content = ob_get_contents();
-            ob_end_clean();
-            $html2pdf = new Html2Pdf('P', 'A4', 'fr', true, 'UTF-8', 0);
-            $html2pdf->pdf->SetDisplayMode('fullpage');
-            $html2pdf->writeHTML($content);
-            $html2pdf->Output('ticket.pdf');
-          } catch (Exception $e) {
-            $error = $e->getMessage();
-            return require VIEWS. 'error/500.php';
-          }
-          return;
-        }
-        $error = "El host debe ser -> http://jguasch.esy.es/redsys/lacaixaOK.php";
-        require VIEWS.'error/401.php';
-        return;
+            $client = $this->client->toArray(self::getSession('username'));
+            $productos = $this->_generate_products();
+            if(!empty($productos) && !empty($client)){
+              return generate_facture($productos , $client);
+            }
+        //     return header('location: /');
+        //   } catch (Exception $e) {
+        //     $error = $e->getMessage();
+        //     return require VIEWS. 'error/500.php';
+        //   }
+        //   return;
+        // }
+        // $error = "El host de peticion debe ser -> http://jguasch.esy.es/redsys/lacaixaOK.php";
+        // require VIEWS.'error/401.php';
+        // return;
       }
 
       public function koAction(){
