@@ -32,7 +32,7 @@
     <title>TheCatLong...</title>
 
     <!-- Style Sheets  -->
-    <link href="<?=URL; ?>css/all.css" rel="stylesheet" media="none" onload="if(media!='all')media='all'">
+    <link href="<?=URL; ?>css/all.css" rel="stylesheet">
     <!-- // <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.21/webcomponents.min.js" async></script> -->
     <!-- Web Components -->
     <link rel="import" href="<?=URL; ?>components/item.html">

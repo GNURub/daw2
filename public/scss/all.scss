@@ -31,7 +31,7 @@ body{
     font-family: 'Roboto';
     color: $primary_text;
     @extend .layout.vertical;
-    height: 100%;
+    min-height: 100vh;
 }
 
 ul{
@@ -56,18 +56,17 @@ h3{
 }
 x-item{
   user-select: text;
-  touch-callout: none;
   -webkit-touch-callout: none;
 }
 div.content {
   @extend .layout.horizontal;
   @extend .layout.wrap-reverse;
-
-  // width: 100%;
   flex-basis: 100%;
   box-shadow: 0 10px 40px rgba(0,0,0, .2);
   z-index: 1;
   flex-wrap: wrap-reverse;
+  min-height: 290px;
+  flex:1;
 
   @media screen and (max-width: 640px) {
     & > div.menu-container {
