@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `thecatlong`.`productos` (
   `precio` DECIMAL NULL COMMENT '',
   `gatosdeenvio` DECIMAL NULL COMMENT '',
   `marca` VARCHAR(45) NULL COMMENT '',
-  `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '',
+  `createdAt` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '',
   `iddescuento` INT NULL COMMENT '',
   `proveedor` VARCHAR(45) NULL DEFAULT 'local' COMMENT '',
   PRIMARY KEY (`idproducto`)  COMMENT '',
@@ -75,6 +75,12 @@ CREATE TABLE IF NOT EXISTS `thecatlong`.`usuarios` (
   `password` VARCHAR(45) NULL COMMENT '',
   `public` TINYINT(1) NULL DEFAULT 0 COMMENT '',
   `provider` VARCHAR(45) NULL DEFAULT 'local' COMMENT '',
+  `path` LONGTEXT NULL DEFAULT NULL COMMENT '',
+  `estado` TEXT NULL DEFAULT NULL COMMENT '',
+  `news` TINYINT(1) NULL DEFAULT 0 COMMENT '',
+  `poblacion` VARCHAR(50) NULL DEFAULT NULL COMMENT '',
+  `zip` VARCHAR(10) NULL DEFAULT NULL COMMENT '',
+  `provincia` VARCHAR(45) NULL DEFAULT NULL COMMENT '',
   PRIMARY KEY (`username`)  COMMENT '',
   UNIQUE INDEX `email_UNIQUE` (`email` ASC)  COMMENT '')
 ENGINE = InnoDB;

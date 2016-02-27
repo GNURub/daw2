@@ -1,10 +1,7 @@
 <?php
-// /product/[{id}]/
-// /category/
-// /category/{group}
-// /category/{cat}/{group}
-// /subcategory/{sub}/{group}
 header('Access-Control-Allow-Origin: *');
+header('Content-type: application/json');
+
 class Api extends Controller {
     private $_params;
     private $product;
@@ -33,6 +30,15 @@ class Api extends Controller {
 
     public function index($params = array()){
       // $this->productAction();
+      echo json_encode(array(
+        array(
+          "endpoints" =>array(
+            "/api//product/[{id}]/",
+            "/api/category/[{group}]",
+          )
+        )
+      ));
+      return;
     }
 
     public function productAction($params)
@@ -54,26 +60,27 @@ class Api extends Controller {
             echo json_encode($products);
             return;
           }
+
           throw new Exception("No hay productos");
         } catch (Exception $e) {
           $error = array(
-            'error' => 200,
+            'error' => 404,
             'errorMsg' => $e->getMessage(),
           );
           echo json_encode($error);
         }
         return;
     }
+
     public function categoryAction()
     {
-
       $idcat = !empty($this->_params[0]) ? $this->_params[0] : false;
       $group = !empty($this->_params[1]) ? $this->_params[1] : false;
       try {
         $products = $this->product->selecWithCategorySubcatAndProduct(
-        $idcat,
-        false,
-        $group
+          $idcat,
+          false,
+          $group
         );
         if (empty($products)) {
           $products = $this->category->toArray(false, true, $group);
@@ -85,9 +92,9 @@ class Api extends Controller {
           }
           echo json_encode($products);
           return;
-          }
-          echo json_encode($products);
-          return;
+        }
+        echo json_encode($products);
+        return;
       } catch (Exception $e) {
         $error = array(
           'error' => 200,

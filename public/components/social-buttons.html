@@ -26,10 +26,16 @@
 
     var thatDoc = document;
     var thisDoc =  (thatDoc._currentScript || thatDoc.currentScript).ownerDocument;
-
+    var shadowRoot;
 
     var template = thisDoc.querySelector('template').content;
     var socialButtons = Object.create(HTMLElement.prototype);
+    var socialNetworks = [
+      'fb',
+      'go',
+      'gh',
+      'tw'
+    ];
 
 
     socialButtons.importHref = function (file, cb){
@@ -37,63 +43,59 @@
       link.rel = 'import';
       link.href = file;
       link.setAttribute('async', '');
-      // link.onload = function(e) {...};
-      // link.onerror = function(e) {...};
       this.appendChild(link);
       if(typeof cb === 'function'){
         link.onload = cb.bind(this);
       }
     };
     socialButtons.createdCallback = function() {
-      var shadowRoot = this.createShadowRoot();
+      shadowRoot = this.createShadowRoot();
 
       var clone = thatDoc.importNode(template, true);
       shadowRoot.appendChild(clone);
 
 
-      if(this.hasAttribute('fb-url')){
-        this.importHref('/components/fb.html', function(){
-          var fb = thisDoc.createElement('fb-button');
-          fb.setAttribute('url', this.getAttribute('fb-url'));
 
-          shadowRoot.querySelector('div').appendChild(fb);
-        });
-      }
+      socialNetworks.forEach(function(sn){
+        if(this.hasAttribute(sn + '-url')){
+          this.importHref('/components/' + sn + '.html', function(){
+            var snb = thisDoc.createElement( sn + '-button');
+            snb.setAttribute('url', this.getAttribute(sn + '-url'));
 
-      if(this.hasAttribute('go-url')){
-        this.importHref('/components/go.html', function(){
-          var go = thisDoc.createElement('go-button');
-          go.setAttribute('url', this.getAttribute('go-url'));
-          shadowRoot.querySelector('div').appendChild(go);
-        });
-      }
-
-      if(this.hasAttribute('gh-url')){
-        this.importHref('/components/gh.html', function(){
-          var gh = thisDoc.createElement('gh-button');
-          gh.setAttribute('url', this.getAttribute('gh-url'));
-          shadowRoot.querySelector('div').appendChild(gh);
-        });
-      }
-
-      if(this.hasAttribute('tw-url')){
-        this.importHref('/components/tw.html', function(){
-          var tw = thisDoc.createElement('tw-button');
-          tw.setAttribute('url', this.getAttribute('tw-url'));
-          shadowRoot.querySelector('div').appendChild(tw);
-        });
-      }
-
-
-
+            shadowRoot.querySelector('div').appendChild(snb);
+          });
+        }
+      }, this);
     };
     socialButtons.attributeChangedCallback = function(attr, oldVal, newVal) {
-      var cont = thatDoc.querySelector('social-buttons');
-      if(attr === 'tw-url' && !this.hasAttribute('tw-url')){
-        var tw = thatDoc.querySelector('tw-button');
-        cont.removeChild(tw);
+      // var cont = thatDoc.querySelector('social-buttons');
+      socialNetworks.forEach(function(sn){
+        if(attr.indexOf(sn) > -1) {
+          if(!newVal){
+            shadowRoot.querySelector('div ' + sn + '-button').remove();
+          }else{
+            var ele = shadowRoot.querySelector('div ' + sn + '-button');
+            if(!ele){
+              var snb = thisDoc.createElement(sn+'-button');
+              snb.setAttribute('url', this.getAttribute(sn+'-url'));
+              shadowRoot.querySelector('div').appendChild(snb);
+            }else{
+              ele.setAttribute(sn+'-url', newVal);
+            }
+          }
+        }
+      });
+      if(attr === 'tw-url' && this.hasAttribute('tw-url')){
+        // var tw = thatDoc.querySelector('tw-button');
+        // cont.removeChild(tw);
+        this.importHref('/components/tw.html', function(){
+          var snb = thisDoc.createElement('tw-button');
+          snb.setAttribute('url', this.getAttribute('tw-url'));
+          shadowRoot.querySelector('div').appendChild(snb);
+        });
       }
     };
+
     window.socialButtons = thatDoc.registerElement('social-buttons', {
         prototype: socialButtons
     });

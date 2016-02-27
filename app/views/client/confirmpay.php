@@ -1,4 +1,10 @@
 <?php require VIEWS . '_layout/header.php'; ?>
+<style media="screen">
+  html{
+    height: 100%;
+    min-height: inherit!important;
+  }
+</style>
 <div class="content form">
   <form name="frm" class="signin center" action="http://jguasch.esy.es/redsys/lacaixa.php" method="POST" target="_blank">
     <input type="hidden" name="Ds_SignatureVersion" value="<?php echo $version; ?>"/>

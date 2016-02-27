@@ -38,47 +38,46 @@
             $itemid = (!isset($itemid) || empty($itemid)) ? null : $itemid;
             $pro = $this->product->toArray($itemid);
             if(empty($itemid) || empty($pro)){
-              header('location: /');
+              return header('location: /');
             }
             $clientes = $this->clients->toArray();
-
-            $mail = new PHPMailer;
-
-            $mail->isSMTP();
-            $mail->Host       = SMTP_HOST;
-            $mail->SMTPAuth   = true;
-            $mail->Username   = EMAIL;
-            $mail->Password   = PASSWORD;
-            $mail->SMTPSecure = SMTP_SECURE;
-            $mail->Port       = SMTP_PORT;
-            $mail->setFrom(EMAIL, 'The cat long');
-            $mail->isHTML(true);
-            $mail->Subject = $title;
-
-            foreach ($clientes as $value) {
-              if(EMAIL != $value['email']){
-                $mail->addAddress($value['email']);
+            $body = "<html>
+            <head>
+            <title>{$title}</title>
+            <style>
+              table{
+                width:100%;
+                text-align: center;
+                border-collapse: collapse;
               }
-              $mail->Body    = "<html>
-                                  <head>
-                                    <title>$title</title>
-                                  </head>
-                                  <body>
-                                    <h2>$title</h2>
-                                    <p>
-                                      $detalles
-                                    </p>
-                                  </body>
-                                </html>";
-            }
-            foreach ($pro as $i) {
-              $mail->addAttachment(IMGS. $i['path']);
-            }
-            $mail->AltBody = $detalles;
+              table, th, td {
+                border: 1px solid black;
+              }
+            </style>
+            </head>
+            <body>
+              <h2>{$title}</h2>
+              <p>
+                {$detalles}
+              </p>
+              <table>
+                <tr>
+                  <th>Titulo</th>
+                  <th>Descripcion</th>
+                  <th>Precio</th>
+                  <th>Marca</th>
+                </tr>
+                <tr>
+                  <td>{$pro['titulo']}</td>
+                  <td>{$pro['descripcion']}</td>
+                  <td>{$pro['precio']}€</td>
+                  <td>{$pro['marca']}</td>
+                </tr>
+              </table>
+            </body>
+            </html>";
+            sendEmail(true, $clientes, $title, $body, array($pro));
 
-            if($mail->send()) {
-                return header('location: /');
-            }
           }
 
           $pa = $this->product->toArray($this->_params[0]);

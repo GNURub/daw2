@@ -10,12 +10,14 @@
         <p> Unauthorized: Access is denied due to invalid credentials. Sorry about that!</p>
         <section class="additional-message">
             <h2>Additional info</h2>
-            <p><?=isset($error) ? $error : 'The Box for this URL does not exist.';?></p>
+            <p>
+              <?= isset($error) ? $error : 'The Box for this URL does not exist.'; ?>
+            </p>
         </section>
 
         <section class="links">
             <a href="<?=URL;?>"><span>«</span> back to homepage</a>
-            | <a href="http://status.codio.com" target="_blank">Platform Status</a>
+            | <a href="<?=URL;?>" target="_blank">Platform Status</a>
         </section>
     </div>
   </body>

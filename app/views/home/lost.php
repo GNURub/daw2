@@ -11,9 +11,8 @@
           <label>Email:</label>
         </div>
       </li>
-
       <li>
-        <button class="btn lg" type="button"><span>Recordar</span></button>
+        <button class="btn lg" type="submit"><span>Recordar</span></button>
       </li>
     </ul>
   </form>

@@ -15,7 +15,7 @@
 
         <section class="links">
             <a href="<?=URL;?>"><span>«</span> back to homepage</a>
-            | <a href="http://status.codio.com" target="_blank">Platform Status</a>
+            | <a href="<?=URL;?>" target="_blank">Platform Status</a>
         </section>
     </div>
   </body>

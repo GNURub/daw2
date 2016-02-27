@@ -2,13 +2,16 @@
 <div class="content">
   <div class="wrapper profile card card-6">
     <header class="header-profile">
-      <a class="avatar avatar-xlarge" href="#">
-        <img src="http://www.crearunavatar.com/crearunavatar/temp-avatars/svgA7341909671667963.png" alt="" />
+      <a class="avatar avatar-xlarge" href="javascript:void(0)">
+        <img src="https://byuc.files.wordpress.com/2012/07/avat-2.jpg" alt="" />
         <span class="ring"></span>
       </a>
-      <h1 class="header-username">GNUrub</h1>
+      <h1 class="header-username"><?=$userData['username']?></h1>
       <h2 class="header-sublime">
-        <span class="realname">Rubén</span>
+        <span class="realname">
+          <?=html_entity_decode($userData['nombre']) .' '
+         . html_entity_decode($userData['apellidos']) ?>
+        </span>
         <span class="location">ibiza</span>
         <ul>
           <li></li>
@@ -16,7 +19,7 @@
         </ul>
       </h2>
       <p class="header-bio">
-        Hola soy ruben tengo 23 años, soy programador
+        <?=html_entity_decode($userData['estado'])?>
       </p>
     </header>
     <section class="stream-container">

@@ -17,6 +17,7 @@
         self::$go = new GoogleLogin();
       }
 
+      // PERFIL USUARIO
       public function index($params = array())
       {
           if (empty($params[0])) {
@@ -47,6 +48,7 @@
           return require VIEWS.'error/401.php';
       }
 
+      // CREAR USUARIO
       public function createAction()
       {
           // Creamos un nuevo cliente
@@ -97,6 +99,7 @@
         return require VIEWS.'error/400.php';
       }
 
+      // LOGIN CLIENTE
       public function signinAction()
       {
         extract($_POST);
@@ -114,7 +117,11 @@
             if(empty($userData) || empty($userData['password'])){
               throw new Exception("No existe el usuario {$username}", 1);
             }
-            if (hash_equals($userData['password'], crypt($password, $userData['password']))) {
+            if (hash_equals(
+                  $userData['password'],
+                  crypt($password, $userData['password'])
+                 )
+                ) {
                 self::setSession('username', $userData['username']);
                 self::setSession('admin', $userData['rol']);
                 return header('location: /');
@@ -130,25 +137,43 @@
         return require VIEWS.'error/400.php';
       }
 
-      public function adminAction()
-      {
-          if (!!self::getSession('username') && self::getSession('admin') == 'administrador') {
-              return require VIEWS.'client/admin.php';
-          }
-          require VIEWS.'error/401.php';
-      }
+
+      // public function adminAction()
+      // {
+      //     if (!!self::getSession('username') && self::getSession('admin') == 'administrador') {
+      //         return require VIEWS.'client/admin.php';
+      //     }
+      //     require VIEWS.'error/401.php';
+      // }
 
       public function updateAction()
       {
           //update a todo item
       }
 
+      // RECUPERACION CONTRASEÑA
       public function restoreAction()
       {
           extract($_POST);
-          if (isset($email)) {
+          if (isset($email) && isValidEmail($email)) {
               try {
-                  $this->client->toArray($email);
+                  $client = $this->client->toArray($email);
+                  if($client){
+                    $body = "<html>
+                    <head>
+                    <title>Recuperacion</title>
+                    </head>
+                    <body>
+                    <h2>Recuperacion password</h2>
+                    <p>
+                    El sistema de restauración esta en construccion
+                    </p>
+                    </body>
+                    </html>";
+                    return sendEmail(true, array($client), "Recuperacion contraseña", $body);
+                  }
+                  throw new Exception("No existe el cliente", 1);
+
               } catch (Exception $e) {
                   $error = $e->getMessage();
                   return require VIEWS.'error/500.php';
@@ -163,17 +188,17 @@
           if (!self::getSession('username')) {
               return header('location: /');
           }
-          
-          if(isset($_SESSION['productos']) && !empty($_SESSION['productos'])){ 
+
+          if(isset($_SESSION['productos']) && !empty($_SESSION['productos'])){
             $productos = array();
             foreach (self::getSession('productos') as $id => $q) {
                 $pro = $this->product->toArray($id);
-                if(!empty($pro)){  
+                if(!empty($pro)){
                   $pro['q'] = $q;
                   array_push($productos, $pro);
                 }
             }
-            return generate_facture($productos);  
+            return generate_facture($productos);
           }
           return header('location: /');
       }
@@ -300,9 +325,9 @@
         	$terminal="871";
         	$moneda="978";
         	$trans="0";
-        	$url="https://thecatlong-gnurub.rhcloud.com/";
-          $urlKO="https://thecatlong-gnurub.rhcloud.com/client/ko";
-          $urlOK="https://thecatlong-gnurub.rhcloud.com/client/ok";
+        	$url= URL;
+          $urlKO= URL . "client/ko";
+          $urlOK= URL . "client/ok";
         	$id = $hash_compra;
         	$amount = number_format($_POST['amount'], 2, '', '');
 
@@ -365,15 +390,18 @@
             $html2pdf->writeHTML($content);
             $html2pdf->Output('ticket.pdf');
           } catch (Exception $e) {
-            echo $e->getMessage();
+            $error = $e->getMessage();
+            return require VIEWS. 'error/500.php';
           }
           return;
         }
-        return require VIEWS.'error/401.php';
+        $error = "El host debe ser -> http://jguasch.esy.es/redsys/lacaixaOK.php";
+        require VIEWS.'error/401.php';
+        return;
       }
-      
+
       public function koAction(){
         return require VIEWS.'error/400.php';
       }
-      
+
   }

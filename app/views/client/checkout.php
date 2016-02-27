@@ -27,7 +27,7 @@
         </ul>
         <input type="hidden" name="amount" value=""/>
         <button class="btn btn-lg red" <?=count($productos)?"":"disabled"?> style="width: 100%;padding: 0.2em 1em;">Pagar ahora!</button>
-        <a href="/client/facture" class="btn btn-lg red">PDF</a> 
+        <a href="/client/facture" class="btn btn-lg red">PDF</a>
       </form>
     </div>
   </div>

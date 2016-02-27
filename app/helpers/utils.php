@@ -10,6 +10,40 @@
     return preg_match('/^[\w\s\S]{8,}$/', $pass);
   }
 
+  // Enviar email
+  function sendEmail($force, $clients, $subject, $body, $resources = array()){
+    $mail = new PHPMailer;
+    $mail->isSMTP();
+    $mail->Host       = SMTP_HOST;
+    $mail->SMTPAuth   = true;
+    $mail->Username   = EMAIL;
+    $mail->Password   = PASSWORD;
+    $mail->SMTPSecure = SMTP_SECURE;
+    $mail->Port       = SMTP_PORT;
+    $mail->setFrom(EMAIL, 'The cat long');
+    $mail->isHTML(true);
+    $mail->Subject = $subject;
+
+    foreach ($clients as $client) {
+      if((EMAIL != $client['email'] && !empty($client['news'])) || !!$force){
+        $mail->addAddress($client['email']);
+      }
+    }
+    $mail->Body    = $body;
+    foreach ($resources as $i) {
+      if( !isset($i['absolute']) ){
+        $mail->addAttachment(IMGS. $i['path']);
+      }else{
+        $mail->addAttachment($i['path']);
+      }
+    }
+    $mail->AltBody = $body;
+
+    if($mail->send()) {
+      return header('location: /');
+    }
+  }
+
   function isImageValid($file){
     return !!preg_match('/image\/*/', mime_content_type($file));
   }
@@ -116,10 +150,10 @@
       $pdf->addLineFormat( $cols);
       $pdf->addLineFormat($cols);
 
-  
+
       $y  = 109;
       $total = 0;
-      
+
       foreach ($productos as $id => $pro) {
           $totalProducto = ($pro["precio"] + $pro["precio"] * 0.21);
           $total += $totalProducto;
@@ -132,7 +166,7 @@
           $size = $pdf->addLine( $y, $line );
           $y   += $size + 2;
       }
- 
+
 
       $pdf->addCadreTVAs();
 
