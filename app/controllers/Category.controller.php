@@ -30,11 +30,11 @@
             function showImage($id, $urlimg){
               echo "<div class='lightbox card card-2'>";
               echo "<a class='lightbox' href='#{$id}'>";
-              echo "<img src='{$urlimg}' alt='' />";
+              echo "<img src='{$urlimg}' alt='{$id}' />";
               echo "</a>";
               echo "</div>";
               echo "<div class='lightbox-target' id='{$id}'>";
-              echo "<img src='{$urlimg}'/>";
+              echo "<img src='{$urlimg}' alt='{$id}'/>";
               echo "<a class='lightbox-close' href='#'></a>";
               echo "</div>";
             }
