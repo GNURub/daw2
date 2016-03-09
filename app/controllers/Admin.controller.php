@@ -7,9 +7,9 @@
       private $category;
       private $subcategory;
       private $clients;
-      static $products;
+      static  $products;
       private $isAdmin;
-      static $lastItem;
+      static  $lastItem;
 
       public function __construct($params = array())
       {

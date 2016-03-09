@@ -126,8 +126,6 @@ function generate_ticket($productos = array()){
 
   // Generar Factura
   function generate_facture($productos = array(), $client = array()){
-      // print_r($productos);
-      // exit;
       $pdf = new PDF_Invoice( 'P', 'mm', 'A4' );
       $pdf->AddPage();
       $pdf->addSociete( "TheCatLong",

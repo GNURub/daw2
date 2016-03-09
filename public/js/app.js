@@ -8,5 +8,6 @@
       e.stopPropagation();
       dropDown.classList.toggle('hidden');
     });
-  }
+  };
+  $( doc ).tooltip();
 })(document);

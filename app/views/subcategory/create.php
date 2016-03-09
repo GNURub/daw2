@@ -2,7 +2,7 @@
 <div class="content form">
   <h2 class="center">Formulario de Subcategoría</h2>
   <form class="signin center" method="post">
-    <ul>
+    <ul style="border:0">
       <li>
         <div class="group">
           <input type="text" class="capitalize" name="nombre" required>

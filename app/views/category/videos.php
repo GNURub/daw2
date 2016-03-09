@@ -47,6 +47,19 @@
           </p>
         </div>
       </section>
+      <hr>
+      <audio controls="">
+            <source src="http://demos.w3avenue.com/html5-unleashed-tips-tricks-and-techniques/demo-audio.ogg">
+            <source src="http://demos.w3avenue.com/html5-unleashed-tips-tricks-and-techniques/demo-audio.mp3">
+      </audio>
+      <audio controls="">
+            <source src="http://www.w3schools.com/html/horse.ogg">
+            <source src="http://www.w3schools.com/html/horse.mp3">
+      </audio>
+      <audio controls="">
+            <source src="http://www.html5tutorial.info/media/vincent.ogg">
+            <source src="http://www.html5tutorial.info/media/vincent.mp3">
+      </audio>
     </div>
   </article>
 </div>

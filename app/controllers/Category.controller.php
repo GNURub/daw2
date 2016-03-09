@@ -24,10 +24,28 @@
           return require VIEWS.'error/404.php';
         }
         $selectedCategory = $params[0];
+
         switch ($params[0]) {
           case 'Imagenes':
-            $gallery_imgs = scandir(PUBLICO.'images_gallery'.DIRECTORY_SEPARATOR, 1);
-            // echo isImageValid(PUBLICO. 'images_gallery'. DIRECTORY_SEPARATOR . $gallery_img[0]);
+            function showImage($id, $urlimg){
+              echo "<div class='lightbox card card-2'>";
+              echo "<a class='lightbox' href='#{$id}'>";
+              echo "<img src='{$urlimg}' alt='' />";
+              echo "</a>";
+              echo "</div>";
+              echo "<div class='lightbox-target' id='{$id}'>";
+              echo "<img src='{$urlimg}'/>";
+              echo "<a class='lightbox-close' href='#'></a>";
+              echo "</div>";
+            }
+            $dirs= array(0 => 'gal_img');
+            $gallery_imgs = scandir(PUBLICO . $dirs[0], 1);
+            foreach ($gallery_imgs as $i => $ele) {
+              $url = PUBLICO . $dirs[0] . DIRECTORY_SEPARATOR. $ele;
+              if(is_dir($url) && $ele != '.' && $ele != '..'){
+                array_push($dirs, $ele);
+              }
+            }
             $categories = array(array('idcategoria' => 'Imagenes'), array('idcategoria' => 'Videos'));
             return require VIEWS.'category/imagenes.php';
           case 'Videos':

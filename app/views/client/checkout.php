@@ -13,7 +13,7 @@
               </span>
               <span class="q">
                 <span>  x</span>
-                <input type="number" name="productos[<?=$id?>][q]" min="1" value="<?=$pro['q']?>">
+                <input type="number" name="productos[<?=$id?>][q]" min="1" value="<?=$pro['q']?>" title="Cantidad">
               </span>
               <span class="price"><?=$pro['precio']?></span>€
               <input type="hidden" name="productos[<?=$id?>][precio]" value="<?=$pro['precio']?>">
@@ -26,13 +26,26 @@
           </li>
         </ul>
         <input type="hidden" name="amount" value=""/>
-        <button class="btn btn-lg red" <?=count($productos)?"":"disabled"?> style="width: 100%;padding: 0.2em 1em;">Pagar ahora!</button>
-        <a href="/client/ticket" class="btn btn-lg red">PDF</a>
+
+        <button <?=count($productos)?"":"disabled"?> style="width: 100%;padding: 0.2em 1em;" >Pagar ahora!</button>
+        <a href="/client/ticket" class="" title="Ver PDF del carrito">PDF</a>
       </form>
     </div>
   </div>
 </div>
 <script charset="utf-8" async>
+  $(function(){
+
+    $( "button:first" ).button({
+      icons: {
+        primary: "ui-icon-cart"
+      }
+    }).next().button({
+      icons: {
+        primary: "ui-icon-document"
+      }
+    });
+  });
   var subte = document.querySelector('li.divider span.price');
   var amount = document.querySelector('input[name="amount"]');
   var subt;

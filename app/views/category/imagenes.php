@@ -2,21 +2,22 @@
 
 <div class="content">
   <div class="multimedia imagenes">
-    <?php foreach ($gallery_imgs as $id => $img): ?>
-      <?php if (isImageValid(PUBLICO. 'images_gallery'. DIRECTORY_SEPARATOR . $img)):
-        $urlimg = URL.'images_gallery'.DIRECTORY_SEPARATOR.$img;
+    <?php
+
+      foreach($dirs as $i => $dir){
+        $path = !$i ? $dir : $dirs[0] . DIRECTORY_SEPARATOR . $dir;
+        $gallery_imgs = scandir(PUBLICO . $path, 1);
+        
+        foreach ($gallery_imgs as $id => $img){
+          $url = PUBLICO . $path . DIRECTORY_SEPARATOR . $img;
+          if(isImageValid($url)){
+            $urlimg = URL.$path.DIRECTORY_SEPARATOR.$img;
+            showImage($id, $urlimg);
+          }
+        }
+      }
+
       ?>
-          <div class="lightbox card card-2">
-            <a class="lightbox" href="#<?=$id?>">
-              <img src="<?=$urlimg?>" alt="" />
-            </a>
-          </div>
-          <div class="lightbox-target" id="<?=$id?>">
-            <img src="<?=$urlimg?>"/>
-            <a class="lightbox-close" href="#"></a>
-          </div>
-      <?php endif; ?>
-    <?php endforeach; ?>
   </div>
 </div>
 <?php require VIEWS . '_layout/footer.php' ?>
