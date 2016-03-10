@@ -190,16 +190,16 @@ function generate_ticket($productos = array(), $send = false){
       $params  = array( "RemiseGlobale" => 1,
       "remise_tva"     => 1,       // {la remise s'applique sur ce code TVA}
       "remise"         => 0,       // {montant de la remise}
-      "remise_percent" => 10,      // {pourcentage de remise sur ce montant de TVA}
+      "remise_percent" => 0,      // {pourcentage de remise sur ce montant de TVA}
       "FraisPort"      => 1,
-      "portTTC"        => 10,      // montant des frais de ports TTC
+      "portTTC"        => 0,      // montant des frais de ports TTC
       // par defaut la TVA = 19.6 %
       "portHT"         => 0,       // montant des frais de ports HT
       "portTVA"        => 21,    // valeur de la TVA a appliquer sur le montant HT
       "AccompteExige"  => 1,
       "accompte"         => 0,     // montant de l'acompte (TTC)
       "accompte_percent" => 0,    // pourcentage d'acompte (TTC)
-      "Remarque" => "Avec un acompte, svp..." );
+      "Remarque" => "" );
 
       $pdf->addTVAs( $params, $tab_tva, $tot_prods);
       $pdf->addCadreEurosFrancs();

@@ -406,14 +406,14 @@ function addCadreTVAs()
     $this->SetXY( $r1+9, $y1);
     $this->Cell(10,4, "BASES HT");
     $this->SetX( $r1+29 );
-    $this->Cell(10,4, "REMISE");
+    $this->Cell(10,4, "DESCUENTO");
     $this->SetX( $r1+48 );
-    $this->Cell(10,4, "MT TVA");
+    $this->Cell(10,4, "MT IVA");
     $this->SetX( $r1+63 );
-    $this->Cell(10,4, "% TVA");
+    $this->Cell(10,4, "% IVA");
     $this->SetX( $r1+78 );
-    $this->Cell(10,4, "PORT");
-    $this->SetX( $r1+100 );
+    // $this->Cell(10,4, "PORT");
+    // $this->SetX( $r1+100 );
     $this->Cell(10,4, "TOTAUX");
     $this->SetFont( "Arial", "B", 6);
     $this->SetXY( $r1+93, $y2 - 8 );
@@ -441,10 +441,10 @@ function addCadreEurosFrancs()
     $this->SetFont( "Arial", "B", 6);
     $this->SetXY( $r1, $y1+5 );
     $this->Cell(20,4, "TOTAL TTC", 0, 0, "C");
-    $this->SetXY( $r1, $y1+10 );
-    $this->Cell(20,4, "ACOMPTE", 0, 0, "C");
+    // $this->SetXY( $r1, $y1+10 );
+    // $this->Cell(20,4, "ACOMPTE", 0, 0, "C");
     $this->SetXY( $r1, $y1+15 );
-    $this->Cell(20,4, "NET A PAYER", 0, 0, "C");
+    $this->Cell(20,4, "NETO A PAGAR", 0, 0, "C");
 }
 
 // remplit les cadres TVA / Totaux et la remarque
