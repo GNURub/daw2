@@ -113,7 +113,7 @@
     }
   }
 
-function generate_ticket($productos = array()){
+function generate_ticket($productos = array(), $send = false){
   ob_start();
   include APP.'/templates/pdf/ticket.php';
   $content = ob_get_contents();
@@ -121,7 +121,12 @@ function generate_ticket($productos = array()){
   $html2pdf = new Html2Pdf('P', 'A4', 'fr', true, 'UTF-8', 0);
   $html2pdf->pdf->SetDisplayMode('fullpage');
   $html2pdf->writeHTML($content);
-  return $html2pdf->Output('ticket.pdf');
+  if(!$send){
+    return $html2pdf->Output('ticket.pdf');
+  }
+  $tmpFile = sys_get_temp_dir() . DIRECTORY_SEPARATOR .  uniqid(time()) . 'ticket.pdf';
+  $html2pdf->Output($tmpFile);
+  return $tmpFile;
 }
 
   // Generar Factura
@@ -193,7 +198,7 @@ function generate_ticket($productos = array()){
       "portTVA"        => 21,    // valeur de la TVA a appliquer sur le montant HT
       "AccompteExige" => 1,
       "accompte"         => 0,     // montant de l'acompte (TTC)
-      "accompte_percent" => 15,    // pourcentage d'acompte (TTC)
+      "accompte_percent" => 0,    // pourcentage d'acompte (TTC)
       "Remarque" => "Avec un acompte, svp..." );
 
       $pdf->addTVAs( $params, $tab_tva, $tot_prods);
@@ -210,6 +215,10 @@ function generate_ticket($productos = array()){
           array(
             'absolute' => true,
             'path' => $tmpFile
+          ),
+          array(
+            'absolute' => true,
+            'path' => generate_ticket($productos, true)
           )
         )
       );
