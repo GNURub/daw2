@@ -184,8 +184,8 @@ function generate_ticket($productos = array(), $send = false){
       $pdf->addCadreTVAs();
 
       $tot_prods = array( array ( "px_unit" => $totalProducto, "qte" => 1, "tva" => 1 ),
-      array ( "px_unit" =>  10, "qte" => 1, "tva" => 1 ));
-      $tab_tva = array( "1"       => 19.6,
+      array ( "px_unit" =>  0, "qte" => 1, "tva" => 1 ));
+      $tab_tva = array( "1"       => 21,
       "2"       => 5.5);
       $params  = array( "RemiseGlobale" => 1,
       "remise_tva"     => 1,       // {la remise s'applique sur ce code TVA}
