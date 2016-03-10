@@ -121,11 +121,11 @@ function generate_ticket($productos = array(), $send = false){
   $html2pdf = new Html2Pdf('P', 'A4', 'fr', true, 'UTF-8', 0);
   $html2pdf->pdf->SetDisplayMode('fullpage');
   $html2pdf->writeHTML($content);
-  if(!$send){
-    return $html2pdf->Output('ticket.pdf');
-  }
   $tmpFile = sys_get_temp_dir() . DIRECTORY_SEPARATOR .  uniqid(time()) . 'ticket.pdf';
-  $html2pdf->Output($tmpFile);
+  if(!$send){
+    return $html2pdf->Output($tmpFile);
+  }
+  $html2pdf->Output($tmpFile, 'F');
   return $tmpFile;
 }
 
@@ -191,12 +191,12 @@ function generate_ticket($productos = array(), $send = false){
       "remise_tva"     => 1,       // {la remise s'applique sur ce code TVA}
       "remise"         => 0,       // {montant de la remise}
       "remise_percent" => 10,      // {pourcentage de remise sur ce montant de TVA}
-      "FraisPort"     => 1,
+      "FraisPort"      => 1,
       "portTTC"        => 10,      // montant des frais de ports TTC
       // par defaut la TVA = 19.6 %
       "portHT"         => 0,       // montant des frais de ports HT
       "portTVA"        => 21,    // valeur de la TVA a appliquer sur le montant HT
-      "AccompteExige" => 1,
+      "AccompteExige"  => 1,
       "accompte"         => 0,     // montant de l'acompte (TTC)
       "accompte_percent" => 0,    // pourcentage d'acompte (TTC)
       "Remarque" => "Avec un acompte, svp..." );
@@ -223,6 +223,4 @@ function generate_ticket($productos = array(), $send = false){
         )
       );
   }
-
-
  ?>

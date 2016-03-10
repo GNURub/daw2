@@ -382,7 +382,7 @@
             $client = $this->client->toArray(self::getSession('username'));
             $productos = $this->_generate_products();
             if(!empty($productos) && !empty($client)){
-              return generate_facture($productos , $client);
+              generate_facture($productos , $client);
             }
             return header('location: /');
           } catch (Exception $e) {

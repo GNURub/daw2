@@ -33,10 +33,10 @@ class Api extends Controller {
       echo json_encode(
         array(
           "endpoints" =>array(
-            "/api/product/[{id}]/",
-            "/api/category/",
-            "/api/category/[{category}]/",
-            "/api/category/[{category}]/[{group}]",
+            "GET /api/product/[{id}]",
+            "GET /api/category/",
+            "GET /api/category/[{category}]/",
+            "GET /api/category/[{category}]/[{group}]",
           )
         )
       );
