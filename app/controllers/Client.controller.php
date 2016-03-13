@@ -191,7 +191,7 @@
           header('Access-Control-Allow-Origin: *');
           if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['productos']) && !empty($_POST['productos'])){
             foreach ($_POST['productos'] as $pro) {
-              $_SESSION['productos'][$pro['idproducto']] = $pro['q'];
+              $_SESSION['productos'][$pro['idproducto']] = array($pro['q'], $pro['size'], $pro['color']);
             }
             echo "OK";
             return;
@@ -319,7 +319,7 @@
 
           $hash_compra = md5(uniqid(time()));
           foreach ($_POST['productos'] as $pro) {
-            $_SESSION['productos'][$pro['idproducto']] = $pro['q'];
+            $_SESSION['productos'][$pro['idproducto']] = array($pro['q'], $pro['size'], $pro['color']);
           }
 
           $miObj = new RedsysAPI;
@@ -371,7 +371,14 @@
         }
         foreach ($a as $id => $q) {
           $pro = $this->product->toArray($id);
-          $pro['q'] = $q;
+          $pro['q'] = $q[0];
+          if(isset($q[1])){
+            $pro['size'] = $q[1];
+          }
+          if(isset($q[2])){
+            $pro['color'] = $q[2];
+          }
+
           array_push($productos, $pro);
         }
         return $productos;
@@ -391,6 +398,16 @@
 
             $productos = $this->_generate_products();
             // Guardar compras por productos
+            foreach ($productos as $id => $pro) {
+              $this->client->save(array(
+                "idcompra"   => $id_compra,
+                "idproducto" => $id,
+                "cantidad"   => $pro['q'],
+                "idtalla"    => $pro['size'],
+                "idcolor"    => $pro['color'],
+                "username"   => self::getSession("username")
+              ), "compras_productos_tallas_colores");
+            }
 
             $client = $this->client->toArray(self::getSession('username'));
             if(!empty($productos) && !empty($client)){

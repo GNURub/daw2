@@ -14,13 +14,13 @@ class Controller
       $array = self::getSession($key);
       if ($array && is_array($array)) {
         if(array_key_exists($value, $array)){
-          ++$array[$value];
+          ++$array[$value][0];
         }else{
-          $array[$value] = 1;
+          $array[$value][1] = 1;
         }
         self::setSession($key, $array);
       }else{
-        $_SESSION[$key] = array($value => 1);
+        $_SESSION[$key] = array($value => array(1));
       }
     }
 
