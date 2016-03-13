@@ -1,0 +1,74 @@
+<template>
+  <style>
+  @import '../css/all.css';
+  @import '../css/x-order.min.css';
+
+
+  </style>
+  <ul class="stream-activity">
+    <li class="stream-item">
+      <a href="/client" class="avatar avatar-medium">
+        <img src="" alt="" />
+        <span class="ring"></span>
+      </a>
+      <span class="stream-item-type default"></span>
+      <header class="stream-item-header">
+        <span class="left">
+          <a href="#" class="username"></a>
+        </span>
+        <span class="stream-item-time">
+          1 semana
+        </span>
+      </header>
+      <p class="stream-item-content">
+        Hola
+      </p>
+      <ul class="stream-item-links">
+        <li>
+          <a href="javascript:void(0)">Volver a comprar</a>
+        </li>
+        <li>
+          <a href="javascript:void(0)">Pagar</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</template>
+<script>
+  (function(window, document, undefined){
+    'use strict';
+    var thatDoc = document;
+
+
+    var thisDoc =  (thatDoc._currentScript || thatDoc.currentScript).ownerDocument;
+
+
+    var template = thisDoc.querySelector('template').content;
+
+
+    var order = Object.create(HTMLElement.prototype);
+
+    order.createdCallback = function() {
+      var shadowRoot = this.createShadowRoot();
+
+      var clone = thatDoc.importNode(template, true);
+      shadowRoot.appendChild(clone);
+      this.avatar   = this.getAttribute('avatar') || 'http://lorempixel.com/50/50';
+      this.username = this.getAttribute('username') || null;
+      this.time     = this.getAttribute('time') || null;
+      shadowRoot.querySelector('.username').innerHTML = this.username;
+      shadowRoot.querySelector('.avatar img').src = this.avatar;
+
+    };
+    order.attributeChangedCallback = function(attr, oldVal, newVal) {
+
+    };
+
+
+
+    window.order = thatDoc.registerElement('x-order', {
+        prototype: order
+    });
+
+  })(window, document);
+</script>

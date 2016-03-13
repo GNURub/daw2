@@ -24,6 +24,7 @@
             if(isset($_SESSION['username'])){
 
               $userData = $this->client->toArray($_SESSION['username']);
+              $orders   = $this->client->getOrders($_SESSION['username']);
               $canAccess = (
                 !empty($userData)
               );

@@ -351,6 +351,9 @@ header {
 
 form {
   margin: auto; }
+  form#search-form {
+    width: 100%;
+    margin: 0; }
   form.signin ul {
     border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
   form.signin.center {
@@ -1114,6 +1117,12 @@ div.content {
       vertical-align: middle;
       border-radius: 200px;
       position: relative; }
+      div.content div.profile .avatar.avatar-medium {
+        width: 50px;
+        height: 50px; }
+        div.content div.profile .avatar.avatar-medium img {
+          width: 50px;
+          height: 50px; }
       div.content div.profile .avatar.avatar-xlarge, div.content div.profile .avatar.avatar-xlarge img {
         width: 120px;
         height: 120px; }
@@ -1131,21 +1140,6 @@ div.content {
       margin: 70px auto;
       max-width: 500px;
       min-width: 450px; }
-      div.content div.profile section.stream-container ul.stream-activity {
-        margin: 0 0 0 80px; }
-        div.content div.profile section.stream-container ul.stream-activity li.stream-item {
-          padding: 0 0 60px 35px;
-          border-left: 3px solid #e8e8e8;
-          position: relative; }
-          div.content div.profile section.stream-container ul.stream-activity li.stream-item:first-child:before {
-            width: 3px;
-            display: block;
-            content: "";
-            background: #fff;
-            height: 15px;
-            top: 0;
-            left: -3px;
-            position: absolute; }
   div.content div.multimedia {
     -webkit-flex-basis: 90%;
         -ms-flex-preferred-size: 90%;
@@ -1189,3 +1183,6 @@ div.content x-item {
 
 .capitalize {
   text-transform: capitalize; }
+
+.left {
+  float: left; }

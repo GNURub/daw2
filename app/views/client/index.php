@@ -23,9 +23,7 @@
       </p>
     </header>
     <section class="stream-container">
-      <ul class="stream-activity">
-        <li class="stream-item"></li>
-      </ul>
+      <x-order username="<?=$userData['username']?>"></x-order>
     </section>
   </div>
 </div>

@@ -43,4 +43,27 @@
     </div>
   </div>
 </div>
+<script charset="utf-8" defer>
+'use strict';
+  window.onload = function(){
+    if(!!document.querySelector("#search-form")){
+      document.querySelector("#search-form").addEventListener('submit', function(e){
+        e.preventDefault();
+        var query = document.querySelector('#buscador').value;
+        window.fetch('/api/product/?q=' + encodeURI(query)).then(function(response){
+          return response.json();
+        }).then(function(e){
+          if(e.length){
+            var container = document.querySelector('.items-container');
+            container.innerHTML = '';
+            e.forEach(function(e, i){
+              var item = `<x-item class='animated zoomIn' style='animation-delay: ${i}00ms;' url='${e.path}' num='${e.idproducto}' label='${e.titulo}' descripcion='${e.descripcion}'></x-item>`;
+              container.innerHTML += item;
+            })
+          }
+        })
+      }, false);
+    }
+  }
+</script>
  <?php require VIEWS . '_layout/footer.php'; ?>

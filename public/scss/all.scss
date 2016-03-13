@@ -186,6 +186,14 @@ div.content {
       vertical-align: middle;
       border-radius: 200px;
       position: relative;
+      &.avatar-medium{
+        width: 50px;
+        height: 50px;
+        img{
+          width: 50px;
+          height: 50px;
+        }
+      }
       &.avatar-xlarge, &.avatar-xlarge img{
         width: 120px;
         height: 120px;
@@ -207,24 +215,7 @@ div.content {
       margin: 70px auto;
       max-width: 500px;
       min-width: 450px;
-      ul.stream-activity{
-        margin:0 0 0 80px;
-        li.stream-item{
-          padding: 0 0 60px 35px;
-          border-left: 3px solid #e8e8e8;
-          position: relative;
-          &:first-child:before{
-            width: 3px;
-            display: block;
-            content: "";
-            background: #fff;
-            height: 15px;
-            top: 0;
-            left: -3px;
-            position: absolute;
-          }
-        }
-      }
+
     }
   }
 
@@ -282,4 +273,7 @@ div.content x-item{
 }
 .capitalize{
   text-transform: capitalize;
+}
+.left{
+  float: left;
 }

@@ -19,7 +19,11 @@
       public function index()
       {
         // load VIEWSs
-        $productos = $this->product->toArray();
+        if(isset($_GET['q']) && !empty($_GET['q'])){
+          $productos = $this->product->search($_GET['q']);
+        }else{
+          $productos = $this->product->toArray();
+        }
         $currentUser = self::getSession('username');
         require VIEWS . 'home/index.php';
       }

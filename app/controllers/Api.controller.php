@@ -33,10 +33,14 @@ class Api extends Controller {
       echo json_encode(
         array(
           "endpoints" =>array(
-            "GET /api/product/[{id}]",
-            "GET /api/category/",
-            "GET /api/category/[{category}]/",
-            "GET /api/category/[{category}]/[{group}]",
+            "GET  /api/product/[{id}]",
+            "GET  /api/product/?q={query}",
+            "GET  /api/category/",
+            "GET  /api/category/[{category}]/",
+            "GET  /api/category/[{category}]/[{group}]",
+            "GET  /api/orders/{username}/[{id}]",
+            "POST /api/orders/",
+            "GET  /api/properties/{producto}/[{idtalla}]",
           )
         )
       );
@@ -52,6 +56,12 @@ class Api extends Controller {
 
         try {
           $id = !empty($this->_params[0]) ? $this->_params[0] : false;
+          if(!$id && isset($_REQUEST['q']) && !empty($_REQUEST['q'])){
+            $products = $this->product->search($_REQUEST['q']);
+            $products = array_map('absUrl', $products);
+            echo json_encode($products);
+            return;
+          }
           $products = $this->product->toArray($id);
           if(!empty($products)){
             if(isset($products['path'])){

@@ -64,11 +64,15 @@
       $by = !empty($username) ? $username : $this->id;
       $by = escapeText($by);
       $id =  escapeText($id);
+      $q = "";
+      if(!!$id){
+        $q = " AND (idcompra = {$id} OR hash_compra = '{$id}')";
+      }
       $query = "SELECT * FROM compras
       WHERE username = '{$by}'";
       if($id){
-        $query = "SELECT * FROM compras
-        WHERE username = '{$by}' AND (idcompra = {$id} OR hash_compra = '{$id}')";
+        $query = "SELECT * FROM compras INNER JOIN compras_productos_tallas_colores USING(idcompra)
+        WHERE username = '{$by}'" . $q;
       }
       if(!$resultado = $this->db->query($query)){
         throw new Exception($this->db->error, 1);

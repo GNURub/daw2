@@ -16,11 +16,11 @@
                 <input type="number" name="productos[<?=$id?>][q]" min="1" value="<?=$pro['q']?>" title="Cantidad">
               </span>
               <span class="size">
-                <select id="size" name="productos[<?=$id?>][size]">
+                <select id="size" required name="productos[<?=$id?>][size]">
                 </select>
               </span>
               <span class="color">
-                <select id="color" name="productos[<?=$id?>][color]">
+                <select id="color" required name="productos[<?=$id?>][color]">
                 </select>
               </span>
               <span class="price"><?=$pro['precio']?></span>€

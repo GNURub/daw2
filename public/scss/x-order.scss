@@ -1,0 +1,121 @@
+ul.stream-activity{
+  margin:0 0 0 80px;
+  li.stream-item{
+    padding: 0 0 60px 35px;
+    border-left: 3px solid #e8e8e8;
+    position: relative;
+    &:after,&:before{
+      display: table;
+      line-height: 0;
+      content: "";
+    }
+    &:after{
+      clear: both;
+    }
+    .avatar{
+      float: left;
+      margin: 0 0 0 -120px;
+    }
+    &:hover .stream-item-links a{
+      color: #1caff6;
+    }
+    &:first-child:before{
+      width: 3px;
+      display: block;
+      content: "";
+      background: #f4f4f4;
+      height: 15px;
+      top: 0;
+      left: -3px;
+      position: absolute;
+    }
+    .stream-item-type{
+      position: absolute;
+      width: 40px;
+      text-align: center;
+      display: block;
+      border-top: 3px solid #f4f4f4;
+      border-bottom: 3px solid #f4f4f4;
+      left: 22px;
+      top: 7px;
+      &.default{
+        width: 21px;
+        height: 21px;
+        border:3px solid #f4f4f4;
+        display: block;
+        left: -12px;
+        top: 15px;
+        background: #e8e8e8;
+        border-radius: 20px;
+      }
+    }
+    header.stream-item-header{
+      margin: 2px 0 5px 0;
+      height: inherit;
+      .username{
+        font-weight: 500;
+        color: #1caff6;
+      }
+      .stream-item-time{
+        color: #c6c6c6;
+        margin: 0 0 0 10px;
+      }
+    }
+    p.stream-item-content{
+      float: left;
+      margin: 0 0 10px 0;
+    }
+    .stream-item-links{
+      float: right;
+      font-size: 12px;
+      margin-left: 10px;
+      li{
+        margin-left: 5px;
+        float: left;
+        &:first-child{
+          margin-left: 0
+        }
+        a{
+          text-decoration: none;
+          color: #999;
+          &:hover{
+            text-decoration: underline;
+          }
+        }
+
+      }
+
+
+    }
+  }
+}
+.avatar{
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 200px;
+  position: relative;
+  &.avatar-medium{
+    width: 50px;
+    height: 50px;
+    img{
+      width: 50px;
+      height: 50px;
+    }
+  }
+  &.avatar-xlarge, &.avatar-xlarge img{
+    width: 120px;
+    height: 120px;
+  }
+  img, .ring{
+    border-radius: 200px;
+  }
+  .ring{
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.1);
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}

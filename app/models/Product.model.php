@@ -104,6 +104,29 @@
       return $result;
     }
 
+    public function search($query){
+        $query = escapeText($query);
+        $q = "SELECT *
+        FROM {$this->table} p
+        NATURAL JOIN imagenes i
+        WHERE
+        (
+            titulo LIKE '%{$query}%'
+            OR descripcion LIKE '%{$query}%'
+            OR marca LIKE '%{$query}%'
+            OR precio LIKE '%{$query}%'
+        )";
+
+      if(!$_puntero = $this->db->query($q)){
+        throw new Exception($this->db->error, 1);
+      }
+      $result = array();
+      while ($row = $_puntero->fetch_assoc()) {
+        array_push($result, $row);
+      }
+      return $result;
+    }
+
   }
 
  ?>

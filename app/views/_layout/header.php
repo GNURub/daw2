@@ -42,6 +42,7 @@
     <!-- // <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.21/webcomponents.min.js" async></script> -->
     <!-- Web Components -->
     <link rel="import" href="<?=URL; ?>components/item.html">
+    <link rel="import" href="<?=URL; ?>components/x-order.html">
     <link rel="import" href="<?=URL; ?>components/social-buttons.html">
 </head>
 <body>
@@ -52,10 +53,12 @@
               <span class="title pacifico">The Cat Long</span>
             </a>
           </div>
-          <div class="buscador">
-            <i class="material-icons">search</i>
-            <input type="search">
-          </div>
+            <div class="buscador">
+              <form id="search-form" enctype="multipart/form-data" method="GET" action="/">
+                <i class="material-icons">search</i>
+                <input type="search" id="buscador" name="q">
+              </form>
+            </div>
           <ul class="menu">
             <li></li>
             <li>
