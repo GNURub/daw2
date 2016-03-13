@@ -187,6 +187,15 @@
 
       public function ticketAction()
       {
+          // Ajax ticket
+          header('Access-Control-Allow-Origin: *');
+          if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['productos']) && !empty($_POST['productos'])){
+            foreach ($_POST['productos'] as $pro) {
+              $_SESSION['productos'][$pro['idproducto']] = $pro['q'];
+            }
+            echo "OK";
+            return;
+          }
           if (!self::getSession('username')) {
               return header('location: /');
           }
@@ -374,13 +383,16 @@
         $_SERVER['HTTP_REFERER'] == "http://jguasch.esy.es/redsys/lacaixaOK.php"){
           try {
             $hash_compra = md5(uniqid(time()));
-            $this->client->save(array(
+            $id_compra = $this->client->save(array(
               "hash_compra" => $hash_compra,
               "estado"      => "pagado",
               "username"    => self::getSession("username")
             ), "compras");
-            $client = $this->client->toArray(self::getSession('username'));
+
             $productos = $this->_generate_products();
+            // Guardar compras por productos
+
+            $client = $this->client->toArray(self::getSession('username'));
             if(!empty($productos) && !empty($client)){
               generate_facture($productos , $client);
             }

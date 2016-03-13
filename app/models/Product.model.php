@@ -62,6 +62,22 @@
       return $_puntero->fetch_assoc();
     }
 
+    public function tallasColoresProducto($pro, $size = ""){
+      if(!empty($size)){
+        $size = " and idtalla = '{$size}'";
+      }
+      $query = "SELECT *
+      FROM productos_tallas_colores WHERE stock > 0 AND idproducto = {$pro}".$size;
+      if(!$_puntero = $this->db->query($query)){
+        throw new Exception($this->db->error, 1);
+      }
+      $result = array();
+      while ($row = $_puntero->fetch_assoc()) {
+        array_push($result, $row);
+      }
+      return $result;
+    }
+
     public function toArray($id = false){
       if(!!$id){
         $id = escapeText($id);

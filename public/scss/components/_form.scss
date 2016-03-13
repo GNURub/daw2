@@ -42,6 +42,9 @@ form{
           word-wrap: break-word;
           flex: 2;
         }
+        span.size,span.color{
+          margin-right: 5px;
+        }
         span.q{
           margin-left: .3em;
           flex: 1;

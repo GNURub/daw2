@@ -10,4 +10,6 @@
     });
   };
   $( doc ).tooltip();
+
+  
 })(document);

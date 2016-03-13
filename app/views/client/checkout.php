@@ -2,11 +2,11 @@
 <div class="content form">
   <div class="wrap">
     <div class="card card-1">
-      <form class="ticket" method="POST">
+      <form class="ticket" method="POST" enctype="multipart/form-data"  name="productsinfo">
         <h5>Ticket</h5>
         <ul>
           <?php foreach ($productos as $id=>$pro): ?>
-            <li>
+            <li data-id="<?=$pro['idproducto']?>">
               <span class="title">
                 <?=$pro['titulo']?>
                 <input type="hidden" name="productos[<?=$id?>][idproducto]" value="<?=$pro['idproducto']?>">
@@ -14,6 +14,14 @@
               <span class="q">
                 <span>  x</span>
                 <input type="number" name="productos[<?=$id?>][q]" min="1" value="<?=$pro['q']?>" title="Cantidad">
+              </span>
+              <span class="size">
+                <select id="size" name="productos[<?=$id?>][size]">
+                </select>
+              </span>
+              <span class="color">
+                <select id="color" name="productos[<?=$id?>][color]">
+                </select>
               </span>
               <span class="price"><?=$pro['precio']?></span>€
               <input type="hidden" name="productos[<?=$id?>][precio]" value="<?=$pro['precio']?>">
@@ -28,15 +36,31 @@
         <input type="hidden" name="amount" value=""/>
 
         <button <?=count($productos)?"":"disabled"?> style="width: 100%;padding: 0.2em 1em;" >Pagar ahora!</button>
-        <a href="/client/ticket" class="" title="Ver PDF del carrito">PDF</a>
+        <a href="/client/ticket" class="" id="ticket" title="Ver PDF del carrito">PDF</a>
       </form>
     </div>
   </div>
 </div>
 <script charset="utf-8" async>
+'use strict';
   $(function(){
+    var size = $('#size');
+    var color = $('#color');
 
-    $( "button:first" ).button({
+    size.on('change', function(e){
+      var id = $(this).parents('li[data-id]').attr('data-id');
+      window.fetch('/api/properties/' + id + '/' + size.val()).then(function(response){
+        return response.json();
+      }).then(function(r){
+        color.empty();
+        r.forEach(function(o){
+          color.append('<option>' + o.idcolor + '</option>');
+        })
+      })
+      // console.log(size.val())
+    });
+
+    $('button:first').button({
       icons: {
         primary: "ui-icon-cart"
       }
@@ -44,6 +68,37 @@
       icons: {
         primary: "ui-icon-document"
       }
+    });
+
+    // Ajax ticket
+    if(!!$('#ticket')){
+      $('#ticket').on('click',function(e){
+        e.preventDefault();
+        var body = new FormData(document.forms.namedItem("productsinfo"));
+        window.fetch('/client/ticket', {
+          method: 'POST',
+          body: body,
+          credentials: 'include'
+        }).then(function(response){
+          return response.text();
+        }).then(function(r){
+          location.href = "/client/ticket";
+        })
+      });
+    }
+    $('li[data-id]').each(function(i,e){
+      var id = e.dataset.id;
+      window.fetch('/api/properties/' + id, {
+        credentials: 'include'
+      }).then(function(response){
+        return response.json();
+      }).then(function(sizes){
+        size.empty();
+        size.append('<option disabled selected>Seleccionar</option>');
+        sizes.forEach(function(e){
+          size.append('<option>' + e.idtalla +'</option>');
+        });
+      })
     });
   });
   var subte = document.querySelector('li.divider span.price');

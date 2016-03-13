@@ -74,6 +74,12 @@ class Api extends Controller {
         return;
     }
 
+    public function propertiesAction($params){
+      $propers = $this->product->tallasColoresProducto($params[0], isset($params[1]) ? $params[1] : '');
+      echo json_encode($propers);
+      return;
+    }
+
     public function categoryAction()
     {
       $idcat = !empty($this->_params[0]) ? $this->_params[0] : false;

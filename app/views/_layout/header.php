@@ -66,7 +66,7 @@
               <?php
                 }else{
               ?>
-                  <a href="/client/">Perfil</a>
+                  <a href="/client/"><?=ucfirst(self::getSession('username'))?></a>
               <?php
                 }
               ?>
@@ -98,6 +98,11 @@
                         Adm.Acounts
                       </a>
                     </li>
+                    <li>
+                      <a href="/client/checkout">
+                        Carrito
+                      </a>
+                    </li>
                   </ul>
                 </div>
               <?php
@@ -109,7 +114,7 @@
                     <a href="<?=self::getSession('username') ? '/client/checkout' : '/home/signin'?>" class="carrito">
                       <i class="material-icons">shopping_basket</i>
                       <small>
-                        Tienes <?=self::getSession('productos') ? count(self::getSession('productos')) : 0;?> productos.
+                        Tienes <?=self::getSession('productos') ? count(self::getSession('productos')) : 0 ?> productos.
                       </small>
                     </a>
                   </li>
