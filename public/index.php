@@ -53,6 +53,7 @@ require_once APP.'helpers/fb.php';
 require_once APP.'helpers/go.php';
 require_once APP.'helpers/utils.php';
 require_once APP.'helpers/apiRedsys.php';
+require_once APP.'helpers/flash.php';
 
 
 Log::write("Atendiendo peticion.");

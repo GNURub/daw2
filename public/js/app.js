@@ -11,5 +11,4 @@
   };
   $( doc ).tooltip();
 
-  
 })(document);

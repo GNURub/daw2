@@ -1,0 +1,151 @@
+<template>
+  <style>
+    :host{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      animation: reveal 1 2s;
+      z-index: 10000;
+    }
+
+    .notification{
+    	width: 60vw;
+    	height: 40px;
+    	// border-radius: 0px 0px 5px 5px;
+    	margin: 0 auto;
+    	color: white;
+    	line-height: 40px;
+    	overflow: hidden;
+      position: relative;
+    }
+    .notification .title{
+    	margin-right: 15px;
+    	padding: 0px 15px;
+    	line-height: 40px;
+    	display: inline-block;
+    }
+
+    .notification .close{
+    	background: rgba(255,255,255,0.2);
+    	padding: 0px 15px;
+    	float: right;
+    	line-height: 40px;
+    	display: inline-block;
+    	color: white;
+    }
+    .notification .close:hover{
+      cursor: pointer;
+    }
+    :host(.closed){
+    	transform: translate(0px, -50px);
+    	transition: 0.7s;
+    }
+
+    @keyframes reveal{
+    	0%{
+    		transform: translate(0px, -50px);
+    	}
+    	50%{
+    		transform: translate(0px, -50px);
+    	}
+    	100%{
+    		transform: translate(0px, 0px);
+    	}
+    }
+
+
+    .notification.success{
+    	background: #2ecc71;
+    }
+    .notification.success .title{
+    	background: #27ae60;
+    }
+
+    .notification.error{
+    	background: #e74c3c;
+    }
+    .notification.error .title{
+    	background: #c0392b;
+    }
+
+    .notification.warning{
+    	background: #f1c40f;
+    }
+    .notification.warning .title{
+    	background: #f39c12;
+    }
+
+    .notification.normal{
+    	background: #3498db;
+    }
+    .notification.normal .title{
+    	background: #2980b9;
+    }
+
+  </style>
+  <div class="notification">
+    <span class="title">Ok</span>
+    <span class="message">Everything went great!</span>
+    <span class="close">X</span>
+  </div>
+</template>
+<script>
+  (function(window, document, undefined){
+    'use strict';
+    var thatDoc = document;
+
+
+    var thisDoc =  (thatDoc._currentScript || thatDoc.currentScript).ownerDocument;
+
+
+    var template = thisDoc.querySelector('template').content;
+
+
+    var Notify = Object.create(HTMLElement.prototype);
+
+
+    Notify.createdCallback = function() {
+      var shadowRoot = this.createShadowRoot();
+
+      var clone = thatDoc.importNode(template, true);
+      shadowRoot.appendChild(clone);
+      this.typeContent  = shadowRoot.querySelector('.notification');
+      this.titleContent = shadowRoot.querySelector('.title');
+      this.msgContent   = shadowRoot.querySelector('.message');
+      this.close        = shadowRoot.querySelector('.close');
+      this.close.addEventListener('click',function(){
+        this.classList.add('closed');
+      }.bind(this), false);
+      this.typeContent.classList.add(this.getAttribute('type') || 'success');
+
+      this.msgContent.innerHTML   = this.getAttribute('msg') || "Todo corrector!";
+      this.titleContent.innerHTML = this.getAttribute('label') || "OK!";
+
+
+      setTimeout(function(){
+         this.classList.add('closed');
+      }.bind(this), 5300);
+
+    };
+    Notify.attributeChangedCallback = function(attr, oldVal, newVal) {
+      switch (attr) {
+        case 'type':
+          this.typeContent.classList.add(this.getAttribute('type') || 'success');
+          break;
+        case 'label':
+          this.titleContent.innerHTML = newVal;
+          break;
+        case 'msg':
+          this.messageContent.innerHTML = newVal;
+          break;
+      }
+    };
+
+
+    window.Notify = thatDoc.registerElement('x-notify', {
+        prototype: Notify
+    });
+
+  })(window, document);
+</script>

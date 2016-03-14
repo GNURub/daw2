@@ -40,6 +40,7 @@
     $mail->AltBody = $body;
 
     if($mail->send()) {
+      flash('msg', 'Su email se ha enviado correctamente', 'Notificación');
       return header('location: /');
     }
   }

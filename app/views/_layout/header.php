@@ -43,9 +43,13 @@
     <!-- Web Components -->
     <link rel="import" href="<?=URL; ?>components/item.html">
     <link rel="import" href="<?=URL; ?>components/x-order.html">
+    <link rel="import" href="<?=URL; ?>components/x-notification.html">
     <link rel="import" href="<?=URL; ?>components/social-buttons.html">
 </head>
 <body>
+    <?php
+      flash('msg');
+     ?>
     <header class="cabecera">
         <nav class="utils">
           <div class="logotipo">

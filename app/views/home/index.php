@@ -46,11 +46,13 @@
 <script charset="utf-8" defer>
 'use strict';
   window.onload = function(){
-    if(!!document.querySelector("#search-form")){
+
       document.querySelector("#search-form").addEventListener('submit', function(e){
         e.preventDefault();
         var query = document.querySelector('#buscador').value;
-        window.fetch('/api/product/?q=' + encodeURI(query)).then(function(response){
+        document.querySelector('#buscador').value = '';
+        query = !!query ? '?q=' + encodeURI(query) : '';
+        window.fetch('/api/product/' + query).then(function(response){
           return response.json();
         }).then(function(e){
           if(e.length){
@@ -63,7 +65,7 @@
           }
         })
       }, false);
-    }
+
   }
 </script>
  <?php require VIEWS . '_layout/footer.php'; ?>

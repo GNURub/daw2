@@ -89,6 +89,7 @@
                   );
                   $_SESSION['username'] = $username;
                   Log::write("El usuario $username se ha creado correctamente");
+                  flash('msg', 'El usuario se creó correctamente', 'Reguistro');
                   return header('Location: /client');
               }
               Log::write('Los datos pasados por POST no son correctos');
@@ -174,6 +175,7 @@
                     </body>
                     </html>";
                     return sendEmail(true, array($client), "Recuperacion contraseña", $body);
+
                   }
                   throw new Exception("No existe el cliente", 1);
 
@@ -198,19 +200,22 @@
             return;
           }
           if (!self::getSession('username')) {
-              return header('location: /');
+            flash('msg', 'Debe loguearse para acceder.', 'Warning!', 'warning');
+            return header('location: /');
           }
 
           if(isset($_SESSION['productos']) && !empty($_SESSION['productos'])){
             $productos = $this->_generate_products();
             return generate_ticket($productos);
           }
+          flash('msg', 'No hay productos en la cesta', 'Warning!', 'warning');
           return header('location: /');
       }
 
       public function deleteAction()
       {
           if (!self::getSession('username')) {
+              flash('msg', 'Debe loguearse para acceder.', 'Warning!', 'warning');
               return header('location: /');
           }
           try {
@@ -218,6 +223,7 @@
                   self::destroySession('username');
                   self::destroySession('admin');
                   self::destroySession('productos');
+                  flash('msg', 'Se ha eliminado su cuenta satisfactoriamente', 'Administración');
                   return header('location: /');
               }
           } catch (Exception $e) {
@@ -360,6 +366,8 @@
           $productos = $this->_generate_products();
           return require VIEWS.'client/checkout.php';
         }
+        flash('msg', 'Gracias por su compra, la factura se enviará a su email', 'Compra');
+
         return header('location: /');
       }
 
