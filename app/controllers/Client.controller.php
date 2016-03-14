@@ -369,7 +369,6 @@
           $productos = $this->_generate_products();
           return require VIEWS.'client/checkout.php';
         }
-        flash('msg', 'Gracias por su compra, la factura se enviará a su email', 'Compra');
 
         return header('location: /');
       }
