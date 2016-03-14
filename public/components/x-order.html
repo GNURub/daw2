@@ -17,7 +17,7 @@
           <a href="#" class="username"></a>
         </span>
         <span class="stream-item-time">
-          1 semana
+
         </span>
       </header>
       <p class="stream-item-content">
@@ -34,10 +34,12 @@
     </li>
   </ul>
 </template>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment-with-locales.min.js"></script>
 <script>
   (function(window, document, undefined){
     'use strict';
     var thatDoc = document;
+
 
 
     var thisDoc =  (thatDoc._currentScript || thatDoc.currentScript).ownerDocument;
@@ -47,9 +49,16 @@
 
 
     var order = Object.create(HTMLElement.prototype);
+    var shadowRoot;
+
+    order.fromNow = function(date){
+      moment.locale('es');
+      var local = moment(date, "YYYY-MM-DD hh:mm:ss");
+      return local.fromNow();
+    };
 
     order.createdCallback = function() {
-      var shadowRoot = this.createShadowRoot();
+      shadowRoot = this.createShadowRoot();
 
       var clone = thatDoc.importNode(template, true);
       shadowRoot.appendChild(clone);
@@ -58,10 +67,18 @@
       this.time     = this.getAttribute('time') || null;
       shadowRoot.querySelector('.username').innerHTML = this.username;
       shadowRoot.querySelector('.avatar img').src = this.avatar;
+      if(!!this.time){
+        shadowRoot.querySelector('.stream-item-time').innerHTML = this.fromNow(this.time);
+      }
 
     };
     order.attributeChangedCallback = function(attr, oldVal, newVal) {
+      switch (attr) {
+        case 'time':
+          shadowRoot.querySelector('.stream-item-time').innerHTML = this.fromNow(newVal);
+          break;
 
+      }
     };
 
 

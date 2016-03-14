@@ -15,15 +15,6 @@ ul.stream-activity {
       margin: 0 0 0 -120px; }
     ul.stream-activity li.stream-item:hover .stream-item-links a {
       color: #1caff6; }
-    ul.stream-activity li.stream-item:first-child:before {
-      width: 3px;
-      display: block;
-      content: "";
-      background: #f4f4f4;
-      height: 15px;
-      top: 0;
-      left: -3px;
-      position: absolute; }
     ul.stream-activity li.stream-item .stream-item-type {
       position: absolute;
       width: 40px;

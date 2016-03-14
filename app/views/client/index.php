@@ -19,11 +19,13 @@
         </ul>
       </h2>
       <p class="header-bio">
-        <?=html_entity_decode($userData['estado'])?>
+        <?=$userData['estado']?>
       </p>
     </header>
     <section class="stream-container">
-      <x-order username="<?=$userData['username']?>"></x-order>
+      <?php foreach ($orders as $key => $order): ?>
+        <x-order username="<?=$order['username']?>" time="<?=$order['fecha']?>" num="<?=$order['idcompra']?>"></x-order>
+      <?php endforeach; ?>
     </section>
   </div>
 </div>

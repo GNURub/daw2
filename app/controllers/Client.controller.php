@@ -24,12 +24,15 @@
             if(isset($_SESSION['username'])){
 
               $userData = $this->client->toArray($_SESSION['username']);
-              $orders   = $this->client->getOrders($_SESSION['username']);
               $canAccess = (
                 !empty($userData)
               );
               if ($canAccess) {
+                  $orders   = $this->client->getOrders($_SESSION['username']);
                   Log::write('El usuario accede a su perfil.');
+                  function detailsOrder(){
+                    echo "hola";
+                  }
                   return require VIEWS.'client/index.php';
               }
             }

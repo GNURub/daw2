@@ -29,17 +29,15 @@ class Api extends Controller {
     }
 
     public function index($params = array()){
-      // $this->productAction();
       echo json_encode(
         array(
           "endpoints" =>array(
             "GET  /api/product/[{id}]",
             "GET  /api/product/?q={query}",
             "GET  /api/category/",
-            "GET  /api/category/[{category}]/",
             "GET  /api/category/[{category}]/[{group}]",
-            "GET  /api/orders/{username}/[{id}]",
             "POST /api/orders/",
+            "GET  /api/orders/{username}/[{idproducto}]",
             "GET  /api/properties/{producto}/[{idtalla}]",
           )
         )

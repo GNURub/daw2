@@ -1227,6 +1227,15 @@ div.content {
       margin: 70px auto;
       max-width: 500px;
       min-width: 450px; }
+      div.content div.profile section.stream-container x-order:first-child::shadow li.stream-item:before {
+        width: 3px;
+        display: block;
+        content: "";
+        background: #f4f4f4;
+        height: 15px;
+        top: 0;
+        left: -3px;
+        position: absolute; }
   div.content div.multimedia {
     -webkit-flex-basis: 90%;
         -ms-flex-preferred-size: 90%;

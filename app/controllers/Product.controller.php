@@ -179,6 +179,8 @@
                           'path' => $path,
                         ), "imagenes");
                       }
+                      flash('msg', "El producto {$titulo} se ha creado con éxito");
+
                       return header('location: /');
                     } catch (Exception $e) {
                         $error = $e->getMessage();

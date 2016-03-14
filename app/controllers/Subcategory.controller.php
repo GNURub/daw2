@@ -62,6 +62,7 @@
                 $this->subcategory->save(array(
                   'idsubcategoria' => $nombre
                 ));
+                flash('msg', 'La subcategoria se ha creado con éxito');
                 return header('location: /');
               } catch (Exception $e) {
                 $error = $e->getMessage();

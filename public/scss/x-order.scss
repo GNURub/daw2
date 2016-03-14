@@ -20,14 +20,7 @@ ul.stream-activity{
       color: #1caff6;
     }
     &:first-child:before{
-      width: 3px;
-      display: block;
-      content: "";
-      background: #f4f4f4;
-      height: 15px;
-      top: 0;
-      left: -3px;
-      position: absolute;
+      
     }
     .stream-item-type{
       position: absolute;

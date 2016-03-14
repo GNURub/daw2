@@ -110,6 +110,8 @@
                       exit($e->getMessage());
                     }
                   }
+                  flash('msg', 'La categoria se ha creado con éxito');
+
                   return header('location: /');
                 } catch (Exception $e) {
                   $error = $e->getCode();
