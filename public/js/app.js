@@ -10,5 +10,9 @@
     });
   };
   $( doc ).tooltip();
+  $( "#tabs" ).tabs();
+  $( "#accordion" ).accordion({
+    collapsible: true
+  });
 
 })(document);
