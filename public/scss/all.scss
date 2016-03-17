@@ -142,6 +142,7 @@ div.content {
     }
   }
   div.profile{
+
     @extend .layout.vertical;
     @extend .layout.center;
     width: 40%;
@@ -149,6 +150,11 @@ div.content {
     margin: 70px auto;
     background-color: rgb(244, 244, 244);
     word-break: break-word;
+    @media screen and (max-width: 500px) {
+      &{
+        width: 90%;
+      }
+    }
 
 
     header.header-profile{

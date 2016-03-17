@@ -10,7 +10,7 @@
         <div id="tabs-1">
           <section class="columns">
             <div class="column">
-              <video autoplay controls>
+              <video controls>
                 <source src="http://www.808.dk/vstreamer.asp?video=gizmo.mp4" type="video/mp4">
                 <source src="http://www.808.dk/vstreamer.asp?video=gizmo.webm" type="video/webm">
                 <source src="http://www.808.dk/vstreamer.asp?video=gizmo.ogv" type="video/ogg">

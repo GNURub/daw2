@@ -1195,6 +1195,9 @@ div.content {
     margin: 70px auto;
     background-color: #f4f4f4;
     word-break: break-word; }
+    @media screen and (max-width: 500px) {
+      div.content div.profile {
+        width: 90%; } }
     div.content div.profile header.header-profile {
       margin: 0 0 100px 0;
       position: relative;
