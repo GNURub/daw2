@@ -418,9 +418,8 @@
                 "idcolor"    => $pro['color'],
                 "username"   => self::getSession("username")
               ), "compras_productos_tallas_colores");
-              // print_r($pro);
             }
-        
+
 
             $client = $this->client->toArray(self::getSession('username'));
             if(!empty($productos) && !empty($client)){
