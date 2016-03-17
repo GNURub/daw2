@@ -410,15 +410,17 @@
             $productos = $this->_generate_products();
             // Guardar compras por productos
             foreach ($productos as $id => $pro) {
-              $this->client->save(array(
-                "idcompra"   => $id_compra,
-                "idproducto" => $id,
-                "cantidad"   => $pro['q'],
-                "idtalla"    => $pro['size'],
-                "idcolor"    => $pro['color'],
-                "username"   => self::getSession("username")
-              ), "compras_productos_tallas_colores");
+              // $this->client->save(array(
+              //   "idcompra"   => $id_compra,
+              //   "idproducto" => $id,
+              //   "cantidad"   => $pro['q'],
+              //   "idtalla"    => $pro['size'],
+              //   "idcolor"    => $pro['color'],
+              //   "username"   => self::getSession("username")
+              // ), "compras_productos_tallas_colores");
+              print_r($pro);
             }
+            exit;
 
             $client = $this->client->toArray(self::getSession('username'));
             if(!empty($productos) && !empty($client)){
