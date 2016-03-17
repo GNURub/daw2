@@ -10,7 +10,7 @@
     <input type="hidden" name="Ds_SignatureVersion" value="<?php echo $version; ?>"/>
     <input type="hidden" name="Ds_MerchantParameters" value="<?php echo $params; ?>"/>
     <input type="hidden" name="Ds_Signature" value="<?php echo $signature; ?>"/>
-    <input type="submit" class="btn btn-lg" value="Confimar pago" >
+    <input type="submit" style="padding:1em" class="btn btn-lg" value="Confimar pago" >
   </form>
 </div>
 <?php require VIEWS . '_layout/footer.php'; ?>
