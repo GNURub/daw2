@@ -17,7 +17,7 @@
 
       $values = $parsed["values"];
       $query = "INSERT INTO {$table}($keys) VALUES ({$values})";
-      if($data['idcolor']){
+      if(isset($data['idcolor'])){
 
         echo $query;
         exit;

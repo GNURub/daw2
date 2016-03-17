@@ -18,16 +18,6 @@
   var form, dialog;
   function updateProduct(){
     document.forms.namedItem("dialogproduct").submit();
-    // var oData = new FormData();
-    // window.fetch('/api/product', {
-    // 	method: 'POST',
-    //   credentials: 'include',
-    //   body: oData
-    // }).then(function(response) {
-    //   return response.text();
-    // }).then(function(doc) {
-    //   console.log(doc)
-    // })
   }
 
   dialog = $( "#dialog-item" ).dialog({
