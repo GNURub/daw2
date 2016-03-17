@@ -415,7 +415,7 @@
         
                   if ($firma != $signatureRecibida){
                     flash('msg', 'El servidor no responde correctamente', 'Error', 'error');
-                    heaer('location: /');
+                    header('location: /');
                     return;
                   }
           }
