@@ -420,7 +420,7 @@
               ), "compras_productos_tallas_colores");
               // print_r($pro);
             }
-            exit;
+        
 
             $client = $this->client->toArray(self::getSession('username'));
             if(!empty($productos) && !empty($client)){
@@ -429,7 +429,9 @@
             return header('location: /');
           } catch (Exception $e) {
             $error = $e->getMessage();
-            return require VIEWS. 'error/500.php';
+            echo $error;
+            exit;
+            // return require VIEWS. 'error/500.php';
           }
           return;
         }

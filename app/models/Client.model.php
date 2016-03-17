@@ -19,8 +19,8 @@
       $query = "INSERT INTO {$table}($keys) VALUES ({$values})";
       if(isset($data['idcolor'])){
 
-        echo $query;
-        exit;
+        // echo $query;
+        // exit;
       }
       if(!$this->db->query($query)){
         throw new Exception($this->db->error);
