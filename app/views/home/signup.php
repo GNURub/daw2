@@ -58,6 +58,12 @@
       </li>
 
       <li class="list__item">
+        <input id='public' type="checkbox" class="checkbox" name="public" checked>
+        <label for="public" class="label--checkbox">Quiero que mi perfil sea público</label>
+
+      </li>
+
+      <li class="list__item">
         <input id='news' type="checkbox" class="checkbox" name="news" checked>
         <label for="news" class="label--checkbox">Recibir notificaciones de los nuevos productos</label>
 

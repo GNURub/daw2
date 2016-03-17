@@ -87,7 +87,8 @@
                       'apellidos' => $apellidos,
                       'email' => $email,
                       'password' => $hash,
-                      'news' => $news
+                      'news' => $news,
+                      'public' => !!$public ? 1 : 0
                     )
                   );
                   $_SESSION['username'] = $username;
