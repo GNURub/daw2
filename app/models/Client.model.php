@@ -17,8 +17,11 @@
 
       $values = $parsed["values"];
       $query = "INSERT INTO {$table}($keys) VALUES ({$values})";
-      echo $query;
-      exit;
+      if($data['idcolor']){
+
+        echo $query;
+        exit;
+      }
       if(!$this->db->query($query)){
         throw new Exception($this->db->error);
       }
