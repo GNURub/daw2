@@ -46,6 +46,11 @@ footer{
       div.about{
         @extend .layout.vertical;
       }
+      @media screen and (max-width: 460px) {
+        div.about{
+          display: none;
+        }
+      }
     }
     &.social{
       justify-content: center;

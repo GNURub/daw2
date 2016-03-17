@@ -53,6 +53,7 @@ class Api extends Controller {
         }
 
         try {
+
           $id = !empty($this->_params[0]) ? $this->_params[0] : false;
           if(!$id && isset($_REQUEST['q']) && !empty($_REQUEST['q'])){
             $products = $this->product->search($_REQUEST['q']);

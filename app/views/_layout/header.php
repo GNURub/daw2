@@ -73,7 +73,7 @@
               <?php
                 }else{
               ?>
-                  <a href="/client/"><?=ucfirst(self::getSession('username'))?></a>
+                  <a href="/client/"><?=is_numeric(self::getSession('username')) ? "Perfil" : ucfirst(self::getSession('username'))?></a>
               <?php
                 }
               ?>
@@ -166,3 +166,52 @@
           </ul>
         </nav>
     </header>
+    <div id="dialog-item" title="Editar Producto">
+      <form id="dialog-form" name="dialogproduct" action="/product/update" enctype="multipart/form-data" method="POST">
+        <div>
+          <div class="group">
+            <input type="text" name="titulo" required>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Título</label>
+          </div>
+          <div class="group">
+            <input type="text" name="marca" class="capitalize" required>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Marca:</label>
+          </div>
+          <!-- <div class="group">
+            <input type="text" name="stock" required>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Stock:</label>
+          </div> -->
+          <div class="group">
+            <input type="text" name="precio" required>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Precio:</label>
+          </div>
+          <div class="group">
+            <input type="text" name="gastoenvio" required>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Gastos de envío:</label>
+          </div>
+          <div class="group">
+            <input type="text" name="descripcion" required>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Descripcion:</label>
+          </div>
+          <div class="group">
+            <input type="file" style="opacity:0" accept="image/*;capture=camera" name="imagen" required>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Imagen:</label>
+          </div>
+        </div>
+        <input name="id" id="id-product" type="hidden" value="" />
+      </form>
+    </div>

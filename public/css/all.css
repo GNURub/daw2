@@ -352,8 +352,25 @@ header {
 form {
   margin: auto; }
   form#search-form {
-    width: 100%;
-    margin: 0; }
+    width: 100% !important;
+    margin: 0 !important; }
+  form#dialog-form {
+    height: 100%;
+    width: 100% !important;
+    margin-top: 5.5em; }
+    form#dialog-form > div {
+      width: 56%;
+      margin: 3em auto;
+      height: 100%;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-justify-content: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      -webkit-flex-direction: column;
+          -ms-flex-direction: column;
+              flex-direction: column; }
   form.signin ul {
     border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
   form.signin.center {
@@ -664,6 +681,9 @@ footer {
             display: flex; }
           footer div:nth-of-type(1) div.data ul li > * {
             margin: 0 .5em; }
+      @media screen and (max-width: 460px) {
+        footer div:nth-of-type(1) div.about {
+          display: none; } }
     footer div.social {
       -webkit-justify-content: center;
           -ms-flex-pack: center;

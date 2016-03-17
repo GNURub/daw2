@@ -222,7 +222,25 @@
 
       public function updateAction()
       {
-          //update a todo item
+        //update a todo item
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+          if(!empty($_POST['id'])){
+            try {
+              $this->product->edit(array(
+                "gatosdeenvio" => $_POST['gastoenvio'],
+                "titulo"     => $_POST['titulo'],
+                "marca"      => $_POST['marca'],
+                "precio"     => $_POST['precio'],
+                "descripcion"=> $_POST['descripcion']
+              ), $_POST['id']);
+              flash("msg", "El producto se ha modificado correctamente");
+            } catch (Exception $e) {
+              flash("msg", $e->getMessage(), 'Error', 'error');
+            }
+          }
+          return header('location: /');
+        }
       }
 
       public function deleteAction()

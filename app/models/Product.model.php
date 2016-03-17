@@ -127,6 +127,26 @@
       return $result;
     }
 
+    public function edit($data, $id){
+      $set = "";
+      foreach ($data as $key => $value) {
+        if(!empty($value)){
+          if(is_numeric($value)){
+            $set .= $set == "" ? "$key = " . $value : ",$key = ".$value;
+          }else{
+            $set .= $set == "" ? "$key = '{$value}'" : ",$key = '{$value}'";
+          }
+        }
+      }
+      $query = "UPDATE {$this->table}
+        SET {$set}
+        WHERE idproducto = {$id}";
+
+      if (!$this->db->query($query)) {
+          throw new Exception($this->db->error, 1);
+      }
+    }
+
   }
 
  ?>
