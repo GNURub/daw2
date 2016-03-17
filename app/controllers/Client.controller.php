@@ -398,8 +398,8 @@
 
       public function okAction(){
         // PRODUCTION
-        print_r($_POST);
-        exit;
+        // print_r($_POST);
+        // exit;
         if(isset($_SERVER['HTTP_REFERER']) &&
         $_SERVER['HTTP_REFERER'] == "http://jguasch.esy.es/redsys/lacaixaOK.php"){
           try {
