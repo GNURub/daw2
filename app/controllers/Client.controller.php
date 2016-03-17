@@ -403,7 +403,7 @@
         if(isset($_SERVER['HTTP_REFERER']) &&
         $_SERVER['HTTP_REFERER'] == "http://jguasch.esy.es/redsys/lacaixaOK.php"){
           if (!empty( $_POST ) ) {//URL DE RESP. ONLINE
-                  
+                  $miObj = new RedsysAPI;
                   $version = $_POST["Ds_SignatureVersion"];
                   $datos = $_POST["Ds_MerchantParameters"];
                   $signatureRecibida = $_POST["Ds_Signature"];
