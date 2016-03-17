@@ -402,6 +402,23 @@
         // exit;
         if(isset($_SERVER['HTTP_REFERER']) &&
         $_SERVER['HTTP_REFERER'] == "http://jguasch.esy.es/redsys/lacaixaOK.php"){
+          if (!empty( $_POST ) ) {//URL DE RESP. ONLINE
+                  
+                  $version = $_POST["Ds_SignatureVersion"];
+                  $datos = $_POST["Ds_MerchantParameters"];
+                  $signatureRecibida = $_POST["Ds_Signature"];
+                  
+        
+                  $decodec = $miObj->decodeMerchantParameters($datos);	
+                  $kc = 'Mk9m98IfEblmPfrpsawt7BmxObt98Jev'; //Clave recuperada de CANALES
+                  $firma = $miObj->createMerchantSignatureNotif($kc,$datos);	
+        
+                  if ($firma != $signatureRecibida){
+                    flash('msg', 'El servidor no responde correctamente', 'Error', 'error');
+                    heaer('location: /');
+                    return;
+                  }
+          }
           try {
             $hash_compra = md5(uniqid(time()));
             $id_compra = $this->client->save(array(
