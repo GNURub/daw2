@@ -84,8 +84,14 @@ class Api extends Controller {
     }
 
     public function propertiesAction($params){
-      $propers = $this->product->tallasColoresProducto($params[0], isset($params[1]) ? $params[1] : '');
-      echo json_encode($propers);
+      if(!empty($params[0])){
+        $propers = $this->product->tallasColoresProducto($params[0], isset($params[1]) ? $params[1] : '');
+        echo json_encode($propers);
+        return;
+      }
+      echo json_encode(array(
+          'error' => "Introduce el id del producto"
+      ));
       return;
     }
 
