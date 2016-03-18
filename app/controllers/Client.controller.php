@@ -145,15 +145,6 @@
         return require VIEWS.'error/400.php';
       }
 
-
-      // public function adminAction()
-      // {
-      //     if (!!self::getSession('username') && self::getSession('admin') == 'administrador') {
-      //         return require VIEWS.'client/admin.php';
-      //     }
-      //     require VIEWS.'error/401.php';
-      // }
-
       public function updateAction()
       {
           //update a todo item
@@ -196,12 +187,21 @@
       {
           // Ajax ticket
           header('Access-Control-Allow-Origin: *');
-          if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['productos']) && !empty($_POST['productos'])){
-            foreach ($_POST['productos'] as $pro) {
-              $_SESSION['productos'][$pro['idproducto']] = array($pro['q'], $pro['size'], $pro['color']);
+          if($_SERVER['REQUEST_METHOD'] == 'POST'){  
+            if (isset($_POST['productos']) && !empty($_POST['productos'])){
+              if(empty($_POST['pdf'])){
+                $_SESSION['productos'] = array();
+              }
+              foreach ($_POST['productos'] as $pro) {
+                $_SESSION['productos'][$pro['idproducto']] = array($pro['q'], $pro['size'], $pro['color']);
+              }
+              echo "OK";
+              return;
+            }if($_SERVER['REQUEST_METHOD'] == 'POST'){
+              if(empty($_POST['pdf'])){
+                $_SESSION['productos'] = array();
+              }
             }
-            echo "OK";
-            return;
           }
           if (!self::getSession('username')) {
             flash('msg', 'Debe loguearse para acceder.', 'Warning!', 'warning');
@@ -383,7 +383,7 @@
         }
         foreach ($a as $id => $q) {
           $pro = $this->product->toArray($id);
-          $pro['q'] = $q[0];
+          $pro['q'] = isset($q[0]) ? $q[0] : 0;
           if(isset($q[1])){
             $pro['size'] = $q[1];
           }

@@ -417,6 +417,10 @@ form {
           -webkit-flex: 1;
               -ms-flex: 1;
                   flex: 1; }
+        form.ticket ul li span.delete {
+          cursor: pointer;
+          font-weight: bold;
+          color: red; }
         form.ticket ul li input {
           width: 3em;
           appearance: none;

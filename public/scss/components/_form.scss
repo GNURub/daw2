@@ -70,6 +70,12 @@ form{
         span.price{
           flex: 1;
         }
+        span.delete{
+          cursor: pointer;
+          font-weight: bold;
+          color: red;
+        }
+        
         input{
           width: 3em;
           appearance:none;

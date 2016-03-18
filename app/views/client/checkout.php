@@ -23,7 +23,8 @@
                 <select id="color" required name="productos[<?=$id?>][color]">
                 </select>
               </span>
-              <span class="price"><?=$pro['precio']?></span>€
+              <span class="price"><?=$pro['precio']?>€</span>
+              <span class="delete"> X</span>
               <input type="hidden" name="productos[<?=$id?>][precio]" value="<?=$pro['precio']?>">
             </li>
           <?php endforeach; ?>
@@ -75,6 +76,7 @@
       $('#ticket').on('click',function(e){
         e.preventDefault();
         var body = new FormData(document.forms.namedItem("productsinfo"));
+        body.append('pdf', true);
         window.fetch('/client/ticket', {
           method: 'POST',
           body: body,
@@ -82,6 +84,7 @@
         }).then(function(response){
           return response.text();
         }).then(function(r){
+          console.log(r)
           location.href = "/client/ticket";
         })
       });
@@ -104,10 +107,20 @@
   var subte = document.querySelector('li.divider span.price');
   var amount = document.querySelector('input[name="amount"]');
   var subt;
+  $('.delete').on('click', function(e){
+    $(this).parents('li').remove();
+    calc();
+    var body = new FormData(document.forms.namedItem("productsinfo"));
+    window.fetch('/client/ticket', {
+      method: 'POST',
+      body: body,
+      credentials: 'include'
+    });
+  });
   function calc(){
     subt = 0;
     [].forEach.call(document.querySelectorAll('form.ticket li:not(.divider)'), function(e){
-      subt += Number(e.querySelector('.q input').value) * Number(e.querySelector('.price').innerHTML);
+      subt += Number(e.querySelector('.q input').value) * parseInt(e.querySelector('.price').innerHTML, 10);
     });
     subte.innerHTML = subt;
     amount.value = Number(subt);
